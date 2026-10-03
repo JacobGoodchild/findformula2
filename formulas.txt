@@ -65,6 +65,8 @@ INDEX
 [21] Extremal Kerr, edge-on capture cross-section at ANY particle speed: the boundary is
     L = E(r+1) - (r-1) sqrt(r(p^2 r+1)), Q = r^2[-p^2 r^2 + (2p^2-1) r + 1 + 2E sqrt(r(p^2 r+1))];
     elliptic (sqrt of t^4 + 2E t^3 - t^2 - 2E p^2 t - p^4); joins 7pi+16sqrt2 (slow) to 16pi+15sqrt3 (light).  — not found
+[22] Slow-particle capture by an extremal Kerr-Newman hole (edge-on): (2/a^2) Int y(3y+1)(y-1)
+    sqrt(a^2(2y+1) - (y^2-y-1)^2) dy, from pi phi^5 (golden ratio; extremal RN, probably known) to 7pi+16sqrt2.  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1212,6 +1214,35 @@ How it was verified:
     obtained from the full-spin sextic as (4t-5)^2 x quartic at a = 1 (code/anyv.py).
 
 Novelty status: NOT FOUND.
+
+==================================================================================
+[22] SLOW-PARTICLE CAPTURE BY EXTREMAL KERR-NEWMAN BLACK HOLES (EDGE-ON)
+==================================================================================
+Question (plain English):
+  Entry [15] for black holes carrying both spin and charge at the extremal limit a^2 + Q^2 = M^2.
+
+Result (M = 1, r = y^2, slow particles E -> 1, incoming direction perpendicular to the spin):
+  Marginally bound spherical orbits (from the general Kerr-Newman solution with q = Q^2 = 1 - a^2):
+     L_z = -(y^3 - y^2 - y - a^2)/a,     Q = y^2 [ a^2 (2y + 1) - (y^2 - y - 1)^2 ] / a^2
+  (the general Kerr-Newman expressions contain a factor (y-1)^2 exactly at extremality, which cancels).
+  Capture cross-section sigma = A(a) (M/v)^2 with
+     A(a) = (2/a^2) Int_{y_lo}^{y_hi} y (3y + 1)(y - 1) sqrt( a^2 (2y+1) - (y^2 - y - 1)^2 ) dy,
+  y_hi = largest root of the quartic under the root, y_lo = max(1, next root). The square root is of
+  a quartic, so this is an elliptic integral. The straight NHEK-type edge (y_lo = 1) is present iff
+  3a^2 > 1, i.e. a > M/sqrt3  (for light the corresponding threshold is a > M/2, entry [7]).
+  Limits: a -> 1:  7 pi + 16 sqrt2 = 44.6185655731 (entry [15] at a = 1, exactly reproduced);
+          a -> 0:  the range collapses onto y = phi = (1 + sqrt5)/2 (golden ratio), r_mb = phi^2 M, and
+                   A -> pi y^2 (2y+1)|_{y=phi} = pi phi^5 = (11 + 5 sqrt5) pi/2 = 34.8407964223
+                   (extremal Reissner-Nordstrom slow capture; PROBABLY KNOWN, e.g. Zakharov 1994).
+  Values: a = 0.3: 35.645473954091556088290231677;  a = 0.5: 37.0824702637328749778118919656;
+          a = 0.8: 40.8602689368078374649924857875.
+
+How it was verified (code/mb_knext.py): independent brute force with the exact Kerr-Newman E = 1 radial
+  potential R = (r^2+a^2-aL)^2 - (r-1)^2 (r^2 + (L-a)^2 + Q), 3000 values of L, bisection in Q:
+     a = 1: 44.61848 vs 44.61857;  a = 0.8: 40.85551 vs 40.86027;  a = 0.5: 37.08178 vs 37.08247;
+     a = 0.3: 35.64587 vs 35.64547.   a -> 0: A(0.001) = 34.84081 vs pi phi^5 = 34.84080.
+
+Novelty status: NOT FOUND for a > 0 (the a = 0 endpoint is probably known).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
