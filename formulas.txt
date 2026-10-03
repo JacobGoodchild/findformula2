@@ -400,6 +400,12 @@ Novelty status: NOT FOUND (general formula). The equatorial uncharged value 7/24
   (Igata et al., e.g. arXiv:2108.09051 / EPJC 2021, "Photon emissions from near-horizon
   extremal and near-extremal Kerr equatorial emitters"). The charged equatorial values were
   previously only known numerically (arXiv:1910.01528); the latitude dependence was not found.
+  Caveat: "Escape probability for isotropic emitters near Kerr black hole with astrometric
+  observables", Commun. Theor. Phys. (2024) 055404, describes a general (apparently numerical)
+  method for emitters anywhere, including off the equator; we could not read its full text, so
+  it may contain numerical values overlapping the Kerr (a = M) off-equator case. Ogasawara &
+  Igata (arXiv:2111.03243) classify off-equator escape regions and announced a follow-up on
+  probabilities, which we did not find.
 
 ==================================================================================
 [7] EDGE-ON SHADOW AREA OF AN EXTREMAL KERR-NEWMAN BLACK HOLE
