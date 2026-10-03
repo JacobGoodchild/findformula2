@@ -43,3 +43,12 @@ ok('[19] massive escape beta=0.8 is 1/8', massive_escape.P('0.8'), mpf(1)/8, 1e-
 ok('[19] massive escape beta=1 is 7/24', massive_escape.P('1').real, mpf(7)/24, 1e-20)
 ok('[21] extremal any-speed capture: slow limit', anyv_ext_area.area('0.0001')[0]*mpf('0.0001')**2, 7*pi+16*sqrt(2), 1e-3)
 ok('[22] extremal KN slow capture a->0 -> pi phi^5', mb_knext.A_formula('0.001')[0], pi*((1+sqrt(5))/2)**5, 1e-3)
+import mb_master, isco_massive, kerrsen_check, ks_slow_sim, perimeter, kerrsen_incl_check
+mp.dps=30
+import mb_incl
+ok('[23] one-integral slow capture any direction vs [16] integral (a=0.9, 30deg)', mb_master.sigma_master('0.9',mpf(30)*pi/180), mb_incl.A_mb('0.9',mpf(30)*pi/180), 1e-12)
+ok('[24] ISCO massive escape at beta=1/2 is 1/4', isco_massive.P('0.5').real, mpf(1)/4, 1e-15)
+ok('[25] Kerr-Sen extremal a=1 -> 16pi+15sqrt3', kerrsen_check.A_ext(1), 16*pi+15*sqrt(3), 1e-20)
+ok('[29] Kerr-Sen slow capture b=0 -> [15]', ks_slow_sim.A_formula(0.5,0.0), 7*pi+pi*sqrt(1-mpf('0.25'))+16*sqrt(mpf('1.5'))*ellipe(mpf(2)/3), 1e-10)
+ok('[30] perimeter a->1 -> 18 sqrt3', perimeter.P_closed('0.99999999'), 18*sqrt(3), 2e-3)
+ok('[30] perimeter a->0 -> 2 pi sqrt27', perimeter.P_closed('0.0000001'), 2*pi*sqrt(27), 1e-6)
