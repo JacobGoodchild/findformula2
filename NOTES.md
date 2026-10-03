@@ -123,3 +123,9 @@
 * Literature: Will (2012, arXiv:1208.3931) critical L_c(i) series for E = 1 reproduces [16] exactly
   -> [16] relabelled "probably known/derivable". Analytic perturbation for general E running
   (code/anyv_pert2.py, rational parametrisation r_c = (u^2+3)^2/(4u^2)).
+* Dead end (caught by numerical check): tried the "average over orbit tilt" trick of [20] for the
+  PHOTON shadow (would give an elementary extremal value 75.1198...). Wrong: for photons the
+  impact radius^2 is C + a^2 cos^2(theta_obs), which depends on the viewing direction as well as
+  on the tilt, so the reduction fails (true value 75.016367793769378...). For slow particles the
+  extra term is a^2 p^2 cos^2 -> 0, which is why [20] is fine (and brute-force verified).
+* [19] massive escape from extremal horizon: threshold c/sqrt(1+a^2), elementary for beta <= sqrt3/2.
