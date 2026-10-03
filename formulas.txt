@@ -26,6 +26,8 @@ INDEX
     Kerr-Newman black hole (for a >= M/sqrt2, where that orbit sits on the horizon):
     P = 1/2 - arcsin(k)/(2pi) + k arctan(sqrt((1+k^2)/(1-k^2)))/(pi sqrt(1+k^2)), k = M/(2a);
     equals 3/8 + sqrt(3)/9 at a = M/sqrt2.                                     — not found (a = M value 54.65% known)
+[9] Extremal Kerr-Newman shadow area for ANY viewing angle: edge polynomial factorises,
+    A = 4 Int (3r^2 + 2(a^2-1) r - a^2 cos^2 th)/sqrt(N) dr (+ edge term). Unifies [3] and [7]. — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -479,6 +481,49 @@ Novelty status: NOT FOUND for the Kerr-Newman formula and the 3/8 + sqrt3/9 valu
   "Observability of the innermost stable circular orbit in a near-extremal Kerr black hole").
   The threshold a = M/sqrt2 for the extremal Kerr-Newman ISCO to reach the horizon is
   PROBABLY KNOWN (it is a simple property of circular orbits) but we did not find it stated.
+
+==================================================================================
+[9] EXTREMAL KERR-NEWMAN SHADOW AREA FOR ANY VIEWING ANGLE
+==================================================================================
+Question (plain English):
+  Combine [3] (maximal spin, any angle) and [7] (maximal spin+charge, edge-on): what is the
+  shadow area of an extremal charged spinning black hole (a^2 + Q^2 = M^2) seen from any angle?
+
+Key fact: with s = sin(theta), c = cos(theta), the shadow-edge polynomial factorises again:
+   N(r) = a^2 s^2 beta^2 = -( r^2 - 2(1 + a s) r - a^2 c^2 ) ( r^2 - 2(1 - a s) r - a^2 c^2 ),
+   roots r_D = 1 + a s + sqrt(1 + a^2 + 2 a s),  r_C = 1 - a s + sqrt(1 + a^2 - 2 a s),
+         r_B = 1 + a s - sqrt(1 + a^2 + 2 a s),  r_A = 1 - a s - sqrt(1 + a^2 - 2 a s).
+
+Formula (M = 1, observer at infinity):
+   A(a, theta) = 4 Int_{r_lo}^{r_D} ( 3 r^2 + 2(a^2 - 1) r - a^2 cos^2 theta ) / sqrt(N(r)) dr  +  B
+   * if r_C >= 1:  r_lo = r_C and B = 0 (no straight edge);
+   * if r_C <  1:  r_lo = 1 and B = (1 + a^2 + a^2 s^2) sqrt(N(1)) / (a^2 s^2),
+     N(1) = 4a^2 - 1 - 6 a^2 c^2 - a^4 c^4  (the straight "NHEK line" edge is visible exactly
+     when N(1) > 0, i.e. 4a^2 - 1 > 6a^2 cos^2 theta + a^4 cos^4 theta; impossible for a <= 1/2).
+   It is a complete (r_C >= 1) or incomplete elliptic integral of the same type as [3]; a = 1
+   gives [3] exactly and theta = 90 deg gives the elementary formulas of [7].
+
+Decimal values (M = 1):
+   a=0.3, 40 deg: 52.518421956362934966    a=0.6, 30 deg: 59.088456323138632705
+   a=0.8, 60 deg: 66.253992826697037842    a=0.9, 17 deg: 69.268628479054939662
+   a=1,   60 deg: 75.088757730578130927 (= entry [3])
+
+How it was derived: same route as [3]. For Q^2 = 1 - a^2: xi = (a^2 + 2r - r^2)/a,
+   eta = r^2 (2+2a-r)(r-2+2a)/a^2, d xi/dr = -2(r-1)/a; sympy factor + Hermite reduction:
+   (r-1) sqrt(N) = s^2 a^2 (3r^2 + 2(a^2-1) r - a^2 c^2)/sqrt(N) + d/dr[ S sqrt(N) ],
+   S = r^2/4 - r/2 + a^2(c^2 - 2)/4.
+
+How it was verified (code/kn_ext_incl.py): against the direct area integral built from the
+   GENERAL Kerr-Newman critical-curve formulas (no simplification), 30-digit arithmetic:
+     a=0.3, 40 deg: 52.51842195636293497 (formula) vs 52.51842195636289549 (direct)
+     a=0.6, 30 deg: 59.08845632313863271 vs 59.08845632313863744
+     a=0.6, 80 deg: 59.36175070680889195 vs 59.36175070680891387
+     a=0.8, 60 deg: 66.25399282669703784 vs 66.25399282669703817
+     a=1,   60 deg: 75.08875773057812019 vs 75.08875773057813093 (and [3]: 75.0887577305781309271)
+     a=0.4, 89.9 deg: 54.28672105403065417 vs 54.28672105403065826 (-> 16 pi + 8 pi a^2 = 54.2867...)
+   (agreement ~1e-14, limited by the direct method's endpoint singularities).
+
+Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

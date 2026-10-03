@@ -69,3 +69,10 @@
 * Orientation-averaged small-spin series (from [5]): <A>/pi = 27 - 2a^2 - 11a^4/27
   - 100a^6/567 - 13688a^8/137781 - ...  (just a corollary of [5]).
 * Extremal Kerr shadow at 30 deg (singular modulus k = sin 15 deg): Pi(1/2|k) survives.
+
+### Lead 3b: extremal KN at any inclination -> RESULT [9]
+* Factorisation p,q = 2 +- 2 a sin(theta) (Kerr case was 2 +- 2 sin(theta)).
+* Pitfall: my direct-check code first had an extra 1/sin(theta) (ratio = 1/sin40 exactly).
+* Braneworld extension (a > M) checked numerically for [6],[7],[8].
+* sympy could not do the ISCO integral symbolically; the closed form in [8] rests on 30-digit
+  numerical identification at 4 k values + the known k=1/2 value + ray simulation.
