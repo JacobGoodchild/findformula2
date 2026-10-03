@@ -1,0 +1,121 @@
+FORMULAS — verified results (general relativity)
+==================================================
+AI-assisted (Claude Code), directed by Jacob Goodchild. Units G = c = M = 1 unless stated.
+Novelty labels: "not found" = not found in web searches (could still exist somewhere);
+"probably known" / "known" = found or very likely in the literature.
+
+INDEX
+-----
+[1] Exact area of the Kerr black-hole shadow seen edge-on, for every spin (elliptic integrals)
+    + its small-spin series with rational coefficients.                         — not found (only the a^2 term is known)
+[2] Edge-on shadow of a maximally spinning (extremal) Kerr black hole:
+    area = (16*pi + 15*sqrt(3)) M^2 exactly.                                    — not found
+
+==================================================================================
+[1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
+==================================================================================
+Question (plain English):
+  A black hole photographed against a bright background looks like a dark patch, the
+  "shadow" (this is what the Event Horizon Telescope images of M87* and Sgr A* show).
+  For a non-spinning black hole the shadow is a disc of area 27*pi*M^2. Spin squashes and
+  shifts it. People use the shadow AREA (or the "equivalent diameter") to measure black holes,
+  but for a spinning hole it has only been computed numerically, by fits, or to first order
+  in the spin. Is there an exact formula?  Yes, at least for an observer in the equatorial
+  plane (seeing the hole edge-on).
+
+Formula (M = 1, spin 0 < a < 1, observer at infinity, inclination 90 deg):
+  Let r_p < r_r be the prograde and retrograde circular photon-orbit radii,
+      r_p = 2[1 + cos((2/3) arccos(-a))],  r_r = 2[1 + cos((2/3) arccos(a))],
+  and r_0 = 6 - r_p - r_r   (the third root of r^3 - 6r^2 + 9r - 4a^2; 0 < r_0 < 1).
+
+  (a) One-line integral form:
+        A(a) = 3 * Integral_{r_p}^{r_r}  [ (r-1)(5r-2) + 2(1-a^2)/(r-1) ] dr
+                                         / sqrt( r (4a^2 - r (r-3)^2) )
+      The square root is sqrt( r (r-r_0)(r-r_p)(r_r-r) ).
+
+  (b) Closed form in complete elliptic integrals K, E, Pi (parameter convention m = k^2,
+      Pi(n|m) = Int_0^{K} du / (1 - n sn^2 u)):
+        m  = (r_r-r_p) r_0 / ((r_r-r_0) r_p),    n = (r_r-r_p)/(r_r-r_0),
+        n' = n (r_0-1)/(r_p-1),                  g = 2/sqrt((r_r-r_0) r_p),
+        V  = [ n E + (m-n) K + (2nm + 2n - n^2 - 3m) Pi(n) ] / ( 2 (n-1)(m-n) )
+        I0 = g K
+        I1 = g [ r_0 K + (r_p-r_0) Pi(n) ]
+        I2 = g [ r_0^2 K + 2 r_0 (r_p-r_0) Pi(n) + (r_p-r_0)^2 V ]
+        J  = g [ K/(r_0-1) + (r_0-r_p)/((r_p-1)(r_0-1)) Pi(n') ]
+        A(a) = 6 I0 - 21 I1 + 15 I2 + 6 (1-a^2) J          (times M^2)
+      (all K, E, Pi evaluated at parameter m).
+
+  (c) Small-spin series (coefficients found to 40+ digits and recognised as exact rationals):
+        A(a) / (27 pi M^2) = 1 - a^2/18 - a^4/72 - 2059 a^6/314928
+                               - 88175 a^8/22674816 - 355999 a^10/136048896 - ...
+      (314928 = 2^4 3^9; 22674816 = 2^7 3^11; 136048896 = 2^9 3^11 ... all denominators 2^p 3^q)
+
+Decimal values (M = 1):
+  a = 0.1   : A = 84.77575938950222861469736...
+  a = 0.5   : A = 83.56105412846154557835349...
+  a = 0.9   : A = 79.58712552387277213416654...
+  a = 0.998 : A = 76.60485539230466491847881...
+  a -> 1    : A = 16 pi + 15 sqrt(3) = 76.24624457096985121831...   (entry [2])
+  a = 0     : A = 27 pi = 84.82300164692441743849...
+
+How it was derived:
+  The shadow edge is the curve (alpha, beta) = (-xi, +-sqrt(eta)) traced by the spherical
+  photon orbits, with xi = (r^2(3-r) - a^2(r+1))/(a(r-1)),
+  eta = r^3(4a^2 - r(r-3)^2)/(a^2 (r-1)^2).  Area = 2 Int sqrt(eta) |dxi/dr| dr.
+  Key simplification: dxi/dr = -2[(r-1)^3 + 1 - a^2]/(a (r-1)^2), so the integrand is
+  (4/a^2) r sqrt(W) [1 + (1-a^2)/(r-1)^3] with W = r(4a^2 - r(r-3)^2).
+  A computer-algebra reduction (sympy; code/reduce_area.py) subtracts an exact derivative
+  d/dr[S(r) sqrt(W)] (which vanishes at both ends) and leaves the integrand
+  (6 - 21 r + 15 r^2 + 6(1-a^2)/(r-1)) / sqrt(W) -- surprisingly, the polynomial part
+  does not depend on a at all.  The standard substitution
+  sn^2 u = (r_r-r_0)(r-r_p)/((r_r-r_p)(r-r_0)) then gives the K, E, Pi form.
+  The small-spin coefficients were obtained by fitting a 30-term polynomial in a^2 to the
+  exact formula evaluated at 250-digit precision, and recognising each coefficient as a
+  rational with denominator 2^p 3^q (agreement to > 25 digits).
+
+How it was verified (code/check_reduce.py, code/area_closed.py, code/verify_shoelace.py):
+  * Original curve integral vs closed form, 30-digit arithmetic:
+      a=0.5: 83.5610541284615455783534950008 (direct) vs 83.5610541284615455783534950007 (closed)
+      a=0.9: 79.5871255238727721341665423326 (direct) vs 79.5871255238727721341665423326 (closed)
+  * Reduced integral (a) by numerical quadrature vs closed form (b), 40 digits: agree to ~1e-19
+    at a = 0.001, 0.3, 0.7, 0.9, 0.998, 0.9999999.
+  * Fully independent check: shoelace (polygon) area of 800,000 points on the shadow edge:
+      a=0.2: 84.63258477 (polygon) vs 84.63258477162 (formula)
+      a=0.8: 81.07754800 (polygon) vs 81.07754800229
+      a=0.999: 76.49048639 (polygon) vs 76.49048638587
+  * Limits: a -> 0 gives 27 pi; a -> 1 gives 16 pi + 15 sqrt(3) (entry [2]).
+  * The a^2 term, -3 pi a^2/2, agrees with the perturbative result of Hassanabadi et al.,
+    arXiv:2607.11979 (2026), eq. (115): A = 27 pi m^2 - (3 pi/2) a^2 + O(a^4).
+
+Novelty status: NOT FOUND (exact formula, and the series beyond a^2).
+  The a^2 correction is KNOWN (arXiv:2607.11979). A January 2026 paper (arXiv:2601.09655,
+  "closed-form surrogate for the equivalent diameter of the Kerr shadow") fits the area with
+  a 15-parameter polynomial, and says it only has an exact result for the face-on (polar)
+  case, which suggests the exact edge-on formula is not standard. Not found in web searches.
+
+==================================================================================
+[2] AREA OF THE EDGE-ON SHADOW OF AN EXTREMAL KERR BLACK HOLE
+==================================================================================
+Question (plain English):
+  A black hole spinning as fast as nature allows (a = M) has a shadow with one flattened,
+  straight edge when seen from its equator. How big is it?
+
+Formula:
+  A_extremal(edge-on) = (16 pi + 15 sqrt(3)) M^2  = 76.24624457096985121831398925506... M^2
+  i.e. 89.888642338...% of the non-spinning value 27 pi M^2.
+
+How it was derived:
+  For a = 1, xi = 1 + 2r - r^2 and eta = r^3 (4 - r), 1 <= r <= 4, so
+  A = 4 Int_1^4 r (r-1) sqrt(r(4-r)) dr, which is elementary (sympy evaluates it exactly).
+  (The straight "NHEK line" segment of the edge sits at constant alpha = -2 and adds
+  nothing to Int beta d(alpha).)
+
+How it was verified:
+  * sympy exact integral -> 15 sqrt(3) + 16 pi.
+  * mpmath quadrature (40 digits): 76.2462445709698512183139892550601316513;
+    PSLQ on {A, pi, sqrt(3)} returns the relation A - 16 pi - 15 sqrt(3) = 0.
+  * Limit of the general formula [1]: a = 0.9999999 gives 76.248359...,
+    a = 0.999999 gives 76.25297..., approaching 76.24624 (the approach is like sqrt(1-a)).
+
+Novelty status: NOT FOUND. (The vertical diameter 6 sqrt(3) M of this shadow is known;
+  no exact area found in web searches.)
