@@ -49,3 +49,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 24 | How fast must debris be thrown from the innermost orbit of a max-spin black hole to escape? | faster than (3√2−2)/7·c ≈ 0.32c; exactly 1/4 escape at c/2 | not found |
 | 25 | Shadow size of the string-theory (Kerr–Sen) black hole, side-on | compact integral; elementary closed form at extremality | not found |
 | 26 | Light escaping from the horizon of an extreme string-theory (Kerr–Sen) black hole | 1/2 − arcsin(k)/2π − k/4, k = (1+b)/2; matches published numbers | not found |
+| 27 | How fast a black hole spins down in a bath of slow dark matter | ⟨ℓ_z⟩ = −(2a/3 + a³/15 + …)M; exact at max spin: −0.8193M | not found (exact value) |

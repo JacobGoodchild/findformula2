@@ -77,6 +77,8 @@ INDEX
     extremal (a = M - b) closed form sqrt(a) sqrt(4-a)(a+14) + 8(2a+1) arcsin(sqrt(a)/2) + 4 pi (2a+1).  — not found
 [26] Escape of light from the horizon of an extremal Kerr-Sen black hole: P = 1/2 - arcsin(k)/(2pi) - k/4,
     k = (1 + b)/2 (3D isotropic); in-plane version 1/2 - arcsin(k)/(2pi) reproduces Zhang & Jiang's numerics.  — not found
+[27] Spin-down of a black hole in a bath of slow isotropic dark matter: mean swallowed L_z per unit mass
+    = -(2a/3 + a^3/15 + 41a^5/1680 + ...) M (derivable); exact at a = M: -0.81932684 M, da/dlnM = -2.81932684.  — not found (exact value)
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1407,6 +1409,43 @@ How it was verified: brute-force ray test in the exact extremal Kerr-Sen metric 
   Planar formula: reproduces the 1/4 quoted by Zhang & Jiang at Q = sqrt2.
 
 Novelty status: NOT FOUND (numerical results exist: arXiv:2004.03367).
+
+==================================================================================
+[27] SPIN-DOWN OF A KERR BLACK HOLE ACCRETING SLOW, ISOTROPIC DARK MATTER
+==================================================================================
+Question (plain English):
+  A spinning black hole sitting in a cloud of slow dark matter moving in random directions eats
+  more counter-rotating than co-rotating particles, so it spins down as it grows. By how much?
+
+Result (G = c = M = 1, slow particles E -> 1, isotropic velocities):
+  The rates follow from the critical curve L_c(mu), mu = cos i (entry [23]):
+     particles captured  ~ (pi/2) Int_{-1}^{1} L_c^2 dmu      (= <sigma> v^2, entry [20])
+     L_z captured        ~ (pi/3) Int_{-1}^{1} mu L_c^3 dmu
+  so the mean angular momentum swallowed per unit swallowed mass is
+     <l_z> = (2/3) Int mu L_c^3 dmu / Int L_c^2 dmu,   and   d a/d ln M = <l_z>/M - 2a.
+  Series (from Will's L_c(i), arXiv:1208.3931; derivable):
+     <l_z> = -(2a/3 + a^3/15 + 41 a^5/1680 + ...) M,    d a/d ln M = -(8a/3 + a^3/15 + ...)
+  Exact at maximal spin a = 1 (all integrals elementary, using the parametrisation of [23]):
+     Int mu L_c^3 dmu = -4876/189 - (790/63) sqrt2 + (628/189) sqrt6 - (2 sqrt3/81) ln((1+sqrt2+sqrt6)/(1+sqrt2))
+                      = -35.423640554598023254
+     Int L_c^2 dmu    = 2 [47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln((1+sqrt2+sqrt6)/(1+sqrt2))]
+                      = 28.823369582005124491
+     <l_z> = -0.81932684180255246848 M,     d a/d ln M = -2.8193268418025524685
+  i.e. an extremal black hole loses spin about 2.82 times faster (in log M) than its spin value; the
+  small-spin law -8/3 a extrapolated to a = 1 would give -2.75.
+
+How it was derived: uniform directions + uniform impact parameters = uniform distribution of the
+  asymptotic angular-momentum vector with measure d^3L/L (slow limit), so the L_z flux is
+  (1/4pi) Int d^3L (2pi/L) L_z = (pi/3) Int mu L_c^3 dmu. At a = 1: L_c^2 = 3y^2 + 2y + 1,
+  mu = -(y^3 - y^2 - y - 1)/sqrt(3y^2+2y+1) on 1 <= y <= 1+sqrt2, plus the straight piece L_c = 2/mu for
+  sqrt(2/3) <= mu <= 1; sympy integrates everything exactly.
+
+How it was verified (code/torque_iso_sim.py): independent bisection for L_c(mu) at 2000 tilts using the
+  exact E = 1 radial potential:
+     a = 1:   Int mu L_c^3 = -35.42369 (sim) vs -35.42364;  Int L_c^2 = 28.82339 vs 28.82337;  <l_z> = -0.819328 vs -0.819327
+     a = 0.5: <l_z> = -0.342547 (sim) vs series -0.342430 (next term O(a^7))
+
+Novelty status: NOT FOUND for the exact extremal value; the small-spin series follows from Will (2012).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
