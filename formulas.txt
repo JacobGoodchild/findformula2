@@ -692,6 +692,18 @@ How it was verified (code/energy_frac.py, energy_sim_zamo.py, energy_sim_isco.py
       ZAMO off-equator, a=0.9, 60 deg: sim 0.09264   formula 0.09251
     (grid noise ~1e-3 relative).
 
+  (c) Line profile (energy spectrum of the escaping light, summed over all directions) for the ISCO lamp of
+  extremal Kerr, per emitted photon, g = E_inf/E_emit:
+       dP/dg = sqrt3/4                                               for 1/sqrt3 <= g <= sqrt3,
+       dP/dg = (sqrt3/(4 pi)) arcsin( 2 sqrt3 g / sqrt(3 + 2 sqrt3 g - 3 g^2) )  for 0 < g < 1/sqrt3,
+       dP/dg = 0 otherwise.
+  A flat top from g = 1/sqrt3 to the maximum blueshift g = sqrt3, with a step of exactly a factor 2 at
+  g = 1/sqrt3 (below it only outward-launched photons escape) and an arcsin tail to g = 0. (From g = (2t+1)/sqrt3,
+  t = cosine of the emission angle to the orbital motion.) Integrates to 0.5465 ([8]) with mean 0.5956 ([10]).
+  Check (code/isco_spectrum.py, 180,000-direction ray simulation): histogram per unit g in bins of 0.1:
+     0.05: 0.0136 vs 0.0134;  0.25: 0.0648 vs 0.0646;  0.45: 0.1249 vs 0.1242;  0.65 ... 1.65: 0.4333 vs 0.4330;
+     edge bins (0.5-0.6 and 1.7-1.8) partially filled as expected; mean g 0.59563 vs 0.59564.
+
 Novelty status: NOT FOUND. Related papers (arXiv:2108.09051, 1910.12682) give photon escape
   probabilities and maximum blueshifts (e.g. sqrt3 for the ISCO, which is the maximum of
   a(t+k)/sqrt(1-k^2) at t = 1), but we did not find the energy-weighted escape fraction.
