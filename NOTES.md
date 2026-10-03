@@ -76,3 +76,7 @@
 * Braneworld extension (a > M) checked numerically for [6],[7],[8].
 * sympy could not do the ISCO integral symbolically; the closed form in [8] rests on 30-digit
   numerical identification at 4 k values + the known k=1/2 value + ray simulation.
+
+### Lead 5: energy-weighted escape -> RESULT [10]
+* ZAMO: 3/32 + sqrt3/16 (Kerr) found by PSLQ immediately; general a via PSLQ at 2 values.
+* ISCO: by-parts + same elementary integrals. Check: max of E_inf/E_emit = sqrt3 (known max blueshift).

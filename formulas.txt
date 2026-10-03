@@ -28,6 +28,9 @@ INDEX
     equals 3/8 + sqrt(3)/9 at a = M/sqrt2.                                     — not found (a = M value 54.65% known)
 [9] Extremal Kerr-Newman shadow area for ANY viewing angle: edge polynomial factorises,
     A = 4 Int (3r^2 + 2(a^2-1) r - a^2 cos^2 th)/sqrt(N) dr (+ edge term). Unifies [3] and [7]. — not found
+[10] Fraction of emitted ENERGY that escapes from the horizon of an extremal black hole:
+    lamp at rest: 3/32 + sqrt(3)/16 (Kerr), (4a^2-1)/(32a) + sqrt(4a^2-1)/16 (Kerr-Newman);
+    lamp on the ISCO: 2 sqrt3/9 + 1/(20 pi) + 13 arctan(sqrt(5/3))/(5 sqrt15 pi) = 59.56% (Kerr). — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -530,6 +533,60 @@ How it was verified (code/kn_ext_incl.py): against the direct area integral buil
    (agreement ~1e-14, limited by the direct method's endpoint singularities).
 
 Novelty status: NOT FOUND.
+
+==================================================================================
+[10] ENERGY ESCAPE FRACTION FROM THE HORIZON OF AN EXTREMAL BLACK HOLE
+==================================================================================
+Question (plain English):
+  [6] and [8] count PHOTONS. But photons climbing out lose (or, for a moving lamp, gain)
+  energy. For a maximally spinning hole the escaping photons are NOT infinitely redshifted,
+  so we can ask: of all the energy the lamp emits (in its own frame), what fraction arrives
+  at infinity?  (Average of E_infinity / E_emitted over isotropic emission, counting
+  captured photons as 0.)
+
+Formulas (M = 1, extremal Kerr-Newman a^2 + Q^2 = 1, lamp on the equator at r -> 1):
+  * Lamp at rest in the ZAMO frame:   E_inf/E_emit = a n_phi for escaping photons, and
+        epsilon_ZAMO = (4a^2 - 1)/(32 a) + sqrt(4a^2 - 1)/16           (a >= 1/2)
+        Kerr (a = 1):  epsilon = 3/32 + sqrt(3)/16 = 0.202003175473054830845465...
+    Off the equator (polar angle theta): epsilon = (a s/sqrt(Sigma_H)) (1 - k^2 + sqrt(1-k^2))/8,
+    s = sin theta, Sigma_H = 1 + a^2 cos^2 theta, k = Sigma_H/(2 a s)  (k < 1).
+  * Lamp on the ISCO (moving at v = k = 1/(2a), for a >= 1/sqrt2):  E_inf/E_emit = a(t+k)/sqrt(1-k^2),
+    t = cosine of emission angle to the direction of motion. With b = 1 + k^2,
+    phi_1 = arcsin(sqrt(b/2)), arccos k = c_k:
+        S = 2k^2 phi_1/b^(3/2) - k^2 sqrt(1-k^4)/b^(3/2) - 2(1+2k^2) phi_1/sqrt(b)
+            + (1-k)^2 c_k/2 + (1+k)^2 (pi/2 - c_k/2)
+        K2 = k^2 pi/4 - S/2
+        epsilon_ISCO = a(1/2 + k)/(2 sqrt(1-k^2)) + a K2/(2 pi sqrt(1-k^2))
+    Kerr (a = 1, k = 1/2):
+        epsilon_ISCO = 2 sqrt(3)/9 + 1/(20 pi) + 13 arctan(sqrt(5/3))/(5 sqrt(15) pi)
+                     = 0.595642179018597734401778655...
+    a = 0.8: 0.602041782744716891715816...;  a = 1/sqrt2: 0.635726238678152262747279...
+  Interpretation: a lamp at rest just outside the horizon of a maximally spinning black hole
+  delivers ~20% of its energy to the outside world; one riding the ISCO delivers ~60% (more
+  than its ~55% photon escape probability, because the escaping photons are Doppler-boosted).
+
+How it was derived:
+  Weight the exact escape region of [6] (and its boosted version [8]) by the photon energy at
+  infinity: at the horizon E = E_ZAMO (alpha + omega sqrt(g_phiphi) n_phi) -> a n_phi on the
+  equator (a s n_phi/sqrt(Sigma_H) off it). The ZAMO integral is elementary; the general-k
+  formula was found by PSLQ at k = 0.3 and 0.35 (relation 8F = 1 - k^2 + sqrt(1-k^2), F = 2k*eps,
+  40 digits) and confirmed at k = 1/2 (3/32 + sqrt3/16 from the first PSLQ run). The ISCO
+  integral: by parts as in [8], then the same three elementary integrals plus
+  Int s ds/sqrt(s(2k-bs)) = (4k/b^(3/2))(phi_1/2 - sqrt(1-k^4)/4).
+
+How it was verified (code/energy_frac.py, energy_sim_zamo.py, energy_sim_isco.py):
+  * Closed forms vs direct numerical integration over the escape region, 30 digits:
+      ISCO a=1: 0.59564217901859773440177865599 (both); a=0.8: 0.602041782744716891715816076199 (both)
+  * Independent brute-force ray simulation (energy-weighted, grid N=250, r = 1 + 1e-7):
+      ZAMO a=1:   sim 0.20170   formula 0.20200
+      ZAMO a=0.8: sim 0.13878   formula 0.13900
+      ISCO a=1:   sim 0.59563   formula 0.59564
+      ISCO a=0.8: sim 0.60205   formula 0.60204
+    (grid noise ~1e-3 relative).
+
+Novelty status: NOT FOUND. Related papers (arXiv:2108.09051, 1910.12682) give photon escape
+  probabilities and maximum blueshifts (e.g. sqrt3 for the ISCO, which is the maximum of
+  a(t+k)/sqrt(1-k^2) at t = 1), but we did not find the energy-weighted escape fraction.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
