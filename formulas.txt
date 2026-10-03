@@ -450,8 +450,9 @@ Results (M = 1, extremal Kerr-Newman, equatorial plane):
 How it was derived:
   Take the near-horizon escape cone of entry [6] (in the ZAMO frame), boost the lamp along the
   rotation direction with speed v, and integrate over the lamp's own isotropic directions
-  (code/boosted.py). With v = k the region simplifies: all directions with n'_phi > 0
-  escape, and for -k < n'_phi < 0 a fraction arcsin((t+k)/(k sqrt(1-t^2)))/(pi/2)... giving
+  (code/boosted.py). With v = k the region simplifies: in the lamp's frame every direction
+  with n'_phi = t > 0 escapes, none with t < -k escape, and for -k < t < 0 the escaping
+  fraction of the circle of directions is (1/pi) arcsin((t+k)/(k sqrt(1-t^2))), giving
      P = 1/2 + (1/2pi) Int_{-k}^{0} arcsin( (t+k)/(k sqrt(1-t^2)) ) dt,
   and integration by parts + partial fractions gives the closed form above (the arctan piece
   comes from Int ds/sqrt(s(2k-(1+k^2)s)); the remaining pieces sum to -arcsin k, which was
