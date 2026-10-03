@@ -49,7 +49,7 @@ INDEX
     = 16 pi (M/v)^2 at a = 0 (known), (7 pi + 16 sqrt2)(M/v)^2 at a = M.          — not found
 [16] Slow-particle capture cross-section for ANY direction: the a^2 correction is direction-independent,
     sigma = 16 pi (M/v)^2 [1 - a^2/16 - (31/2048 - 3C/1024 - 9C^2/2048) a^4 - ...];
-    direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — not found
+    direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — PROBABLY KNOWN (follows from Will 2012)
 [17] Leading spin correction to the capture cross-section for ANY particle speed and ANY direction:
     sigma = sigma_Schw(v) [1 - a^2 (r_c + 3 cos^2(th) (4 - r_c)) / (2 r_c^2 (6 - r_c)) + O(a^4)],
     r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)).  — not found
@@ -945,8 +945,19 @@ How it was verified:
     1 - a^2/16 - a^4/128 - a^6/512, identical to the fitted polynomials at C = 1.
   * The general-direction integral reproduces [15] at 90 deg to 50 digits.
 
-Novelty status: NOT FOUND. arXiv:2510.13604 fits spin expansions numerically (~1.5%); we did not
-  find the exact rational coefficients or the direction-independence of the a^2 term stated.
+  * Strong independent check (found after recording): C. M. Will, "Capture of non-relativistic
+    particles in eccentric orbits by a Kerr black hole", arXiv:1208.3931 (CQG 2012), eq. (14)-(15),
+    gives the critical angular momentum L_c(i) = 2 + 2 sqrt(1 - a cos i - a^2 sin^2 i F/8) as a series
+    in a. Since the capture region in the impact plane is the set of radius L_c(i)/v with
+    cos i = sin(theta) cos(phi), sigma v^2 = (1/2) Int_0^{2pi} L_c^2 dphi. Doing this integral with
+    sympy reproduces ALL our coefficients through a^6 exactly. (L_c^2 = 16 - 8 a cos i - a^2 + O(a^3)
+    explains the direction-independent a^2 term.)
+
+Novelty status: PROBABLY KNOWN / DERIVABLE. The coefficients follow directly from Will (2012);
+  we did not see the cross-section or its direction average written out, but it is a short step.
+  (arXiv:2510.13604 still fits these numerically.) The exact edge-on closed form [15] is NOT a
+  consequence of Will's work, which is approximate away from the equator; in fact [15] implies the
+  exact identity (1/2) Int_0^{2pi} L_c(cos i = cos phi)^2 dphi = 7pi + pi sqrt(1-a^2) + 16 sqrt(1+a) E(2a/(1+a)).
 
 ==================================================================================
 [17] SPIN CORRECTION TO THE CAPTURE CROSS-SECTION OF A BLACK HOLE AT ANY SPEED AND DIRECTION
@@ -986,6 +997,7 @@ How it was derived and verified:
 
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
+  Will (2012, arXiv:1208.3931) covers only the slow limit (E = 1), consistent with r_c = 4 here.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

@@ -1,0 +1,25 @@
+15/4 0.07111111111111111111 16/225 minus edge: 8/675
+7/2 0.081632653061224489794 4/49 minus edge: 6/245
+10/3 0.089999999999999999997 9/100 minus edge: 27/800
+13/4 0.094674556213017751476 16/169 minus edge: 72/1859
+31/10 0.1040582726326742976 100/961 minus edge: 1350/27869
+Traceback (most recent call last):
+  File "/home/user/findformula2/code/anyv_a4.py", line 13, in <module>
+    ce=coefs(lambda h: AA.area(E,h,pi/2)); cp=coefs(lambda h: polar_area(E,h))
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/findformula2/code/anyv_a4.py", line 8, in coefs
+    ys=[fun(h) for h in hs]
+       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/findformula2/code/anyv_a4.py", line 8, in <listcomp>
+    ys=[fun(h) for h in hs]
+        ^^^^^^
+  File "/home/user/findformula2/code/anyv_a4.py", line 13, in <lambda>
+    ce=coefs(lambda h: AA.area(E,h,pi/2)); cp=coefs(lambda h: polar_area(E,h))
+                       ^^^^^^^^^^^^^^^^^
+  File "/home/user/findformula2/code/anyv_area.py", line 23, in area
+    lo=findroot(g,(rs[idx[0]-1],rs[idx[0]]),solver='bisect'); hi=findroot(g,(rs[idx[-1]],rs[idx[-1]+1]),solver='bisect')
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/mpmath/calculus/optimization.py", line 985, in findroot
+    raise ValueError('Could not find root within given tolerance. '
+ValueError: Could not find root within given tolerance. (6.61955296100444393177056370471431941046785500896138729947601989265e-64 > 1.51929083932156779959571876312991314467535453337919119460476479853e-64)
+Try another starting point or tweak arguments.
