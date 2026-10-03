@@ -70,6 +70,9 @@ INDEX
 [23] Exact parametric critical angular momentum for capture of slow particles at any orbital tilt
     (replaces Will 2012's fits): L_c^2 = (3y^4 - 4y^3 + a^2)/(y-1)^2, cos i = -(y^4 - 2y^3 + a^2)/(a sqrt(3y^4 - 4y^3 + a^2)).
                                                                                 — not found in this form (pieces probably known)
+[24] Massive particles launched (isotropically, speed beta) from the ISCO of an extremal Kerr hole:
+    escape iff beta > (3 sqrt2 - 2)/7 c = 0.3204c; P = [2 beta + 1 - sqrt(3(1-beta^2))]/(4 beta) up to
+    beta = sqrt(2/3) c (exactly 1/4 at beta = c/2, exactly 1/2 at sqrt(2/3) c).   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1285,6 +1288,47 @@ How it was verified (code/lc_param.py): against direct bisection for the largest
 Novelty status: NOT FOUND in this form. Parametrisations of spherical orbits by their radius go back
   to Wilkins (1972), so the ingredients are probably known; the simplified L_c(i) formula and its
   use as an exact capture criterion replacing Will's fits were not found.
+
+==================================================================================
+[24] ESCAPE OF MASSIVE PARTICLES LAUNCHED FROM THE ISCO OF AN EXTREMAL KERR BLACK HOLE
+==================================================================================
+Question (plain English):
+  Matter at the innermost stable orbit of a maximally spinning black hole already moves at half the
+  speed of light relative to local static (ZAMO) observers. If it launches debris/neutrinos in all
+  directions with speed beta (in its own frame), what fraction escapes? (For light, the known answer
+  is 5/12 + arctan(sqrt(5/3))/(sqrt5 pi) = 54.65%.)
+
+Result (extremal Kerr, near-horizon ISCO, emitter moving at v = 1/2 relative to the ZAMO; isotropic
+  in the emitter frame; t = cosine of the launch angle to the orbital direction):
+  conditions for escape: E = (2/sqrt3) gamma_beta (beta t + 1/2) >= 1,  3E^2 - 1 > gamma_beta^2 beta^2 n_theta^2,
+  and (outward launch or t > 0). Consequences:
+   * threshold:  nothing launched slower than beta_min = (3 sqrt2 - 2)/7 = 0.32037724... escapes;
+   * for beta_min <= beta <= sqrt(2/3) = 0.81650:
+        P(beta) = [ 2 beta + 1 - sqrt(3 (1 - beta^2)) ] / (4 beta)        (elementary)
+     with the exact values P(1/2) = 1/4 and P(sqrt(2/3)) = 1/2;
+   * for beta > sqrt(2/3):  P = 1/2 - t_0/4 - (1/4pi) Int_{t_0}^{0} (pi - 2 arcsin q(t)) dt ... in practice
+     P = (1/4pi) Int_{t_0}^{1} w(t) dt with w = (full circle 2pi or 4 arcsin q) halved for t < 0,
+     q = sqrt(3E^2 - 1)/(gamma_beta beta sqrt(1 - t^2)), t_0 = ((sqrt3/2) sqrt(1-beta^2) - 1/2)/beta;
+     beta -> 1 recovers 0.5464548... (known photon value).
+  Values: beta = 0.4: 0.1328432583507785285618941;  0.5: 1/4;  0.6: 0.3393163974770409021575179;
+          0.7: 0.4153815401123935125191347;  0.8: 0.4877404735808355074636038;  sqrt(2/3): 1/2;
+          0.9: 0.5225707428831686013446291.
+
+How it was derived: combine the near-horizon massive-particle analysis of [19] (escape needs E >= 1,
+  no outer turning point 3E^2 - 1 - Q > 0, and the near-zone bounce condition) with the Lorentz boost
+  of [8] (ISCO speed v = 1/2 relative to the ZAMO). In emitter-frame variables the bounce condition
+  reduces to t > 0 (because v = 1/2 exactly), and for beta <= sqrt(2/3) the cone condition is never
+  active, leaving P = (1 - t_0)/2.
+
+How it was verified:
+  * Independent brute-force simulation (code/isco_massive_sim.py): emitter boosted to v = 1/2 at
+    r = 1 + 1e-7, isotropic grid of 96,800 launch directions, exact Kerr constants of motion with
+    cancellation-free algebra, escape decided from the exact radial potential (inward bounces included):
+       beta = 0.4: 0.13289 vs 0.13284;  0.5: 0.24967 vs 1/4;  0.7: 0.41508 vs 0.41538;  0.9: 0.52246 vs 0.52257.
+  * The elementary formula equals the general integral at beta = 0.33, 0.6, 0.81, 0.8164965 (to 25 digits).
+  * beta -> 1: 0.54645482 vs the known 0.54645490.
+
+Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
