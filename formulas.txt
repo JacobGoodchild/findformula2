@@ -1429,6 +1429,8 @@ Unifying remark (observation, checked for three families): write the extremal ne
    * Kerr-Newman (r_0 = M = 1): Gamma = 1 + a^2 cos^2, gamma = (1+a^2)^2 sin^2/Gamma, k_NH = 2a/(1+a^2)
        ->  (1 + a^2 cos^2 theta)/(2 a sin theta)   ([6]);
    * Kerr-Sen (equator): Gamma = 1 - b^2, gamma = 4a^2/Gamma, k_NH = 1  ->  (1 + b)/2   (this entry).
+  (k_NH from the near-horizon limit: omega ~ a/(rho + a^2) near the extremal horizon and t = (rho_H + a^2) tau/eps
+   give k_NH = a rho'(r_H)/(rho_H + a^2); Kerr-Newman: 2a r_0/(r_0^2 + a^2) (standard); Kerr-Sen: a*2/(2a) = 1.)
   So the near-horizon escape probability P = 1/2 - arcsin(k)/(2pi) - k/4 is fixed entirely by
   near-horizon data. (Not proven for general extremal black holes; it relies on a Kerr-like far region.)
 
