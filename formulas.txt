@@ -52,7 +52,7 @@ INDEX
     direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — PROBABLY KNOWN (follows from Will 2012)
 [17] Leading spin correction to the capture cross-section for ANY particle speed and ANY direction:
     sigma = sigma_Schw(v) [1 - a^2 (r_c + 3 cos^2(th) (4 - r_c)) / (2 r_c^2 (6 - r_c)) + O(a^4)],
-    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)).  — not found
+    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)); full a^4 term too.  — not found
 [18] Exact spin-down torque on a Kerr black hole from slow matter arriving side-on: the captured
     angular-momentum moment M_1 = -{32 sqrt(1+a)[(a^2+2)E - 2(1-a)K] + 35 pi a^2 + 10 pi (1 - sqrt(1-a^2))}/(5a);
     mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found
@@ -1071,7 +1071,22 @@ How it was derived and verified:
        r_c = 15/4, 7/2, 10/3, 13/4, 31/10, 18/5, 37/10, 16/5: coefficients -4096/455625, -128/12005,
        -243/20000, -4096/314171, -400000/26782109, -3125/314928, -400000/43105703, -3125/229376, all equal
        to -4/(r_c^4 (6 - r_c)); limits r_c = 4 (slow): -1/128 = [16] at C = 1, r_c = 3 (light): -4/243 = [5] at C = 1.
-       (The general-direction a^4 coefficient was not pinned down: see NOTES.)
+  (a'') FULL a^4 term, any speed and any direction (identified numerically, see checks):
+       sigma/sigma_S = 1 - a^2 (r + 3C(4-r))/(2 r^2 (6-r))
+                         + a^4 [ alpha8(r) + beta8(r) C + gamma8(r) C^2 ] / ( 8 r^4 (6 - r)^5 ) + O(a^6),   r = r_c(v),
+       alpha8 = -r^2 (2r^3 + 42r^2 - 549r + 1458)
+       beta8  =  6r (2r^4 + 2r^3 - 239r^2 + 1302r - 2016)
+       gamma8 = -10r^5 - 2r^4 + 1653r^3 - 13266r^2 + 39744r - 41472
+       with alpha8 + beta8 + gamma8 = -32 (6 - r)^4, which reproduces (a') on the axis exactly.
+       Direction average: + a^4 * [ -(24r^4 - 251r^3 + 942r^2 - 2448r + 5184) / (5 r^4 (6-r)^5) ].
+       Checks: light (r = 3): C = 0: -1/72, C = 1: -4/243, average -11/729 (all = [5]);
+               slow (r = 4): C = 0: -31/2048, C = 1: -1/128, average -17/1280 (all = [16]).
+       How identified: capture area with analytic dL/dr at 50 digits (code/anyv_area2.py) for a = 0.003..0.021,
+       7-term even fits (code/edge_a4b.py, mid_a4b.py) at r_c = 15/4, 7/2, 10/3, 13/4, 18/5, 16/5 and
+       C = 0, 1/2; then alpha, beta, gamma separated using the exact C = 1 result. Side-on: a 6-point
+       interpolation of alpha r^4 (6-r)^5 predicts the 7th and 8th points exactly; beta and gamma: degree-5
+       fits through 6 points reproduce the remaining 2 points to 1e-16, with small rational coefficients.
+       (An analytic derivation from the 4th-order perturbation is in progress; not yet complete.)
 
   (b) Companion result -- the spin-down torque at leading order, any speed and direction.
   From L_1 = -2 cos(i)/sqrt(r_c (r_c - 3)) (in r_c form) the mean z-angular momentum of the captured
