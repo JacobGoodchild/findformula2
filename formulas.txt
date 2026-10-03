@@ -1295,6 +1295,15 @@ How it was verified (code/lc_param.py): against direct bisection for the largest
      (12 test points, all agree to ~1e-6, limited by the bisection grid).
   It also underlies the exact averages in [16] and [20] (brute-force verified).
 
+  Corollary -- exact slow-particle capture cross-section for ANY incoming direction theta (one integral):
+     sigma v^2 / M^2 = Int_{|mu| <= sin theta} L_c(mu)^2 dmu / sqrt(sin^2 theta - mu^2)
+                     = Int_{y_a}^{y_b} C(y) (-dmu/dy) / sqrt(sin^2 theta - mu(y)^2) dy,
+  with C = L_c^2 and mu(y) as above and mu(y_a) = sin theta, mu(y_b) = -sin theta (because cos i = sin theta cos phi
+  in the impact plane, so phi -> mu). Check against the independent general-direction computation of [16]
+  (code/mb_master.py vs code/mb_incl.py):
+     a = 0.5, 90 deg: 49.42594400257407 vs 49.42594400257406;  a = 0.5, 60 deg: 49.42980878877024 vs ...7025
+     a = 0.9, 30 deg: 47.19769534086904 vs 47.19769534086904;  a = 0.99, 75 deg: 45.26168532641665 vs ...1667
+
 Novelty status: NOT FOUND in this form. Parametrisations of spherical orbits by their radius go back
   to Wilkins (1972), so the ingredients are probably known; the simplified L_c(i) formula and its
   use as an exact capture criterion replacing Will's fits were not found.
