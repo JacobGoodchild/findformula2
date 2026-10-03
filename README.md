@@ -33,6 +33,8 @@ nobody has written it down before. Please treat the results as candidates for ex
 * **Massive particles** near a maximally spinning hole [19], [24]: nothing launched slower than
   c/√2 escapes from rest near the horizon (exactly 1/8 escape at 0.8c); from the innermost
   orbit the threshold is (3√2−2)/7·c ≈ 0.32c and exactly 1/4 escape at c/2.
+* **Shadow circumference** [30]: maximal spin seen side-on has perimeter exactly 18√3·M
+  (non-spinning: 6√3π·M).
 * **Open question answered (partly)**: the dark-sky solid angle of a maximally spinning black hole
   for an equatorial observer at any distance [13], [14] (called "intractable" in a 2024 paper).
 * Also: charged (Kerr–Newman) and string-theory (Kerr–Sen) versions of several of these
@@ -73,3 +75,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 27 | How fast a black hole spins down in a bath of slow dark matter | ⟨ℓ_z⟩ = −(2a/3 + a³/15 + …)M; exact at max spin: −0.8193M | not found (exact value) |
 | 28 | Max-spin Kerr–Sen shadow from any angle | factorises into two quadratics; one-line elliptic formula | not found |
 | 29 | Dark-matter capture by a string-theory (Kerr–Sen) black hole, side-on | 16√(B+a)·E(m) + π(3B + 4 + √(B²−a²)) | not found |
+| 30 | Circumference of a spinning black hole's shadow | exact; 18√3·M for maximal spin seen side-on | not found |
