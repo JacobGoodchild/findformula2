@@ -75,6 +75,8 @@ INDEX
     beta = sqrt(2/3) c (exactly 1/4 at beta = c/2, exactly 1/2 at sqrt(2/3) c).   — not found
 [25] Kerr-Sen (string-theory) black hole, edge-on shadow area: one compact integral for all (a, b);
     extremal (a = M - b) closed form sqrt(a) sqrt(4-a)(a+14) + 8(2a+1) arcsin(sqrt(a)/2) + 4 pi (2a+1).  — not found
+[26] Escape of light from the horizon of an extremal Kerr-Sen black hole: P = 1/2 - arcsin(k)/(2pi) - k/4,
+    k = (1 + b)/2 (3D isotropic); in-plane version 1/2 - arcsin(k)/(2pi) reproduces Zhang & Jiang's numerics.  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1368,6 +1370,43 @@ How it was verified (code/kerrsen_check.py): polygon (shoelace) area of the shad
      0.2: 32.4979420048 vs 32.4979420058.
 
 Novelty status: NOT FOUND (Kerr-Sen shadows are studied numerically, e.g. arXiv:2112.11066).
+
+==================================================================================
+[26] NEAR-HORIZON ESCAPE OF LIGHT FROM AN EXTREMAL KERR-SEN BLACK HOLE
+==================================================================================
+Question (plain English):
+  Entry [6] for the string-theory (Kerr-Sen) black hole. Zhang & Jiang (arXiv:2004.03367, Nucl. Phys. B
+  2021) computed escape probabilities near the extremal Kerr-Sen horizon numerically (for emission
+  restricted to the equatorial plane). Exact answer?
+
+Result (M = 1, extremal Kerr-Sen: a = 1 - b, b = Q^2/2; lamp at rest in the ZAMO frame on the equator,
+  r -> r_H = 1 - b):
+   * the horizon value of the photon angular momentum is lambda_H = (rho_H + a^2)/a = 2 for every b
+     (rho_H = r_H (r_H + 2b) = 1 - b^2);
+   * exactly as in [6], the escape cone is the wedge n_theta^2 < (1/k^2 - 1) n_phi^2 (n_phi > 0) with
+     inward-launched photons escaping iff n_phi > k, where now
+        k = (lambda_H - a)/2 = (1 + b)/2 = 1 - a/2;
+   * isotropic 3D emission:   P = 1/2 - arcsin(k)/(2 pi) - k/4        (b = 0: 7/24; b -> 1: 0)
+   * emission restricted to the equatorial plane (Zhang & Jiang's setup):
+                              P_plane = 1/2 - arcsin(k)/(2 pi)
+     -> 5/12 for extremal Kerr (b = 0) and exactly 1/4 at b = 1 (Q = sqrt2, a = 0), which is the value
+     Zhang & Jiang report there ("both kinds of particles own an escaping probability 1/4").
+  The same planar formula with k = 1/(2a) applies to extremal Kerr-Newman.
+
+How it was derived: near-horizon expansion as in [6]. With rho = r(r+2b): rho + a^2 - a lambda
+  ~ 2(r - r_H) + a(lambda_H - lambda) (since rho'(r_H) = 2(r_H + b) = 2), Delta = (r - r_H)^2, so the
+  radial potential has the same near/far structure as Kerr with C = eta + (lambda_H - a)^2 = eta + (1+b)^2;
+  in the ZAMO frame n_phi = (1 - b^2)/(a v) = (1+b)/v, giving C = v^2 (n_theta^2 + n_phi^2), and escape
+  requires C < 4 (and v < 2 for inward launches).
+
+How it was verified: brute-force ray test in the exact extremal Kerr-Sen metric (code/kerrsen_escape.py;
+  96,800 directions, r = r_H + 1e-7, cancellation-free algebra, inward bounces included):
+     b = 0:   sim 0.29066 vs 7/24 = 0.29167
+     b = 0.3: sim 0.22362 vs 0.22488
+     b = 0.6: sim 0.15219 vs 0.15242          (grid noise ~1e-3)
+  Planar formula: reproduces the 1/4 quoted by Zhang & Jiang at Q = sqrt2.
+
+Novelty status: NOT FOUND (numerical results exist: arXiv:2004.03367).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
