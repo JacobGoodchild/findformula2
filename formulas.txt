@@ -12,6 +12,11 @@ INDEX
     area = (16*pi + 15*sqrt(3)) M^2 exactly.                                    — KNOWN (Cunha, Herdeiro & Radu 2019)
 [3] Extremal Kerr shadow area for EVERY viewing angle: the edge polynomial factorises,
     giving a one-line integral / elliptic closed form + a series in sin(theta).  — not found
+[4] "Master formula": Kerr shadow area for ANY spin and ANY viewing angle as a single
+    integral of (polynomial + simple pole)/sqrt(sextic), coefficients depend only on
+    u = a^2 cos^2(theta).                                                        — not found
+[5] Small-spin expansion of the Kerr shadow area at any viewing angle, exact rational
+    coefficients:  A = 27 pi M^2 [1 - (1+cos^2 th) a^2/18 - ...]               — not found (edge-on a^2 term known)
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -205,3 +210,101 @@ Novelty status: NOT FOUND. The edge-curve of the extremal Kerr shadow is studied
   inclination was found; papers using the area (arXiv:1909.08039, 2209.06237) say it is
   only exactly known on the axis and edge-on, and interpolate in between (error ~0.8%).
   The factorisation of the edge polynomial may well be known implicitly to experts.
+
+==================================================================================
+[4] MASTER FORMULA: KERR SHADOW AREA FOR ANY SPIN AND ANY INCLINATION
+==================================================================================
+Question (plain English):
+  Same as [1], but for an observer at ANY angle theta from the spin axis. For general spin
+  and angle the shadow edge is described by a degree-6 polynomial, so the area cannot be
+  written with ordinary (complete elliptic) functions -- but can it at least be written as
+  ONE simple, fast, derivative-free integral?  Yes, and the integrand is very simple.
+
+Formula (M = 1, 0 < a < 1, 0 < theta < pi, observer at infinity). Put u = a^2 cos^2(theta).
+  N(r) = -r^6 + 6 r^5 - (9 + 2u) r^4 + 4 a^2 r^3 + 6u r^2 - 4 a^2 u r - u^2 (r-1)^2
+  (N(r) = [beta^2] * a^2 (r-1)^2 sin^2(theta), the "height^2" of the shadow edge, cleared of
+  denominators). Let r_1 < r_2 be the two roots of N with r > 1 (the radii of the spherical
+  photon orbits that touch the edge). Then
+     A(a,theta) = 1/(u-1) * Integral_{r_1}^{r_2} [ 2(u^2 - 5a^2 u + 6u + 3a^2 - 3)
+                                       - 2(2u^2 + a^2 u - 3u - 3a^2 + 3) r
+                                       + 2(u^2 - 6u - 3) r^2
+                                       + 4(u + 3) r^3
+                                       + 2(u - 3) r^4
+                                       - 2(a^2 - 1)(u^2 + 6u - 3)/(r - 1) ]  dr / sqrt(N(r))
+  At theta = 90 deg (u = 0) this reduces to entry [1]; the integrand is integrable at both
+  ends (inverse-square-root endpoints), so tanh-sinh quadrature gets 15-30 digits instantly.
+
+Decimal values (M = 1):
+  a=0.5,  theta=17 deg: 82.4720673488089...      a=0.9, theta=17 deg: 76.1857459493842...
+  a=0.94, theta=30 deg: 75.7058481639768...      a=0.5, theta=60 deg: 83.2601863106775...
+  a=0.99, theta=85 deg: 77.1014352782594...
+
+How it was derived:
+  Area = 2 Int beta |d alpha| with alpha = -xi/sin(theta), beta^2 = eta + a^2 cos^2 - xi^2 cot^2.
+  Using dxi/dr = -2[(r-1)^3 + 1 - a^2]/(a (r-1)^2) the integrand becomes
+  4 sqrt(N) [(r-1)^3 + 1 - a^2] / (a^2 sin^2(theta) (r-1)^3). sympy (code/reduce_general.py)
+  then removed an exact derivative d/dr[S(r) sqrt(N)], S = (1 - r)/(a^2 (c^2-1)) + t1/(r-1)
+  + t2/(r-1)^2, choosing t1, t2 to kill the double and triple poles; S sqrt(N) vanishes at both
+  ends. The leftover coefficients factor into the compact form above.
+  (Checked that no hidden symmetry reduces the sextic to elliptic curves: the classical
+  "three quadratics in involution" determinant is far from 0 for random a, theta --
+  code/genus2.py -- so a K/E/Pi closed form for general (a, theta) is not expected.)
+
+How it was verified (code/master.py):
+  a, theta    master formula        direct curve integral     polygon (800k pts)
+  0.5, 17     82.47206734880892     82.47206734880897         82.47206734656
+  0.9, 17     76.18574594938422     76.18574594938424         76.18574594753
+  0.5, 60     83.26018631067747     83.26018631067749         83.26018631097
+  0.94, 30    75.70584816397675     75.70584816397676         75.70584816299
+  0.99, 85    77.10143527825938     77.10143527825934         77.10143527592
+  0.3, 89     84.38878643604521     84.38878643604519         84.38878643606
+  0.998, 45   74.50487346629570     74.50487346629571         74.50487346528
+  (agreement ~1e-14, limited by double-precision root finding; the polygon is an
+  independent method and agrees to ~1e-9.)  Also reduces to [1] at theta = 90 deg and
+  its small-spin series reproduces the exactly known polar (theta = 0) result (see [5]).
+
+Novelty status: NOT FOUND. Papers compute the area by numerically integrating the edge
+  curve or by fitting (arXiv:2601.09655); no single-integral reduced formula found.
+  Honest caveat: this is a "reduction" result -- useful (fast, exact, simple), but it is
+  not a closed form in standard functions.
+
+==================================================================================
+[5] SMALL-SPIN EXPANSION OF THE KERR SHADOW AREA AT ANY VIEWING ANGLE
+==================================================================================
+Question (plain English):
+  For a slowly spinning black hole, how much does the shadow shrink, depending on how we
+  view it?  A handy rule of thumb would let observers convert a measured shadow size into
+  mass without a full ray-tracing calculation.
+
+Formula (C = cos^2 theta, M = 1, observer at infinity):
+  A / (27 pi) = 1 - (1 + C) a^2 / 18
+                  - ( 1/72 + 5C/972 - 5C^2/1944 ) a^4
+                  - ( 2059/314928 + 167C/104976 - 185C^2/104976 - 5C^3/3888 ) a^6
+                  - ( 88175/22674816 + 3869C/5668704 - 4865C^2/3779136 - 83C^3/69984
+                      - 667C^4/7558272 ) a^8  - ...
+  Pattern: the a^(2k) coefficient is a polynomial of degree k-1 in cos^2(theta) with
+  rational coefficients whose denominators are 2^p 3^q.
+  Leading rule of thumb: the shadow area shrinks by the fraction (1 + cos^2 theta) a^2/18,
+  i.e. twice as much seen pole-on (a^2/9) as edge-on (a^2/18).
+  Example: a = 0.5, theta = 17 deg (M87*): series to a^8 gives A/(27 pi) = 0.9722857...,
+  exact (master formula) 82.4720673.../(27 pi) = 0.9722842... (difference 1.5e-6 = higher terms)
+
+How it was derived:
+  Master formula [4] evaluated at 80-digit precision for 16 values of a^2 (1e-4 ... 1.6e-3)
+  at each of 8 values of cos^2(theta) (1/16, 3/16, ..., 15/16); polynomial fit in a^2,
+  then polynomial fit in cos^2(theta) of each coefficient; rationals recognised.
+
+How it was verified:
+  * Fits are exact to residuals 5e-32 (a^2), 2e-27 (a^4), 1e-23 (a^6), 2e-19 (a^8);
+    fitted coefficient of C^k beyond degree k-1 comes out 0 to the same accuracy.
+  * Edge-on (C = 0) reproduces [1]'s series: 1/18, 1/72, 2059/314928, 88175/22674816.
+  * Pole-on (C = 1) gives 1 - a^2/9 - 4a^4/243 - 100a^6/19683 - 356a^8/177147, which was
+    checked INDEPENDENTLY with sympy from the known exact polar formula
+    A = pi(eta + a^2) at the root of r^3 - 3r^2 + a^2 r + a^2 = 0: identical rationals.
+  * The edge-on a^2 term, -(3 pi/2) a^2, matches arXiv:2607.11979 eq. (115).
+
+Novelty status: NOT FOUND for general inclination (the inclination-dependent a^2 term
+  (1 + cos^2 theta)/18 and all higher terms). The edge-on a^2 term is KNOWN
+  (arXiv:2607.11979), and the pole-on series follows easily from the known polar formula.
+  The a^2 term is simple enough that it could appear in some perturbative paper we missed:
+  label "not found", leaning "possibly known" for the a^2 term only.

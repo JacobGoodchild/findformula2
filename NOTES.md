@@ -27,3 +27,13 @@
 ### Literature correction
 * Entry [2] (16 pi + 15 sqrt3) turned out to be KNOWN: Cunha-Herdeiro-Radu 2019
   (arXiv:1909.08039). Relabelled. Lesson: search harder for "special case" values.
+
+### Lead 1c: general (a, theta) -> RESULTS [4], [5]
+* Edge polynomial N(r) is degree 6 -> genus 2. Tested the "involution" criterion for split
+  Jacobian numerically: not satisfied -> no K/E/Pi closed form expected in general.
+* Hermite reduction still gives a remarkably compact single integral (coeffs depend on
+  u = a^2 cos^2 theta and a^2).
+* Small-spin series at all inclinations with rational coefficients; pole-on case checked
+  against exact polar formula. Rule of thumb: area shrinks by (1+cos^2)a^2/18.
+* Background job hit "polyroots no convergence" at cos^2=0 (degenerate double root at r=0)
+  -> sampled cos^2 at odd sixteenths instead.
