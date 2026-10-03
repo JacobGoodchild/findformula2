@@ -43,3 +43,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 18 | How fast slow matter spins a black hole down (side-on), exactly | closed form with K and E; swallowed L_z = −aM(1 + 3a²/32 + …) | not found |
 | 19 | Can massive particles escape from right next to a max-spin black hole? | only if faster than c/√2; P = (1 − √(1−β²)/β)/2 up to (√3/2)c | not found |
 | 20 | Dark-matter capture by a spinning black hole averaged over all directions | one integral; exact elementary value at max spin ≈ 45.28 (M/v)² | not found |
+| 21 | Max-spin black hole: capture target for particles of any speed (side-on) | one elliptic family joining 7π+16√2 (slow) to 16π+15√3 (light) | not found |

@@ -62,6 +62,9 @@ INDEX
 [20] Direction-averaged (isotropic) slow-particle capture cross-section of a Kerr black hole: one-line
     integral for any spin; at a = M exactly
     pi (M/v)^2 [47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln((1+sqrt2+sqrt6)/(1+sqrt2))] = 45.2756 (M/v)^2.  — not found
+[21] Extremal Kerr, edge-on capture cross-section at ANY particle speed: the boundary is
+    L = E(r+1) - (r-1) sqrt(r(p^2 r+1)), Q = r^2[-p^2 r^2 + (2p^2-1) r + 1 + 2E sqrt(r(p^2 r+1))];
+    elliptic (sqrt of t^4 + 2E t^3 - t^2 - 2E p^2 t - p^4); joins 7pi+16sqrt2 (slow) to 16pi+15sqrt3 (light).  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1173,6 +1176,42 @@ How it was verified (code/mb_avg.py, code/mb_avg_sim.py):
   * a -> 0 gives 16 pi; a = 0.5 agrees with the series of [16] to the expected O(a^8).
 
 Novelty status: NOT FOUND (arXiv:2510.13604 computes such averages numerically).
+
+==================================================================================
+[21] EXTREMAL KERR CAPTURE CROSS-SECTION AT ANY SPEED (EDGE-ON): ONE ELLIPTIC FAMILY
+==================================================================================
+Question (plain English):
+  For a maximally spinning black hole, entries [2] (light) and [15] (slow particles) give exact
+  edge-on capture areas 16pi + 15sqrt3 and 7pi + 16sqrt2. What happens in between, for particles
+  of any speed v?  For general spin the problem is genus 2 (dead end in NOTES), but at a = M it
+  drops to an elliptic integral for every speed.
+
+Formulas (M = 1, a = 1, E = 1/sqrt(1-v^2), p^2 = E^2 - 1 = (gamma v)^2, edge-on incidence):
+  marginally-critical spherical orbits of energy E (sympy, code/anyv_ext.py):
+     L(r) = E (r+1) - (r-1) w(r),   Q(r) = r^2 [ -p^2 r^2 + (2p^2 - 1) r + 1 + 2E w(r) ],
+     w(r) = sqrt( r (p^2 r + 1) ),   1 <= r <= r_max (Q(r_max) = 0),
+  capture cross-section  sigma(v) = (2/p^2) Int_1^{r_max} sqrt(Q) |dL/dr| dr   (in M^2).
+  The substitution r = 1/(t^2 - p^2) (so w = r t) makes everything rational except
+     sqrt( N4(t) ),   N4(t) = t^4 + 2E t^3 - t^2 - 2E p^2 t - p^4,
+  i.e. an elliptic integral (incomplete: the endpoint r = 1 <-> t = E, where N4 = 3E^2 - 1, is the
+  end of the straight NHEK-type edge L = 2E, 0 <= Q <= 3E^2 - 1; dL/dt carries a factor (t - E)).
+  Limits: v -> 0: sigma v^2 -> 7 pi + 16 sqrt2 = 44.6185655731 ([15], a = 1);
+          v -> 1: sigma -> 16 pi + 15 sqrt3 = 76.2462445710 ([2]).
+  Values of sigma (M^2):  v = 0.3: 540.176236592628559475804565288  (sigma v^2 = 48.6158612933)
+                          v = 0.6: 161.829326309246602518232721305
+                          v = 0.9: 88.0258937277213195697852607799
+                          v = 0.999: 76.3480470629935280710683801598
+
+How it was verified:
+  * Independent brute force (code/anyv_ext_sim.py): 3000 values of L_z, bisection in Q for capture
+    by the exact E > 1 radial potential of extremal Kerr:
+       v = 0.6: 161.83020 vs 161.82933;   v = 0.9: 88.02678 vs 88.02589.
+  * Limits checked numerically: v = 0.001: sigma v^2 = 44.61861443 (-> 44.61856557);
+    v = 0.99999: sigma = 76.24726 (-> 76.24624).
+  * Example: for p = 3/4 (E = 5/4, v = 3/5) the quartic is (1/256)(256 t^4 + 640 t^3 - 256 t^2 - 360 t - 81),
+    obtained from the full-spin sextic as (4t-5)^2 x quartic at a = 1 (code/anyv.py).
+
+Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
