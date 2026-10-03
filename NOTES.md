@@ -129,3 +129,13 @@
   on the tilt, so the reduction fails (true value 75.016367793769378...). For slow particles the
   extra term is a^2 p^2 cos^2 -> 0, which is why [20] is fine (and brute-force verified).
 * [19] massive escape from extremal horizon: threshold c/sqrt(1+a^2), elementary for beta <= sqrt3/2.
+### Lead 9: Kerr-Sen (string BH) -> [25] shadow edge-on, [26] near-horizon escape, [28] any-angle extremal shadow, [29] slow capture + torque
+* Kerr-Sen slow capture is elliptic (even quartic after r = y^2 - b), unlike Kerr-Newman (genus 2).
+* Near-horizon escape structure is universal: k = (lambda_H - a)/2 for Kerr, KN, Kerr-Sen (M=1).
+### Lead 10: higher orders of [17]
+* Analytic perturbation (anyv_pert2.py) got L_1..L_3 quickly; L_4 very slow in sympy (running).
+* Order-a^3 torque with exact impact-plane mapping (torque_any.py) too slow in sympy -> stopped.
+* Numerical route: polar a^4 coefficient = -4/(r_c^4 (6 - r_c)) (exact rationals at 8 speeds).
+  Edge-on / mixed C running (edge_a4.py).
+* Dead end: orientation-averaged extremal photon shadow (75.0163677937693780253...) -- PSLQ with
+  pi, sqrt2, sqrt3, sqrt6, ln(1+sqrt2), ln(2+sqrt3), ln((1+sqrt2+sqrt6)/(1+sqrt2)) finds nothing.

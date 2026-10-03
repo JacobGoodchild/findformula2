@@ -13,7 +13,8 @@ def fpole(E):
     ys=[polar_area(E,h) for h in hs]
     M=matrix([[1,h**2,h**4,h**6,h**8] for h in hs]); c=lu_solve(M,matrix(ys))
     return -c[1]/c[0]
-for rc in [Fraction(15,4),Fraction(7,2),Fraction(10,3),Fraction(13,4),Fraction(31,10)]:
-    r=mpf(rc.numerator)/rc.denominator; E=sqrt((r-2)**2/(r*(r-3)))
-    f=fpole(E); fe=1/(2*r*(6-r))
-    print(rc, nstr(f,20), Fraction(str(nstr(f,18))).limit_denominator(100000), 'minus edge:', Fraction(str(nstr(f-fe,18))).limit_denominator(100000))
+if __name__=="__main__":
+ for rc in [Fraction(15,4),Fraction(7,2),Fraction(10,3),Fraction(13,4),Fraction(31,10)]:
+  r=mpf(rc.numerator)/rc.denominator; E=sqrt((r-2)**2/(r*(r-3)))
+  f=fpole(E); fe=1/(2*r*(6-r))
+  print(rc, nstr(f,20), Fraction(str(nstr(f,18))).limit_denominator(100000), 'minus edge:', Fraction(str(nstr(f-fe,18))).limit_denominator(100000))
