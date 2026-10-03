@@ -151,3 +151,8 @@
 * First sympy attempt with sqrt symbols produced Abs() junk; fix: keep E, L0 as symbols, reduce powers with E^2, L0^2.
 * Forgot the a^2 cos^2 theta impact-plane shift at first (q=0 limit did not match [17]); adding it fixed it.
 * Light limit gives compact KN shadow area at any charge; matches [12] double series.
+### Lead 12: universal f(r) version -> RESULT [32]
+* Same perturbation with Delta = r^2 f + a^2, f Taylor-expanded (f''' drops out). Light & massive.
+* Shadow a^2 coefficient depends only on f and kappa = 2f - r^2 f'' (Lyapunov exponent); massive on J = ISCO combo.
+* Verified on Bardeen / Hayward via exact contour (Tsukamoto form) and exact capture boundary.
+* Idea for next: a^4 term universally? (needs order-4 perturbation; Kerr a^4 from [5]/[17] as check.)

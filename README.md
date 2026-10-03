@@ -19,6 +19,13 @@ nobody has written it down before. Please treat the results as candidates for ex
 
 ## Highlights (crisp exact results; details and checks in `formulas.txt`)
 
+* **One formula for many black holes** [32]: for any spinning black hole built from a non-spinning
+  profile f(r) by the standard Newman–Janis/Azreg-Aïnou recipe (regular, quantum-corrected,
+  dark-matter-dressed, …), the small-spin shadow area is
+  A = (πr²/f)[1 + a²{(1−cos²θ)[1/(2fr²) − 4/(r²κ)] + cos²θ(2f−1)/(fr²)}], κ = 2f − r²f″,
+  evaluated at the photon sphere. Same for particle capture at any speed and the spin-down torque
+  −a·sin²θ(1−f)/f. Checked to 11–13 digits on Bardeen and Hayward black holes.
+
 * **Shadow size of a spinning black hole, exactly** (EHT-relevant). Edge-on, any spin: one formula
   with complete elliptic integrals [1]; any spin and viewing angle: a single short integral [4];
   rule of thumb: area = 27πM²[1 − (1+cos²θ)a²/18 − …] [5]. Previously only fits/numerics.
