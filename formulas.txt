@@ -22,6 +22,10 @@ INDEX
     k = (M^2 + a^2 cos^2 th)/(2 a M sin th).                                    — not found (equatorial uncharged value 7/24 known)
 [7] Edge-on shadow area of an extremal Kerr-Newman (charged, max-spin) black hole:
     16 pi + 8 pi a^2 for a <= M/2;  elementary arcsin formula for a > M/2.     — not found
+[8] Chance that light escapes from a lamp ORBITING at the innermost stable orbit of an extremal
+    Kerr-Newman black hole (for a >= M/sqrt2, where that orbit sits on the horizon):
+    P = 1/2 - arcsin(k)/(2pi) + k arctan(sqrt((1+k^2)/(1-k^2)))/(pi sqrt(1+k^2)), k = M/(2a);
+    equals 3/8 + sqrt(3)/9 at a = M/sqrt2.                                     — not found (a = M value 54.65% known)
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -393,7 +397,7 @@ Formula (M = 1):
                                                                           for 1/2 <= a <= 1.
   Both branches give 18 pi at a = 1/2 and the same slope 8 pi there (checked numerically:
   difference quotient 25.13274148 vs 8 pi = 25.13274123); the second branch is where the
-  straight "NHEK line" edge appears, and it adds a (4a^2-1)^(3/2)-type correction.
+  straight "NHEK line" edge appears; the two branches differ by a term of order (2a-1)^(5/2).
   At a = 1: 16 pi + 15 sqrt 3.
   Surprise: the edge-on shadow of an extremal Kerr-Newman hole GROWS with spin
   (16 pi -> 18 pi -> 24.27 pi), the opposite of the fixed-mass trend in [1], because the charge
@@ -418,3 +422,59 @@ How it was verified (code/kn_ext_check.py): polygon (shoelace) area of the shado
   a -> 0 gives 16 pi, the known extremal Reissner-Nordstrom value (critical impact parameter 4M).
 
 Novelty status: NOT FOUND (a = 0 and a = 1 endpoints are known).
+
+==================================================================================
+[8] ESCAPE PROBABILITY FROM THE INNERMOST STABLE ORBIT OF AN EXTREMAL KERR-NEWMAN BLACK HOLE
+==================================================================================
+Question (plain English):
+  Gas in an accretion disk spirals in until the innermost stable circular orbit (ISCO). For a
+  maximally spinning black hole that orbit hugs the horizon, yet a lamp riding on it still
+  gets most of its light out: for the uncharged case the known exact answer is
+  5/12 + arctan(sqrt(5/3))/(sqrt5 pi) = 54.65%.  What happens for a charged (Kerr-Newman)
+  black hole with the maximal combination a^2 + Q^2 = M^2?
+
+Results (M = 1, extremal Kerr-Newman, equatorial plane):
+  (i)  Near the horizon, every circular orbit moves relative to the local non-rotating observer
+       (ZAMO) at speed  v -> 1/(2a)  (= 1/2 for Kerr), i.e. v = k with k from entry [6].
+  (ii) The ISCO sits on the horizon exactly when a >= 1/sqrt(2); at the horizon
+       dE/dr ~ 4 (a - 1/sqrt2) (E = orbital energy).
+  (iii) For a >= 1/sqrt(2), with k = 1/(2a) in [1/2, 1/sqrt2], a lamp on the ISCO, isotropic in
+       its own frame, has escape probability
+         P_ISCO = 1/2 - arcsin(k)/(2 pi) + k * arctan( sqrt((1+k^2)/(1-k^2)) ) / (pi sqrt(1+k^2))
+       (arctan(sqrt((1+k^2)/(1-k^2))) = arcsin(sqrt((1+k^2)/2))).
+       * a = 1   (k = 1/2):       5/12 + arctan(sqrt(5/3))/(sqrt5 pi) = 0.546454899648778864915755...  (known)
+       * a = 0.8 (k = 0.625):     0.558898...
+       * a = 1/sqrt2 (k = 1/sqrt2): 3/8 + sqrt(3)/9 = 3/8 + 1/(3 sqrt 3) = 0.567450089...  (new, neat)
+       So adding charge (lowering spin) slightly INCREASES the ISCO escape probability.
+
+How it was derived:
+  Take the near-horizon escape cone of entry [6] (in the ZAMO frame), boost the lamp along the
+  rotation direction with speed v, and integrate over the lamp's own isotropic directions
+  (code/boosted.py). With v = k the region simplifies: all directions with n'_phi > 0
+  escape, and for -k < n'_phi < 0 a fraction arcsin((t+k)/(k sqrt(1-t^2)))/(pi/2)... giving
+     P = 1/2 + (1/2pi) Int_{-k}^{0} arcsin( (t+k)/(k sqrt(1-t^2)) ) dt,
+  and integration by parts + partial fractions gives the closed form above (the arctan piece
+  comes from Int ds/sqrt(s(2k-(1+k^2)s)); the remaining pieces sum to -arcsin k, which was
+  identified numerically to 30 digits at k = 1/2, 5/9, 2/3, 0.9 and is consistent with the
+  known k = 1/2 value).
+  The orbital speed v and the ISCO threshold came from direct numerics on the Kerr-Newman
+  circular-orbit formulas (code/kn_isco.py): v(r -> 1) = 0.83333333 (a=0.6), 0.71428571 (a=0.7),
+  0.55555556 (a=0.9), 0.5 (a=1); ISCO bisection gives a_c = 0.70710678 (= 1/sqrt2), and
+  dE/dr at r = 1 + 1e-20 is -4.0e-9 / +4.0e-9 for a = 1/sqrt2 -/+ 1e-9.
+
+How it was verified:
+  * The boosted-cone calculation reproduces BOTH known Kerr numbers to 25 digits:
+    v = 0 -> 7/24 = 0.29166666...; v = 1/2 -> 0.5464548996487788649157551 (known ISCO value).
+  * Independent brute-force ray test (code/escape_isco_sim.py): grid of 180,000 directions
+    isotropic in the moving lamp's frame, Lorentz-transformed to the ZAMO frame at
+    r = 1 + 1e-7, escape decided by the exact radial potential:
+        a = 1:        sim 0.54644   formula 0.54645
+        a = 0.8:      sim 0.55890   formula 0.55890
+        a = 1/sqrt2:  sim 0.56749   formula 0.56745
+  * Integral representation vs closed form: identical to 30 digits for k = 1/2, 5/9, 2/3.
+
+Novelty status: NOT FOUND for the Kerr-Newman formula and the 3/8 + sqrt3/9 value.
+  KNOWN for the Kerr value (a = 1): Igata et al. (Ogasawara-Igata, e.g. arXiv:1910.12682,
+  "Observability of the innermost stable circular orbit in a near-extremal Kerr black hole").
+  The threshold a = M/sqrt2 for the extremal Kerr-Newman ISCO to reach the horizon is
+  PROBABLY KNOWN (it is a simple property of circular orbits) but we did not find it stated.

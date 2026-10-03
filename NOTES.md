@@ -53,3 +53,19 @@
 * Elementary for all a. Threshold a = M/2 = same as escape threshold.
 * Shoelace check initially failed: 0/0 at r=1 in the general formulas produced a spike;
   starting at r = 1 + 1e-5 fixed it.
+
+### Lead 4: boosted emitters (ISCO) -> RESULT [8]
+* The escape wedge of [6], boosted with v = 1/2, reproduces the known 54.65% ISCO value to
+  25 digits -- strong confirmation of [6].
+* Extremal KN: near-horizon circular orbits have v = 1/(2a) = k; ISCO on the horizon iff a >= 1/sqrt2.
+* Closed form found by splitting the integral; threshold value 3/8 + sqrt3/9.
+
+### Dead ends this session
+* Horizon-averaged escape probability (uniform over horizon area) for extremal Kerr:
+  0.15321959342592516335569958794462...; involves elliptic integrals (sqrt of a quartic), no
+  neat closed form found by PSLQ.
+* Orientation-averaged extremal Kerr shadow area: 75.01636779376937802536268135...;
+  PSLQ with pi, sqrt2, sqrt3, logs found nothing.
+* Orientation-averaged small-spin series (from [5]): <A>/pi = 27 - 2a^2 - 11a^4/27
+  - 100a^6/567 - 13688a^8/137781 - ...  (just a corollary of [5]).
+* Extremal Kerr shadow at 30 deg (singular modulus k = sin 15 deg): Pi(1/2|k) survives.
