@@ -7,7 +7,8 @@ Novelty labels: "not found" = not found in web searches (could still exist somew
 INDEX
 -----
 [1] Exact area of the Kerr black-hole shadow seen edge-on, for every spin (elliptic integrals)
-    + its small-spin series with rational coefficients.                         — not found (only the a^2 term is known)
+    + its small-spin series with rational coefficients + near-extremal expansion
+    A = 16pi + 15sqrt3 + (3pi/sqrt2) sqrt(1-a) + ... .                         — not found (only the a^2 term is known)
 [2] Edge-on shadow of a maximally spinning (extremal) Kerr black hole:
     area = (16*pi + 15*sqrt(3)) M^2 exactly.                                    — KNOWN (Cunha, Herdeiro & Radu 2019)
 [3] Extremal Kerr shadow area for EVERY viewing angle: the edge polynomial factorises,
@@ -70,6 +71,19 @@ Formula (M = 1, spin 0 < a < 1, observer at infinity, inclination 90 deg):
         A(a) / (27 pi M^2) = 1 - a^2/18 - a^4/72 - 2059 a^6/314928
                                - 88175 a^8/22674816 - 355999 a^10/136048896 - ...
       (314928 = 2^4 3^9; 22674816 = 2^7 3^11; 136048896 = 2^9 3^11 ... all denominators 2^p 3^q)
+
+  (d) Near-extremal expansion (NEW in this entry; epsilon = 1 - a, M = 1):
+        A = 16 pi + 15 sqrt(3) + (3 pi/sqrt 2) epsilon^(1/2)
+              + epsilon [ (8/sqrt 3) ln(27/(2 epsilon)) - 6 sqrt(3) ] + o(epsilon)
+      i.e. the area rises steeply (like a square root) as the spin drops below maximal.
+      How found: closed form (b) at 60-150 digits for epsilon = 1e-12 ... 1e-80.
+        (A - A_1)/sqrt(eps) = 6.66432440723787 (eps=1e-30), 6.664324407237549374794 (1e-40),
+        6.66432440723754937052387 (1e-50);  3 pi/sqrt2 = 6.66432440723754937047...
+        (differences 3.2e-13, 4.3e-18, 5.3e-23: shrink like sqrt(eps), as expected).
+        Next: [A - A_1 - (3pi/sqrt2) sqrt(eps)]/eps - (8/sqrt3) ln(1/eps) = 1.629003878653755218921686
+        at both eps = 1e-60 and 1e-80; PSLQ relation 3b + 18 sqrt3 + 8 sqrt3 ln2 - 24 sqrt3 ln3 = 0,
+        i.e. b = (8/sqrt3) ln(27/2) - 6 sqrt3. (The ln coefficient 8/sqrt3 = 4.6188 was read off
+        from the growth per decade, 10.635/ln 10.)  Status of (d): identified numerically, not proven.
 
 Decimal values (M = 1):
   a = 0.1   : A = 84.77575938950222861469736...
