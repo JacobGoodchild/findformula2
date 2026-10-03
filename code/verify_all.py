@@ -52,3 +52,9 @@ ok('[25] Kerr-Sen extremal a=1 -> 16pi+15sqrt3', kerrsen_check.A_ext(1), 16*pi+1
 ok('[29] Kerr-Sen slow capture b=0 -> [15]', ks_slow_sim.A_formula(0.5,0.0), 7*pi+pi*sqrt(1-mpf('0.25'))+16*sqrt(mpf('1.5'))*ellipe(mpf(2)/3), 1e-10)
 ok('[30] perimeter a->1 -> 18 sqrt3', perimeter.P_closed('0.99999999'), 18*sqrt(3), 2e-3)
 ok('[30] perimeter a->0 -> 2 pi sqrt27', perimeter.P_closed('0.0000001'), 2*pi*sqrt(27), 1e-6)
+
+# [17](b') torque a^3 coefficient vs stored high-precision values (code/torque_a3_c4.out)
+def _t3(r,C): return (1-C)*(1.5*(r-5)-C*(7*r*r-63*r+144)/(2*r))/((r-2)*(6-r)**3)
+ok("[17b'] r=7/2 C=1/4", _t3(3.5,0.25), -0.0825714285714285714, 1e-14)
+ok("[17b'] r=10/3 C=4/5", _t3(10/3,0.8), -0.030955078125, 1e-14)
+ok("[17b'] r=13/4 C=1/2", _t3(3.25,0.5), -0.069999422065537768017, 1e-14)

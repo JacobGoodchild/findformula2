@@ -52,7 +52,7 @@ INDEX
     direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — PROBABLY KNOWN (follows from Will 2012)
 [17] Leading spin correction to the capture cross-section for ANY particle speed and ANY direction:
     sigma = sigma_Schw(v) [1 - a^2 (r_c + 3 cos^2(th) (4 - r_c)) / (2 r_c^2 (6 - r_c)) + O(a^4)],
-    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)); full a^4 term too.  — not found
+    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)); full a^4 term and spin-down torque to a^3 too.  — not found
 [18] Exact spin-down torque on a Kerr black hole from slow matter arriving side-on: the captured
     angular-momentum moment M_1 = -{32 sqrt(1+a)[(a^2+2)E - 2(1-a)K] + 35 pi a^2 + 10 pi (1 - sqrt(1-a^2))}/(5a);
     mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found
@@ -1105,6 +1105,23 @@ How it was derived and verified:
      E = 1.25, 90 deg: -1.48488587876 vs predicted -1.48488578018
      E = 2,    60 deg: -1.36715683949 vs -1.36715674165
      E = 1.0001, 90 deg: -1.00039987393 vs -1.00039978018   (differences O(a^2)).
+
+  (b') Next order, any speed and direction (new this session).  With C = cos^2(theta), s^2 = 1 - C:
+       <L_z>/E = -2 a s^2/(r_c - 2)
+                 + a^3 s^2 [ 3(r_c - 5)/2 - C (7 r_c^2 - 63 r_c + 144)/(2 r_c) ] / ((r_c - 2)(6 - r_c)^3)
+                 + O(a^5)                                                     (units G = c = M = 1)
+  Slow limit (r_c = 4): a^3 coefficient -s^2 (3 + C)/32 (side-on -3/32, matching the exact entry [18]);
+  light (r_c = 3): a^3 coefficient -s^2 (1 + C)/9, i.e. <L_z>/E = -2a s^2 - a^3 s^2 (1 + C)/9 + ...
+  How found: the odd-in-a part of <L_z>/E was computed at 22+ digits from the exact capture region
+  (code/torque_a3.py side-on, code/torque_a3_mid.py at C = 1/2) for 7 speeds each, by fitting
+  h -> <L_z>/(E h) over h = a = 0.003..0.018 to an even polynomial; the a^3 coefficients came out as
+  exact rationals (e.g. r_c = 7/2, C = 1/2: -163/2625), and the C = 1/2 values fixed the C-dependent
+  part uniquely as a quadratic in r_c over r_c (all 7 points fit; 3 parameters).
+  Blind check at angles NOT used in the fit (code/torque_a3_c4.py, C = 1/4 and 4/5):
+     r_c = 7/2,  C = 1/4: -0.0825714285714285714  vs formula -0.0825714285714285714  (diff 2e-22)
+     r_c = 10/3, C = 4/5: -0.030955078125         vs formula -0.030955078125         (diff 5e-23)
+     r_c = 18/5, C = 1/4: -0.0805324978298611111  vs formula -0.0805324978298611111  (diff 2e-22)
+  (6 checks in all, every difference below 3e-22.) Also vanishes on the spin axis (s = 0) as it must.
 
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
