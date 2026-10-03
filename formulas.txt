@@ -1012,8 +1012,21 @@ How it was derived and verified:
   (<cos^2 i> = (1-C)/2) and adding the a^2 p^2 C term (p^2/L_0^2 = (4 - r_c)/r_c^3) gives exactly
   -(r_c + 3C(4 - r_c))/(2 r_c^2 (6 - r_c)) (sympy: difference simplifies to 0).
 
+  (b) Companion result -- the spin-down torque at leading order, any speed and direction.
+  From L_1 = -2 cos(i)/sqrt(r_c (r_c - 3)) (in r_c form) the mean z-angular momentum of the captured
+  particles, per unit captured ENERGY, is
+       <L_z>/E = -2 a M sin^2(theta) / (r_c - 2) + O(a^3)
+  (slow particles edge-on: -a M, cf. entry [18]; light: -2 a M sin^2 theta). Hence a black hole fed by a
+  stream from direction theta evolves as  d a/d ln M = -2a [1 + sin^2(theta)/(r_c - 2)],  and for
+  an isotropic bath  d a/d ln M = -2a [1 + 2/(3(r_c - 2))]:  -8a/3 for slow matter, -10a/3 for radiation.
+  Check (code/anyv_torque.py, a = 0.001, ratio of moment to area of the exact capture region):
+     E = 1.25, 90 deg: -1.48488587876 vs predicted -1.48488578018
+     E = 2,    60 deg: -1.36715683949 vs -1.36715674165
+     E = 1.0001, 90 deg: -1.00039987393 vs -1.00039978018   (differences O(a^2)).
+
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
+  The torque coefficient (b) at E = 1 follows from Will (2012); for general speed we did not find it.
   Will (2012, arXiv:1208.3931) covers only the slow limit (E = 1), consistent with r_c = 4 here.
 
 ==================================================================================
