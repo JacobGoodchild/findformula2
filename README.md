@@ -17,6 +17,27 @@ Units: G = c = 1, and lengths are in units of the black hole mass M unless state
 Caveat: "not found" means we could not find it with web searches — not a guarantee that
 nobody has written it down before. Please treat the results as candidates for expert checking.
 
+## Highlights (crisp exact results; details and checks in `formulas.txt`)
+
+* **Shadow size of a spinning black hole, exactly** (EHT-relevant). Edge-on, any spin: one formula
+  with complete elliptic integrals [1]; any spin and viewing angle: a single short integral [4];
+  rule of thumb: area = 27πM²[1 − (1+cos²θ)a²/18 − …] [5]. Previously only fits/numerics.
+* **Dark matter (slow particle) capture by a spinning black hole, exactly** [15]:
+  σ = [7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a))](M/v)²; at maximal spin (7π + 16√2)(M/v)².
+  The matching spin-down torque in closed form [18]; how spin changes capture at any speed and
+  direction: factor 1 − a²(r_c + 3cos²θ(4−r_c))/(2r_c²(6−r_c)) [17] (analytically derived).
+* **Light escaping from right next to a maximally spinning black hole** [6]:
+  P = 1/2 − arcsin(k)/(2π) − k/4 for every latitude and for charged holes (7/24 on the equator,
+  known); from the innermost orbit of a charged extremal hole 3/8 + √3/9 at the threshold [8];
+  fraction of emitted energy that escapes 3/32 + √3/16 [10].
+* **Massive particles** near a maximally spinning hole [19], [24]: nothing launched slower than
+  c/√2 escapes from rest near the horizon (exactly 1/8 escape at 0.8c); from the innermost
+  orbit the threshold is (3√2−2)/7·c ≈ 0.32c and exactly 1/4 escape at c/2.
+* **Open question answered (partly)**: the dark-sky solid angle of a maximally spinning black hole
+  for an equatorial observer at any distance [13], [14] (called "intractable" in a 2024 paper).
+* Also: charged (Kerr–Newman) and string-theory (Kerr–Sen) versions of several of these
+  ([7], [9], [11], [12], [22], [25], [26], [28], [29]).
+
 ## Results so far (see `formulas.txt` for full details, numbers and checks)
 
 All in units G = c = M = 1. "Not found" = we searched and could not find it published.
