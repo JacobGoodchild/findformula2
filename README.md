@@ -92,3 +92,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 28 | Max-spin Kerr–Sen shadow from any angle | factorises into two quadratics; one-line elliptic formula | not found |
 | 29 | Dark-matter capture by a string-theory (Kerr–Sen) black hole, side-on | 16√(B+a)·E(m) + π(3B + 4 + √(B²−a²)) | not found |
 | 30 | Circumference of a spinning black hole's shadow | exact; 18√3·M for maximal spin seen side-on | not found |
+| 31 | Capture by a charged, slowly spinning black hole at any speed, direction and charge (and its shadow size) | one-line spin correction; RN ISCO polynomial in the denominator | not found |

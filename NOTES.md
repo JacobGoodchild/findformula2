@@ -145,3 +145,9 @@
   alpha(r_c) = -(2 r^3 + 42 r^2 - 549 r + 1458)/(8 r^2 (6-r)^5)  [6-point interpolation predicts the 7th exactly].
   Running cos^2 = 1/2 to get the full C-dependence (mid_a4b.py).
 * Dead end: inner shadow of polar-viewed extremal Kerr: b_in = 2.03468720358978884867..., no closed form found.
+* [17](b') torque to a^3: C-dependence from C = 1/2 data fitted (3 params, 7 points), blind check at C = 1/4, 4/5 (6/6 to 1e-22).
+  Isotropic corollary; slow limit reproduces [27] series -(2a/3 + a^3/15) -- independent cross-check.
+### Lead 11: Kerr-Newman version of [17] -> RESULT [31]
+* First sympy attempt with sqrt symbols produced Abs() junk; fix: keep E, L0 as symbols, reduce powers with E^2, L0^2.
+* Forgot the a^2 cos^2 theta impact-plane shift at first (q=0 limit did not match [17]); adding it fixed it.
+* Light limit gives compact KN shadow area at any charge; matches [12] double series.

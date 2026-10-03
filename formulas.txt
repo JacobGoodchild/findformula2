@@ -85,6 +85,10 @@ INDEX
     sigma = [16 sqrt(B+a) E(2a/(B+a)) + pi (3B + 4 + sqrt(B^2 - a^2))] (M/v)^2 (M = 1, exact).  — not found
 [30] PERIMETER (circumference) of the Kerr shadow: arc length element collapses; edge-on any spin in
     K, E, Pi; maximal spin edge-on exactly 18 sqrt3 M; any (a, theta) as one integral.   — not found
+[31] Capture cross-section of a charged, slowly spinning (Kerr-Newman) black hole for ANY particle speed,
+    direction and charge: sigma = sigma_RN [1 - a^2 (r^2(r - q^2) - C(3r^3 - 12r^2 - q^2 r^2 + 18q^2 r - 8q^4))
+    / (2r(r - q^2)(6r^2 - r^3 - 9q^2 r + 4q^4)) + O(a^4)]; light limit gives the KN shadow area at any charge:
+    A = pi r^4/(r^2 - 2r + q^2) [1 - a^2 (r + 3C(r-2))/(r^2 (r-1)(2r-3))], r = photon-ring radius.   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1684,3 +1688,60 @@ ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
   Trend: as a -> infinity (k -> 0) the ZAMO escape probability -> 1/2 and the ISCO escape
   probability -> 1/2 as well; the ISCO value decreases monotonically from 3/8 + sqrt3/9
   (a = M/sqrt2) through 54.65% (a = M) to 1/2.
+
+==================================================================================
+[31] CAPTURE BY A CHARGED, SLOWLY SPINNING (KERR-NEWMAN) BLACK HOLE AT ANY SPEED AND DIRECTION
+==================================================================================
+Question (plain English):
+  Entry [17] gave a simple rule for how much a small spin shrinks the "target size" (capture
+  cross-section) a black hole presents to passing particles, for any particle speed and any direction.
+  Here the black hole may also carry electric charge Q (particles neutral). Charge is spherically
+  symmetric, so the non-spinning charged (Reissner-Nordstrom, RN) target is a disc; the question is the
+  spin correction on top of it, for every charge, speed and direction at once.
+
+Formula (G = c = M = 1; q = Q; C = cos^2 theta, theta = angle between the spin axis and the particles'
+  direction of travel; the speed v is encoded through the radius r = r_c of the unstable circular
+  orbit that sits on the capture boundary, exactly as in [17]):
+     E^2 = 1/(1 - v^2) = (r^2 - 2r + q^2)^2 / ( r^2 (r^2 - 3r + 2q^2) ),
+     sigma_RN = pi b_0^2,  b_0^2 = r^4 (r - q^2) / (4r^2 - r^3 - 4q^2 r + q^4),
+     sigma_KN = sigma_RN [ 1 - a^2 K(r, q, C) + O(a^4) ],
+     K = [ r^2 (r - q^2) - C (3r^3 - 12r^2 - q^2 r^2 + 18 q^2 r - 8 q^4) ] / [ 2r (r - q^2)(6r^2 - r^3 - 9q^2 r + 4q^4) ].
+  r runs from the photon-ring radius (light, v -> 1) to the marginally bound radius (v -> 0, root of
+  4r^2 - r^3 - 4q^2 r + q^4 = 0). The denominator factor 6r^2 - r^3 - 9q^2 r + 4q^4 is exactly the RN ISCO
+  polynomial (it replaces 6 - r of the uncharged case).
+  Special cases:
+     q = 0: K = (r + 3C(4 - r))/(2r^2(6 - r))  -- entry [17].
+     on the spin axis (C = 1): K = 1/(r (r - q^2))  [the disc just shrinks].
+     isotropic average: C -> 1/3.
+     LIGHT (photon-ring radius r, r^2 - 3r + 2q^2 = 0): K = (r + 3C(r - 2)) / (r^2 (r - 1)(2r - 3)),
+        so the shadow area of a slowly spinning Kerr-Newman hole for ANY charge and inclination is
+            A = pi r^4/(r^2 - 2r + q^2) * [ 1 - a^2 (r + 3C(r - 2))/(r^2 (r - 1)(2r - 3)) + O(a^4) ],
+            r = (3 + sqrt(9 - 8q^2))/2.
+        (q = 0, r = 3: 1 - (1 + C)a^2/18 as in [5]; extremal RN q = 1, r = 2: 1 - a^2/2, inclination-free.)
+
+How it was derived (code/kn_anyv_a2.py, kn_anyv_a2b.py): perturbation of the double-root conditions
+  R = R' = 0 of the Kerr-Newman radial potential R = (E(r^2+a^2) - a L_z)^2 - Delta (r^2 + (L_z - aE)^2 + Q_c),
+  Delta = r^2 - 2r + a^2 + q^2, with L_z = L cos i, Q_c = L^2 sin^2 i, to second order in a around the RN
+  critical orbit (E, L_0 kept as algebraic symbols, reduced with their squares), then averaged over the
+  impact-plane angle (cos i = sin theta cos phi), plus the a^2 cos^2 theta shift of the impact-plane radius
+  (b^2 = L^2/p^2 + a^2 cos^2 theta), as in [17].
+
+How it was verified:
+  (1) Direct numerical capture boundary (code/kn_anyv_check.py): for each of 48 impact-plane angles the
+      critical impact parameter is found from R = R' = 0 by Newton's method at 40 digits, area = (1/2)Int b^2 dphi,
+      a = 0.004, 0.008, 0.012 with extrapolation in a^2:
+        r = 3.5, q = 0.5, theta = 60 deg: numeric -0.0790432393693279   formula -0.0790432393693263
+        r = 3.2, q = 0.7, theta = 30 deg: numeric -0.112257771488184    formula -0.112257771488181
+        r = 3.8, q = 0.3, theta = 90 deg: numeric -0.0661504609642657   formula -0.0661504609642648
+        r = 3.0, q = 0.8, theta = 45 deg: numeric -0.136651895747247    formula -0.136651895747233
+      (printed numbers are -K; agreement to 14 digits.)
+  (2) Light limit expanded in q reproduces the independent double series of entry [12]
+      (A/(27 pi) = 1 - Q^2/3 - (1+C)a^2/18 - Q^4/27 - (3+C)a^2Q^2/81 ...): both give the a^2 coefficient
+      ratio -(9 + 9C + 9q^2 + 5Cq^2)/162 to order q^2 (sympy).
+  (3) q = 0 reduces exactly to [17].
+
+Novelty status: NOT FOUND. The RN disc sigma_RN (non-spinning) follows from standard circular-orbit
+  formulas and is probably known. The spin correction for charged holes at general speed and direction,
+  and the compact KN shadow-area formula at any charge, were not found (searched: slow-rotation KN shadow
+  expansions, KN capture cross-sections; papers found are numerical or treat other parameters).
+
