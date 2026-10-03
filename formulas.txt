@@ -1740,6 +1740,15 @@ How it was verified:
       ratio -(9 + 9C + 9q^2 + 5Cq^2)/162 to order q^2 (sympy).
   (3) q = 0 reduces exactly to [17].
 
+Companion -- spin-down torque (code/kn_torque_check.py). Mean z-angular momentum captured per unit
+  captured energy, to first order in a:
+       <L_z>/E = -a sin^2(theta) (2r - q^2)/(r^2 - 2r + q^2) + O(a^3)      (q = 0: -2a sin^2 theta/(r - 2), [17](b))
+  Check (moment of the exact capture region at a = 1e-6, 48 angles, 40 digits):
+       r = 3.5, q = 0.5, 60 deg: -0.920454545455 (numeric) vs -0.920454545455 (formula)
+       r = 3.0, q = 0.8, 45 deg: -0.736263736264 vs -0.736263736264
+  Since neutral matter does not change Q, in dimensionless units (a* = J/M^2, q* = Q/M):
+       d a*/d ln M = -a* [2 + sin^2(theta)(2r - q^2)/(r^2 - 2r + q^2)],   d q*/d ln M = -q*.
+
 Novelty status: NOT FOUND. The RN disc sigma_RN (non-spinning) follows from standard circular-orbit
   formulas and is probably known. The spin correction for charged holes at general speed and direction,
   and the compact KN shadow-area formula at any charge, were not found (searched: slow-rotation KN shadow
