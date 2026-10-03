@@ -118,3 +118,8 @@
 * Dead end: capture at general speed v (0 < v < 1), edge-on: with r = 1/(t^2 - p^2) everything is
   rational; Q ~ (t+E)^2 * sextic -> genus 2. Only v -> 0 and v = 1 are elliptic.
 ### Lead 7b: extremal KN equatorial solid angle -> RESULT [14] (K = 4r^2 identity).
+* Dead end: slow capture for Kerr-Newman (edge-on): with r = y^2, Q ~ a^2(y^2-q) - (y^3 - 2y^2 + q)^2
+  (sextic) -> genus 2 for q != 0. Only Kerr (q = 0) has the y^2 factor that makes it elliptic.
+* Literature: Will (2012, arXiv:1208.3931) critical L_c(i) series for E = 1 reproduces [16] exactly
+  -> [16] relabelled "probably known/derivable". Analytic perturbation for general E running
+  (code/anyv_pert2.py, rational parametrisation r_c = (u^2+3)^2/(4u^2)).

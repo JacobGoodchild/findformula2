@@ -992,8 +992,18 @@ How it was derived and verified:
       (7/2, 1/4): 0.0632653061224614 vs predicted 0.0632653061224490
       (13/4, 3/4): 0.0849919311457859 vs 0.0849919311457773
       (15/4, 1/2): 0.0651851851851951 vs 0.0651851851851852
-  Status: identified numerically to ~13 digits at 11 test points and consistent with both exact
-  limits; not proven analytically.
+  Status: DERIVED analytically (after the numerical identification). Perturbation theory for the
+  critical (double-root) condition R = R' = 0 of the radial potential with energy E, using the
+  rational parametrisation r_c = (u^2+3)^2/(4u^2) (so sqrt(r_c) and sqrt(r_c-3) are rational;
+  u = 1 slow particles, u = sqrt3 light), gives the critical total angular momentum
+     L_c = L_0 + a L_1 + a^2 L_2 + ...,  L_0 = r_c/sqrt(r_c - 3),
+     L_1 = 8 u^2 cos i / ((u^2-3)(u^2+3)),
+     L_2 = -4u^3 [cos^2 i (u^8 + 28u^6 - 234u^4 + 252u^2 + 81) - 16u^6 + 288u^4 - 144u^2]
+           / ((u^2-3)(u^2+3)^4 (u^4 - 18u^2 + 9))        (code/anyv_pert2.py)
+  (u^4 - 18u^2 + 9 = 0 is r_c = 6: the origin of the (6 - r_c) denominator). The impact-plane
+  radius^2 is (L_c^2 + a^2 p^2 cos^2 theta)/p^2 with cos i = sin(theta) cos(phi); averaging over phi
+  (<cos^2 i> = (1-C)/2) and adding the a^2 p^2 C term (p^2/L_0^2 = (4 - r_c)/r_c^3) gives exactly
+  -(r_c + 3C(4 - r_c))/(2 r_c^2 (6 - r_c)) (sympy: difference simplifies to 0).
 
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
