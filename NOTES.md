@@ -139,3 +139,5 @@
   Edge-on / mixed C running (edge_a4.py).
 * Dead end: orientation-averaged extremal photon shadow (75.0163677937693780253...) -- PSLQ with
   pi, sqrt2, sqrt3, sqrt6, ln(1+sqrt2), ln(2+sqrt3), ln((1+sqrt2+sqrt6)/(1+sqrt2)) finds nothing.
+* a^4 for general direction & speed: edge-on numerical coefficients (r_c = 15/4, 7/2, 10/3) did not give
+  clean rationals at ~13-digit precision; not recorded. Polar a^4 = -4/(r_c^4 (6-r_c)) recorded in [17].
