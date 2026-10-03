@@ -36,3 +36,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 11 | Side-on shadow of a spinning *charged* black hole, any spin and charge | one compact integral (elliptic) | not found |
 | 12 | Shadow of a spinning charged black hole from any angle; rule of thumb | 1 − Q²/3 − (1+cos²θ)a²/18 − … | not found (charge-only terms known) |
 | 13 | How much sky a max-spin black hole blots out for a nearby observer on its equator (open question from 2024) | elementary + one elliptic integral; series in M/r with π, √3 | not found |
+| 14 | Same, for charged max-spin black holes | same structure; series with polynomial coefficients | not found |

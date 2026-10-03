@@ -42,6 +42,8 @@ INDEX
     equatorial plane at ANY distance (an open question raised by Baines & Visser 2024):
     elementary part + one elliptic integral; series (M/r)^2 [(16pi+15sqrt3) - 2(16pi+15sqrt3)(M/r) + ...]
                                                                                 — not found
+[14] Same for extremal Kerr-Newman (charged) black holes; key identity: along the whole shadow edge
+    Carter's constant K = eta + (lambda - a)^2 equals exactly 4r^2 (independent of spin/charge).   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -799,6 +801,54 @@ How it was verified:
 
 Novelty status: NOT FOUND (explicitly described as open by Baines & Visser 2024). Only the
   equatorial observer is solved here; general latitude remains a genus-2 problem.
+
+==================================================================================
+[14] SILHOUETTE SOLID ANGLE OF EXTREMAL KERR-NEWMAN BLACK HOLES (EQUATORIAL OBSERVER, ANY DISTANCE)
+==================================================================================
+Question (plain English):
+  Entry [13] for black holes with both spin and charge at the extremal limit a^2 + Q^2 = M^2:
+  how much of the sky looks dark to an observer at distance r in the equatorial plane?
+
+Key identity (M = 1): on the spherical photon orbits of extremal Kerr-Newman,
+   lambda = (a^2 + 2r - r^2)/a,  eta = r^2 (2+2a-r)(r-2+2a)/a^2,
+   K = eta + (lambda - a)^2 = 4 r^2          (exactly, for every a).
+  Consequently, for a Carter-frame observer at r = 1/z on the equator, the edge of the dark
+  region is
+     sin Theta = 2(1+w) z (1-z) / (1 + (w^2-1) z^2)   (identical to the Kerr case),
+     sin Phi   = (w - 1)/(2a)                          (Kerr: (w-1)/2),     w = r_photon - 1,
+  plus, for a > 1/2, the straight NHEK-line piece sin Theta = k/|sin Phi| with k = z/(a(1+z)).
+
+Formula: Omega(z, a) = 2 pi - I_1 - I_2 with
+   I_1 = 2 Int_{w_0}^{1+2a} cosTheta(w) dw / sqrt( (1+2a-w)(w-1+2a) ),  w_0 = max(0, 1-2a),
+         cosTheta(w) = (1 - z - wz) sqrt((wz + 1 - z)^2 + 4z(1-z)) / (1 + (w^2-1) z^2)   (elliptic);
+   I_2 = 2 arcsin( sqrt(4a^2-1) / (2a sqrt(1-k^2)) ) - 2k arctan( k sqrt(4a^2-1)/sqrt(1 - 4a^2 k^2) )
+         for a > 1/2,  I_2 = 0 for a <= 1/2.
+  For a <= 1/2 the far-observer series has coefficients that are pi times polynomials in a^2:
+   Omega/(pi z^2) = (16 + 8a^2) - (32 + 16a^2) z + (80 + 8a^2 - 24a^4) z^2 - (256 + 384a^2) z^3
+                    + (896 + 2624a^2 + 864a^4 + 80a^6) z^4 + ...
+  (leading term = edge-on shadow area [7]; a = 0 reproduces the exact extremal Reissner-Nordstrom
+  result Omega = 2 pi (1 - sqrt(1 - 16 z^2 (1-z)^2)) = pi z^2 (16 - 32z + 80z^2 - 256z^3 + 896 z^4 ...)).
+  Values: (a, z) = (0.8, 0.5): 5.715040299163711;  (0.8, 0.2): 1.7804725378855428;
+          (0.4, 0.5): 5.992010097171594;  (1, 0.5): 5.714487190163116 (= [13]).
+
+How it was derived: Carter-frame celestial coordinates sin Theta = sqrt(K Delta_R)/(R^2 + a^2 - a lambda),
+  sin Phi = (lambda - a)/sqrt(K) (equator), with the identity K = 4r^2 and Delta_R = (R-1)^2;
+  NHEK-line photons have lambda = (1+a^2)/a and K in [1/a^2, 4] (from entry [6]'s analysis),
+  giving sin Theta = sqrt(K) z/(1+z), sin Phi = 1/(a sqrt K).
+  Series: 12-point fits at z = 1e-5..1.2e-4 for a = 0.05, 0.10, ..., 0.45 (50 digits), then exact
+  polynomial fits in a^2 (residuals 1e-36, 3e-30, 9e-25, 8e-20, 3e-15 for orders 0..4).
+
+How it was verified:
+  * Independent ray simulation in the Carter frame (code/bv_kn_sim.py: isotropic grid of 80,000
+    directions, Lorentz boost from ZAMO to Carter frame, exact radial potential, inward-bouncing
+    photons included), captured solid angle 4 pi (1 - P_escape):
+      (a, z) = (0.8, 0.5): sim 5.7174 vs formula 5.7150;  (0.8, 0.2): 1.7819 vs 1.7805;
+               (0.4, 0.5): 5.9935 vs 5.9920;  (1.0, 0.5): 5.7102 vs 5.7145   (grid noise ~0.005)
+  * a = 1 reproduces [13] to 30 digits; z -> 0: Omega/z^2 -> [7] times (1 - 2z) (e.g. a = 0.8:
+    66.85818 at z = 1e-4 vs 66.87155 (1 - 2e-4) = 66.85818).
+  * a = 0 series = exact Reissner-Nordstrom series (16, -32, 80, -256, 896).
+
+Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
