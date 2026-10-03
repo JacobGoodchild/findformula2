@@ -81,6 +81,8 @@ INDEX
     = -(2a/3 + a^3/15 + 41a^5/1680 + ...) M (derivable); exact at a = M: -0.81932684 M, da/dlnM = -2.81932684.  — not found (exact value)
 [28] Extremal Kerr-Sen shadow area for ANY viewing angle: edge polynomial factorises as
     [(r - a(1+s))^2 - 2a(1+s)][(r - a(1-s))^2 - 2a(1-s)], s = sin theta; one-line elliptic formula.  — not found
+[29] Slow-particle (dark matter) capture by a Kerr-Sen black hole, edge-on: with B = M - b,
+    sigma = [16 sqrt(B+a) E(2a/(B+a)) + pi (3B + 4 + sqrt(B^2 - a^2))] (M/v)^2 (M = 1, exact).  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1482,6 +1484,35 @@ How it was verified (code/kerrsen_incl_check.py): polygon area of the shadow edg
      (0.8, 30): 64.75461117993 vs 64.75461118043;  (0.3, 70): 38.84374137130 vs 38.84374136853;
      (1, 60): 75.08875773265 vs 75.08875773058.
   (A first version had an overall factor a wrong -- the mismatch was exactly 1/a, which pinpointed it.)
+
+Novelty status: NOT FOUND.
+
+==================================================================================
+[29] SLOW-PARTICLE CAPTURE BY A KERR-SEN BLACK HOLE (EDGE-ON), EXACT
+==================================================================================
+Question (plain English): entry [15] (capture of slow particles such as dark matter by a spinning
+  black hole, arriving perpendicular to the spin) for the string-theory Kerr-Sen black hole.
+
+Result (M = 1, B = 1 - b, slow particles v -> 0, sigma = A (M/v)^2, m = 2a/(B + a)):
+     A(a, b) = 16 sqrt(B + a) E(m) + pi ( 3B + 4 + sqrt(B^2 - a^2) )
+  * b = 0 (Kerr): 16 sqrt(1+a) E(2a/(1+a)) + pi (7 + sqrt(1-a^2))  = entry [15].
+  * a -> 0 (non-rotating dilaton black hole): 4 pi (1 + sqrt(1 - b))^2  (16 pi at b = 0).
+  * extremal a = B = 1 - b: 16 sqrt(2B) + pi (3B + 4)  (Kerr: 7 pi + 16 sqrt2).
+  Values: (a, b) = (0.5, 0.2): 43.937359843654825;  (0.3, 0.5): 35.866619710284965;
+          (0.6, 0.4) [extremal]: 35.74835923098611.
+
+How it was derived (code/ks_slow.py, reduce_even2.py, ks_slow_area.py): the E = 1 spherical orbits of
+  Kerr-Sen involve sqrt(r + b); with r = y^2 - b they become rational:
+     L_z = -(y^4 - 2y^3 + 2by + a^2 - b^2)/(a(y-1)),
+     Q   = (y^2 - b)^2 [a^2 - (y^2 - 2y + b)^2] / (a^2 (y-1)^2),
+  and with u = y - 1 the square root is sqrt(a^2 - (u^2 - B)^2), an EVEN quartic as in [15]. Hermite
+  reduction to the basis Int u^k du/sqrt(P) (k = -3..3; values K/sqrt(B+a), sqrt(B+a) E,
+  E/(sqrt(B+a)(B-a)), pi/2, B pi/2, pi/(2 sqrt(B^2-a^2)), B pi/(2 (B^2-a^2)^(3/2)), each checked numerically).
+
+How it was verified (code/ks_slow_sim.py): brute-force capture region from the exact Kerr-Sen E = 1
+  radial potential R = (rho + a^2 - aL)^2 - Delta (rho + (L-a)^2 + Q), rho = r(r+2b), with 3000 values
+  of L and bisection in Q:
+     (0.5, 0.2): 43.93708 vs 43.93736;  (0.3, 0.5): 35.86651 vs 35.86662;  (0.6, 0.4): 35.74867 vs 35.74836.
 
 Novelty status: NOT FOUND.
 

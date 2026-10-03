@@ -51,3 +51,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 26 | Light escaping from the horizon of an extreme string-theory (Kerr–Sen) black hole | 1/2 − arcsin(k)/2π − k/4, k = (1+b)/2; matches published numbers | not found |
 | 27 | How fast a black hole spins down in a bath of slow dark matter | ⟨ℓ_z⟩ = −(2a/3 + a³/15 + …)M; exact at max spin: −0.8193M | not found (exact value) |
 | 28 | Max-spin Kerr–Sen shadow from any angle | factorises into two quadratics; one-line elliptic formula | not found |
+| 29 | Dark-matter capture by a string-theory (Kerr–Sen) black hole, side-on | 16√(B+a)·E(m) + π(3B + 4 + √(B²−a²)) | not found |
