@@ -37,3 +37,19 @@
   against exact polar formula. Rule of thumb: area shrinks by (1+cos^2)a^2/18.
 * Background job hit "polyroots no convergence" at cos^2=0 (degenerate double root at r=0)
   -> sampled cos^2 at odd sixteenths instead.
+
+### Lead 2: escape cones / escape probability (extremal) -> RESULT [6]
+* Baines & Visser (2405.08875) said exact solid angles were intractable. Found: their cos(Theta)
+  simplifies, (D - 2(1+w)z(1-z)) = (wz-(1-z))^2, but the general-z solid angle is still a
+  genus-2 integral (three quadratics, determinant 1 - 3z^2 + z^2 sin^2 theta != 0).
+  Special splitting radius r* = M sqrt(3 - sin^2 theta) noted, NOT pursued yet (lead).
+* Far-field limit z -> 0 of their solid angle is A(theta) z^2 = result [3] (checked numerically).
+* Near-horizon limit z -> 1 is elementary -> P = 7/24 on the equator. Turned out KNOWN.
+  Generalised (own derivation) to all latitudes and to extremal Kerr-Newman -> new formula.
+* Simulation pitfalls: (1) forgot photons emitted inward that bounce back (gave 1/6!);
+  (2) double-precision cancellation at r-1 ~ 1e-7 (fixed with exact algebra for 1+a^2-a*lambda).
+
+### Lead 3: extremal Kerr-Newman shadow -> RESULT [7]
+* Elementary for all a. Threshold a = M/2 = same as escape threshold.
+* Shoelace check initially failed: 0/0 at r=1 in the general formulas produced a spike;
+  starting at r = 1 + 1e-5 fixed it.

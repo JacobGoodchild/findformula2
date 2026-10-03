@@ -17,6 +17,11 @@ INDEX
     u = a^2 cos^2(theta).                                                        — not found
 [5] Small-spin expansion of the Kerr shadow area at any viewing angle, exact rational
     coefficients:  A = 27 pi M^2 [1 - (1+cos^2 th) a^2/18 - ...]               — not found (edge-on a^2 term known)
+[6] Chance that light escapes from just outside the horizon of a maximally spinning (charged)
+    black hole, for any spin and latitude:  P = 1/2 - arcsin(k)/(2 pi) - k/4,
+    k = (M^2 + a^2 cos^2 th)/(2 a M sin th).                                    — not found (equatorial uncharged value 7/24 known)
+[7] Edge-on shadow area of an extremal Kerr-Newman (charged, max-spin) black hole:
+    16 pi + 8 pi a^2 for a <= M/2;  elementary arcsin formula for a > M/2.     — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -308,3 +313,106 @@ Novelty status: NOT FOUND for general inclination (the inclination-dependent a^2
   (arXiv:2607.11979), and the pole-on series follows easily from the known polar formula.
   The a^2 term is simple enough that it could appear in some perturbative paper we missed:
   label "not found", leaning "possibly known" for the a^2 term only.
+
+==================================================================================
+[6] ESCAPE PROBABILITY OF LIGHT FROM THE HORIZON OF AN EXTREMAL (KERR-NEWMAN) BLACK HOLE
+==================================================================================
+Question (plain English):
+  Put a lamp just outside the horizon of a black hole spinning at the maximum rate. The lamp
+  shines equally in all directions (in its own local, "non-rotating" frame -- the ZAMO frame).
+  What fraction of its light escapes to the outside universe?  For an ordinary black hole the
+  answer tends to 0 at the horizon, but for a maximally spinning one a finite fraction escapes.
+  For an uncharged black hole with the lamp on the equator this is known to be exactly 7/24.
+  We find the exact answer for every latitude and for charged (Kerr-Newman) black holes too.
+
+Formula (extremal Kerr-Newman: a^2 + Q^2 = M^2, a > 0; lamp at polar angle theta, r -> M):
+     k = (M^2 + a^2 cos^2 theta) / (2 a M sin theta)
+     P_escape = 1/2 - arcsin(k)/(2 pi) - k/4      if k < 1,      P_escape = 0  if k >= 1.
+  Special cases:
+     * uncharged (a = M), equator:  k = 1/2,  P = 7/24 = 0.2916666...          (known)
+     * charged, equator:            P = 1/2 - arcsin(M/2a)/(2 pi) - M/(8a),  nonzero iff a > M/2
+     * uncharged, latitude theta:   k = (1 + cos^2 theta)/(2 sin theta), nonzero iff
+                                    sin theta > sqrt(3) - 1 (theta > 47.06 deg from the axis)
+  Geometric meaning: the escape cone on the lamp's sky is
+     { n_phi > 0, n_theta^2 < (1/k^2 - 1) n_phi^2, and (n_phi > k or n_r > 0) }
+  (n = unit direction in the ZAMO frame: radial, polar, azimuthal components).
+  So photons escape through a wedge around the rotation direction; within the wedge, those
+  with n_phi > k escape even if aimed inward (they bounce off the potential barrier).
+
+Decimal values:
+  a=M, equator: 0.29166666...   a=0.9M: 0.26736...   a=0.7M: 0.19480...   a=0.55M: 0.09110...
+  a=M, theta=70 deg: 0.25013...  a=0.8M, theta=60 deg: 0.13282...  a=0.9M, theta=50 deg: 0.04842...
+
+How it was derived:
+  Near-horizon expansion r = M(1 + eps x), photon angular momentum
+  lambda = lambda_H - eps u M/a with lambda_H = (M^2 + a^2)/a. In the ZAMO frame the photon
+  direction is n_phi = Sigma_H/(a sin(theta) v), n_theta = sqrt(Theta)/v, with v = u + 2,
+  Sigma_H = M^2 + a^2 cos^2 theta; the radial potential becomes, in the far zone,
+  R = (r-M)^2 [(r+M)^2 - C] and, in the near zone, eps^2 [(2x+u)^2 - C x^2], with
+  C = eta + M^2/a^2 = v^2 (n_theta^2 + n_phi^2). Escape requires C < 4 (no outer turning
+  point) and either u < 0 (any direction: inward photons bounce at x = |u|/(2 - sqrt C) <= 1)
+  or u > 0 with outward motion. Translating to directions gives the wedge above, whose solid
+  angle is 2(pi/2 - arcsin k) + 2 Int_{arcsin k}^{pi/2} sqrt(sin^2 - k^2)/sin
+  = pi - 2 arcsin k + pi (1 - k)  (the last integral equals (pi/2)(1-k), checked to 30 digits).
+  For a = M this agrees with the near-horizon "Case II" edge of Baines & Visser
+  (arXiv:2405.08875), sin(Theta) = sin(Phi_edge)/sin(Phi).
+
+How it was verified:
+  * Independent brute-force ray test (code/escape_kn2.py): isotropic grid of directions in the
+    ZAMO frame at r = M(1 + delta), conserved quantities computed with cancellation-free
+    algebra, escape decided by scanning the exact radial potential (including photons sent
+    inward that bounce back).  Results (grid N = 300, delta = 1e-7 and 1e-9 identical):
+        a=1,   90 deg: sim 0.29172   formula 0.29167
+        a=0.7, 90 deg: sim 0.19473   formula 0.19480
+        a=0.8, 60 deg: sim 0.13237 / 0.13409 / 0.13321 (N=300/150/600)  formula 0.13282
+        a=0.9, 50 deg: sim 0.04807 / 0.04809 / 0.04880 (N=300/150/600)  formula 0.04842
+    (grid noise ~1e-3 because the escape region has sharp edges).
+  * Literature numbers: Ogasawara, Igata, Harada & Miyamoto, PRD 101, 044023 (2020),
+    arXiv:1910.01528, Table II (horizon limit, equator, extremal Kerr-Newman), numerically:
+        a = 1: 0.291, 0.9: 0.267, 0.7: 0.194/0.195, 0.55: 0.0911, 0.5: 0
+    Formula: 0.29167, 0.26736, 0.19480, 0.09110, 0 -- all match.
+  * Threshold a > M/2 for nonzero escape matches that paper's main result.
+
+Novelty status: NOT FOUND (general formula). The equatorial uncharged value 7/24 is KNOWN
+  (Igata et al., e.g. arXiv:2108.09051 / EPJC 2021, "Photon emissions from near-horizon
+  extremal and near-extremal Kerr equatorial emitters"). The charged equatorial values were
+  previously only known numerically (arXiv:1910.01528); the latitude dependence was not found.
+
+==================================================================================
+[7] EDGE-ON SHADOW AREA OF AN EXTREMAL KERR-NEWMAN BLACK HOLE
+==================================================================================
+Question (plain English):
+  A black hole can have spin a and electric charge Q. With the maximum allowed combination
+  (a^2 + Q^2 = M^2), how big is the shadow seen from the equatorial plane?  It interpolates
+  between the maximally charged non-spinning hole (area 16 pi M^2) and the maximally spinning
+  uncharged one (16 pi + 15 sqrt 3).
+
+Formula (M = 1):
+   A(a) = 16 pi + 8 pi a^2                                              for 0 <= a <= 1/2,
+   A(a) = 4 pi (a^2 + 2) + 8 (a^2 + 2) arcsin(1/(2a)) + (14 a^2 + 1) sqrt(4a^2 - 1)/a^2
+                                                                          for 1/2 <= a <= 1.
+  Both branches give 18 pi at a = 1/2 (continuous with continuous slope? -- the value matches;
+  the second branch starts the straight "NHEK line" edge). At a = 1: 16 pi + 15 sqrt 3.
+  Surprise: the edge-on shadow of an extremal Kerr-Newman hole GROWS with spin
+  (16 pi -> 18 pi -> 24.27 pi), the opposite of the fixed-mass trend in [1], because the charge
+  falls as the spin rises.
+  The switch at a = M/2 is the same threshold as in [6] (the NHEK line appears exactly when
+  photons start to escape from the horizon).
+
+Decimal values: a=0.1: 50.51680986972...; a=0.3: 52.52742916802...; a=0.5: 18 pi = 56.5486677646...;
+  a=0.6: 59.38464498027...; a=0.8: 66.87155266755...; a=0.95: 73.75162517849...; a=1: 76.24624457097...
+
+How it was derived:
+  sympy solved R = R' = 0 for Kerr-Newman (code/kn_shadow.py). With Q^2 = 1 - a^2 everything
+  simplifies (code/kn_ext.py): xi = (a^2 + 2r - r^2)/a, eta = r^2 (2+2a-r)(r-2+2a)/a^2,
+  dxi/dr = -2(r-1)/a, so A = (4/a^2) Int r (r-1) sqrt(4a^2 - (r-2)^2) dr over
+  r in [max(1, 2-2a), 2+2a] -- an elementary "circle" integral.
+
+How it was verified (code/kn_ext_check.py): polygon (shoelace) area of the shadow edge built
+  from the GENERAL (unsimplified) Kerr-Newman formulas with 2,000,000 points:
+     a=0.1: 50.516809859 vs 50.516809870;  a=0.3: 52.527429163 vs 52.527429168
+     a=0.6: 59.384644978 vs 59.384644980;  a=0.8: 66.871552692 vs 66.871552668
+     a=1.0: 76.246244569 vs 76.246244571 (= known 16 pi + 15 sqrt 3)
+  a -> 0 gives 16 pi, the known extremal Reissner-Nordstrom value (critical impact parameter 4M).
+
+Novelty status: NOT FOUND (a = 0 and a = 1 endpoints are known).
