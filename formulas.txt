@@ -839,6 +839,10 @@ Formula: Omega(z, a) = 2 pi - I_1 - I_2 with
   result Omega = 2 pi (1 - sqrt(1 - 16 z^2 (1-z)^2)) = pi z^2 (16 - 32z + 80z^2 - 256z^3 + 896 z^4 ...)).
   Values: (a, z) = (0.8, 0.5): 5.715040299163711;  (0.8, 0.2): 1.7804725378855428;
           (0.4, 0.5): 5.992010097171594;  (1, 0.5): 5.714487190163116 (= [13]).
+  Remark: for any Kerr black hole the spherical photon orbits satisfy
+     K = eta + (lambda - a)^2 = 4 r^2 Delta(r)/(r - 1)^2     (sympy),
+  so the extremal identity K = 4r^2 is a special case of a simple general relation that is
+  PROBABLY KNOWN in the literature on spherical photon orbits; the solid-angle result is what is new.
 
 How it was derived: Carter-frame celestial coordinates sin Theta = sqrt(K Delta_R)/(R^2 + a^2 - a lambda),
   sin Phi = (lambda - a)/sqrt(K) (equator), with the identity K = 4r^2 and Delta_R = (R-1)^2;
