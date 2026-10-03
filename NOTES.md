@@ -109,3 +109,12 @@
   With it, the determinant is 4s(1 + z^2 cos^2) != 0: no splitting at any z for theta != 90.
 * At theta = 90 deg one quadratic becomes a perfect square -> elliptic. Solved; series in pi, sqrt3.
 * Simulation confirms BV angles are Carter-frame angles (ZAMO numbers differ at finite r).
+
+## Session 2 (overnight)
+### Lead 8: capture of slow particles (dark matter) -> RESULTS [15], [16]
+* Marginally bound spherical orbits rational in y = sqrt(r); edge-on area reduces to an EVEN
+  quartic -> 7pi + pi sqrt(1-a^2) + 16 sqrt(1+a) E(2a/(1+a)). Extremal: 7pi + 16 sqrt2.
+* General incidence: degree-8 polynomial (genus 3). Series: a^2 term direction independent (!).
+* Dead end: capture at general speed v (0 < v < 1), edge-on: with r = 1/(t^2 - p^2) everything is
+  rational; Q ~ (t+E)^2 * sextic -> genus 2. Only v -> 0 and v = 1 are elliptic.
+### Lead 7b: extremal KN equatorial solid angle -> RESULT [14] (K = 4r^2 identity).

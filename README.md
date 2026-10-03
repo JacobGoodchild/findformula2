@@ -38,3 +38,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 13 | How much sky a max-spin black hole blots out for a nearby observer on its equator (open question from 2024) | elementary + one elliptic integral; series in M/r with π, √3 | not found |
 | 14 | Same, for charged max-spin black holes | same structure; series with polynomial coefficients | not found |
 | 15 | How big a target a spinning black hole is for slow particles like dark matter (side-on) | 7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a)), times (M/v)² | not found |
+| 16 | Same, from any direction, and averaged over directions | 16π(M/v)²[1 − a²/16 − 17a⁴/1280 − …]; the a² term doesn't depend on direction | not found |

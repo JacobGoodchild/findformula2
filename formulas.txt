@@ -47,6 +47,9 @@ INDEX
 [15] Capture cross-section of a spinning black hole for SLOW particles (e.g. dark matter) arriving
     edge-on: sigma = [7 pi + pi sqrt(1-a^2) + 16 sqrt(1+a) E(2a/(1+a))] (M/v)^2;
     = 16 pi (M/v)^2 at a = 0 (known), (7 pi + 16 sqrt2)(M/v)^2 at a = M.          — not found
+[16] Slow-particle capture cross-section for ANY direction: the a^2 correction is direction-independent,
+    sigma = 16 pi (M/v)^2 [1 - a^2/16 - (31/2048 - 3C/1024 - 9C^2/2048) a^4 - ...];
+    direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -859,7 +862,7 @@ Novelty status: NOT FOUND.
 Question (plain English):
   A black hole moving through a cloud of slow particles (dark matter, stars, gas) swallows those
   that come close enough. For a non-spinning hole the "target area" for particles arriving with
-  speed v << c is the textbook sigma = 16 pi (GM/v^2... i.e. 16 pi M^2/v^2 in G = c = 1 units).
+  speed v << c is the textbook sigma = 16 pi M^2/v^2 (G = c = 1 units).
   How does spin change it?  A 2025 paper (arXiv:2510.13604, black holes moving through dark
   matter) computed this numerically and used spin fits accurate to ~1.5%. Here is the exact
   answer for particles arriving in the black hole's equatorial plane (perpendicular to the spin).
@@ -904,6 +907,43 @@ How it was verified:
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) computes the Kerr capture cross-section by
   quasi-Monte Carlo and fits it; the 16 pi Schwarzschild value is textbook. Other directions of
   incidence lead to genus-3 curves (genus 2 at a = 1), so no comparably simple formula there.
+
+==================================================================================
+[16] SLOW-PARTICLE CAPTURE BY A KERR BLACK HOLE FROM ANY DIRECTION (SERIES) AND DIRECTION AVERAGE
+==================================================================================
+Question (plain English):
+  For dark matter (or stars) streaming past a spinning black hole from a random direction, what
+  is the capture cross-section, and its average over directions (what sets accretion rates)?
+
+Results (G = c = 1, v -> 0, C = cos^2 of the angle between spin axis and incoming velocity):
+   sigma(a, C) = 16 pi (M/v)^2 * [ 1 - a^2/16
+                   - ( 31/2048 - 3C/1024 - 9C^2/2048 ) a^4
+                   - ( 233 - 69C - 105C^2 + 5C^3 ) a^6 / 32768 - ... ]
+   * Surprise: at order a^2 the correction (-a^2/16) is the SAME for every direction of approach.
+     (Contrast: for light, entry [5], the a^2 term is (1 + cos^2 theta)/18, strongly direction-dependent.)
+   * Averaged over isotropic directions (<C^n> = 1/(2n+1)):
+        <sigma> = 16 pi (M/v)^2 [ 1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ... ]
+   * Exact general-direction value as one integral (code/mb_incl.py):
+        A(a, theta) = (2/sin^2 theta) Int sqrt(N(u)) |3u^4 + 4u^3 + 1 - a^2| / (a^2 u^3) du,
+        N(u) = sin^2 theta (1+u)^4 (a^2 - (u^2-1)^2) - cos^2 theta ((1+u)^4 - 2(1+u)^3 + a^2)^2,
+        between the two largest positive roots of N  (sigma = A (M/v)^2). N has degree 8 (genus 3),
+        so only the edge-on case [15] has a simple closed form.
+   Example values (a = 0.5): edge-on 49.4259440025740610119469; 60 deg: 49.4298087887702480091;
+     1 deg from the axis: 49.4538578142693457866.
+
+How it was derived: 12-point fits in a^2 (a^2 = 1e-4 ... 1.2e-3, 60-digit arithmetic) at six values
+  of C (1/16, 3/16, ..., 11/16), then exact polynomial fits in C; residuals 5e-44 (a^2), 1e-39 (a^4),
+  5e-36 (a^6); rational recognition errors < 2e-34.
+
+How it was verified:
+  * C = 0 reproduces the exact edge-on series of [15] (1/16, 31/2048, 233/32768).
+  * C = 1 (approach along the spin axis) checked independently with sympy from the exact polar
+    case: the capture region is a disc of radius^2 = Q(y_0), y_0^4 - 2 y_0^3 + a^2 = 0, giving
+    1 - a^2/16 - a^4/128 - a^6/512, identical to the fitted polynomials at C = 1.
+  * The general-direction integral reproduces [15] at 90 deg to 50 digits.
+
+Novelty status: NOT FOUND. arXiv:2510.13604 fits spin expansions numerically (~1.5%); we did not
+  find the exact rational coefficients or the direction-independence of the a^2 term stated.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
