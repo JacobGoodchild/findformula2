@@ -53,6 +53,9 @@ INDEX
 [17] Leading spin correction to the capture cross-section for ANY particle speed and ANY direction:
     sigma = sigma_Schw(v) [1 - a^2 (r_c + 3 cos^2(th) (4 - r_c)) / (2 r_c^2 (6 - r_c)) + O(a^4)],
     r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)).  — not found
+[18] Exact spin-down torque on a Kerr black hole from slow matter arriving side-on: the captured
+    angular-momentum moment M_1 = -{32 sqrt(1+a)[(a^2+2)E - 2(1-a)K] + 35 pi a^2 + 10 pi (1 - sqrt(1-a^2))}/(5a);
+    mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1012,6 +1015,51 @@ How it was derived and verified:
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
   Will (2012, arXiv:1208.3931) covers only the slow limit (E = 1), consistent with r_c = 4 here.
+
+==================================================================================
+[18] SPIN-DOWN TORQUE FROM SLOW-PARTICLE CAPTURE (EDGE-ON), EXACT
+==================================================================================
+Question (plain English):
+  When a spinning black hole swallows slow particles (dark matter, stars) that stream past it in
+  its equatorial plane, it preferentially eats particles orbiting AGAINST its spin, so it loses
+  spin. How much angular momentum does it swallow, exactly? (arXiv:2510.13604 studies exactly
+  this "mass and spin co-evolution" with numerical fits.)
+
+Formula (G = c = 1, v -> 0, incoming direction perpendicular to the spin; m = 2a/(1+a);
+  K = K(m), E = E(m) complete elliptic integrals, parameter convention m = k^2):
+   M_1(a) = Int Int_{capture region} L_z dL_z dy            (L_z, y = sqrt(Q): specific angular momenta)
+          = -{ 32 sqrt(1+a) [ (a^2 + 2) E - 2 (1 - a) K ] + 35 pi a^2 + 10 pi (1 - sqrt(1 - a^2)) } / (5a)
+  Physical rates (particle mass density rho, speed v):
+     dM/dt   = rho (M^2/v) A(a)      with A(a) from entry [15],
+     dJ_z/dt = rho (M^3/v) M_1(a)    (negative: spin-down)
+  so the mean specific angular momentum swallowed is  dJ/dM = M * M_1/A
+     = -a M [ 1 + 3a^2/32 + 37a^4/1024 + ... ],    and  d a / d ln M = M_1/A - 2a = -3a - 3a^3/32 - ...
+  Series: M_1/(16 pi) = -a - a^3/32 - 31 a^5/2048 - ...
+  Extremal (a = 1): M_1 = -(96 sqrt2 + 45 pi)/5 = -55.43...  (the (1-a)K term vanishes),
+     mean swallowed L_z = M_1/A = -(96 sqrt2 + 45 pi)/(5(7 pi + 16 sqrt2)) M = -1.2423... M.
+  Values: M_1(0.1) = -5.02812669559229387769137645451; M_1(0.5) = -25.3570693339450610093659038737;
+          M_1(0.9) = -47.3564848255197507269761211027.
+
+How it was derived: same marginally bound boundary as [15]; the moment integrand
+  L * 2 sqrt(Q) * |dL/du| is (rational in u)/sqrt(a^2 - (u^2-1)^2). A general Hermite-reduction
+  routine (code/reduce_even.py) reduces it to the seven basis integrals
+  Int u^k du/sqrt(P), k = -3..3, whose values are elementary for odd k (t = u^2) and K, E for even k:
+     k=0: K/sqrt(1+a); k=2: sqrt(1+a) E; k=-2: E/(sqrt(1+a)(1-a)); k=1,3: pi/2;
+     k=-1: pi/(2 sqrt(1-a^2)); k=-3: pi/(2(1-a^2)^(3/2))   (each checked numerically at a = 0.6).
+  The same routine reproduces [15] exactly.
+
+How it was verified:
+  * Closed form vs direct numerical integration (code/mb_moment.py), 30 digits: identical at
+    a = 0.1, 0.5, 0.9.
+  * Independent brute force (code/mb_moment_sim.py: bisection for the capture boundary in Q at
+    3000 values of L_z using the E = 1 radial potential): a = 0.5: -25.35650 vs -25.35707;
+    a = 0.9: -47.35731 vs -47.35648.
+  * Small-a: the leading term -16 pi a agrees with Will's (2012) L_c = 4 - a cos i + ...
+    (moment = sin^2 theta Int cos(phi) L_c^3/3 dphi = -16 pi a sin^2 theta).
+  * a -> 1 numerically: M_1(0.999999) = -55.4182, approaching -(96 sqrt2 + 45 pi)/5 = -55.4302.
+
+Novelty status: NOT FOUND (leading O(a) term derivable from Will 2012; the exact closed form and
+  higher terms not found).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

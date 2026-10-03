@@ -40,3 +40,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 15 | How big a target a spinning black hole is for slow particles like dark matter (side-on) | 7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a)), times (M/v)² | not found |
 | 16 | Same, from any direction, and averaged over directions | 16π(M/v)²[1 − a²/16 − 17a⁴/1280 − …]; the a² term doesn't depend on direction | probably known (follows from Will 2012) |
 | 17 | How spin changes the capture target for particles of ANY speed and direction | 1 − a²(r_c + 3cos²θ(4−r_c))/(2r_c²(6−r_c)), with r_c from the speed | not found |
+| 18 | How fast slow matter spins a black hole down (side-on), exactly | closed form with K and E; swallowed L_z = −aM(1 + 3a²/32 + …) | not found |
