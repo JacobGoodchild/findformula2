@@ -1791,6 +1791,13 @@ Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r
        J = 3 f f' + r f f'' - 2 r f'^2      (J = 0 is the ISCO condition of the non-rotating hole).
      At the photon sphere (r f' = 2f, J = -f kappa/r) this reduces to (a). Kerr: entry [17]; Kerr-Newman: entry [31].
 
+   Corollary (perimeter): to O(a^2) the outline is a shifted, rescaled circle plus an ellipticity
+     (cos 2phi) term that changes neither area nor length, so the circumference is
+       P = 2 pi r/sqrt(f) * [1 + (a^2/2) {same bracket as in (a)} + O(a^4)]  (Kerr: [30]'s (1+C)/36).
+     Check (code/univ_perim_check.py, Bardeen g = 0.4, 60 deg, polygon of 6000 points, a = 0.02-0.04):
+       numeric -0.047129 vs formula -0.047081 (agreement at the polygon method's accuracy, ~1e-3 relative).
+     The O(a) displacement of the shadow centre is a sin(theta) (1 - f)/f (Kerr: 2a sin theta).
+
 (c) TORQUE: mean z-angular momentum brought in per unit captured energy (any speed, incl. light),
        <L_z>/E = -a sin^2(theta) (1 - f(r))/f(r) + O(a^3).
 
