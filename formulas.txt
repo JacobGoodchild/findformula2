@@ -1117,6 +1117,16 @@ How it was verified: independent brute-force simulation (code/massive_sim.py): 1
      beta = 0.80: sim 0.125024 vs 1/8
      beta = 0.75: sim 0.05904 vs 0.059041
 
+Generalisation to extremal Kerr-Newman (a^2 + Q^2 = M^2, a > 1/2; k = M/(2a) as in [6]):
+  conditions become n_phi >= sqrt(1-beta^2)/(a beta), n_theta^2 < (1/k^2 - 1) n_phi^2 + 1 - 1/beta^2,
+  and (n_r > 0 or n_phi > k/beta). Hence
+     escape threshold speed  beta_min = 1/sqrt(1 + a^2)      (Kerr: 1/sqrt2),
+     P = (1 - sqrt(1-beta^2)/(a beta))/2  for beta_min <= beta <= sqrt3/2  (the upper limit does not depend on a),
+     P = (1 - k/beta)/2 + (1/2pi) Int_{t_0}^{k/beta} arcsin(sqrt(((1/k^2-1) t^2 + 1 - 1/beta^2)/(1-t^2))) dt above it.
+  Checked by brute force (code/massive_kn.py, extremal KN, r = 1 + 1e-7):
+     (a, beta) = (0.8, 0.95): sim 0.20291 vs 0.20276;  (0.8, 0.85): 0.11273 vs 0.11266 (elementary branch);
+                 (0.8, 0.70): 0 vs 0 (below threshold 0.781);  (0.6, 0.9): 0.05087 vs 0.05082.
+
 Novelty status: NOT FOUND. Related: Zhang & Jiang (arXiv:2004.03367) treat massive particles moving
   only within the equatorial plane with energy fixed at E = 1 (Kerr-Sen); Ogasawara et al.
   (arXiv:1609.03022) the super-Penrose 5/12. The isotropic, fixed-speed problem and the c/sqrt2
