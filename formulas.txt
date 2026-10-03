@@ -1421,6 +1421,17 @@ How it was verified: brute-force ray test in the exact extremal Kerr-Sen metric 
      b = 0.6: sim 0.15219 vs 0.15242          (grid noise ~1e-3)
   Planar formula: reproduces the 1/4 quoted by Zhang & Jiang at Q = sqrt2.
 
+Unifying remark (observation, checked for three families): write the extremal near-horizon geometry
+  in the standard form ds^2 = Gamma(theta)[-x^2 dt^2 + dx^2/x^2 + alpha(theta) dtheta^2] + gamma(theta)(dphi + k_NH x dt)^2.
+  In all cases treated here the escape parameter is
+     k_escape(theta) = sqrt(Gamma/gamma) / k_NH:
+   * Kerr: Gamma = 1 + cos^2, gamma = 4 sin^2/(1 + cos^2), k_NH = 1  ->  (1 + cos^2 theta)/(2 sin theta)   ([6]);
+   * Kerr-Newman (r_0 = M = 1): Gamma = 1 + a^2 cos^2, gamma = (1+a^2)^2 sin^2/Gamma, k_NH = 2a/(1+a^2)
+       ->  (1 + a^2 cos^2 theta)/(2 a sin theta)   ([6]);
+   * Kerr-Sen (equator): Gamma = 1 - b^2, gamma = 4a^2/Gamma, k_NH = 1  ->  (1 + b)/2   (this entry).
+  So the near-horizon escape probability P = 1/2 - arcsin(k)/(2pi) - k/4 is fixed entirely by
+  near-horizon data. (Not proven for general extremal black holes; it relies on a Kerr-like far region.)
+
 Novelty status: NOT FOUND (numerical results exist: arXiv:2004.03367).
 
 ==================================================================================
