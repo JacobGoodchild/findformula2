@@ -1087,6 +1087,12 @@ How it was derived and verified:
        interpolation of alpha r^4 (6-r)^5 predicts the 7th and 8th points exactly; beta and gamma: degree-5
        fits through 6 points reproduce the remaining 2 points to 1e-16, with small rational coefficients.
        (An analytic derivation from the 4th-order perturbation is in progress; not yet complete.)
+       Independent brute-force check (code/capture_brute.py: impact-plane polar grid, 720 angles, bisection
+       in b with the exact Kerr radial potential), sigma in M^2:
+         a = 0.3, E = 1.25, 60 deg: brute 179.27546 | O(a^4) formula 179.27630 | O(a^2) only 179.29709 | a=0: 180.34479
+         a = 0.3, E = 2,    30 deg: brute 102.51005 | O(a^4) 102.51047 | O(a^2) 102.52324
+         a = 0.2, E = 1.25, 90 deg: brute 179.93451 | O(a^4) 179.93453 | O(a^2) 179.93860
+       (remaining differences are the size expected from the O(a^6) term).
 
   (b) Companion result -- the spin-down torque at leading order, any speed and direction.
   From L_1 = -2 cos(i)/sqrt(r_c (r_c - 3)) (in r_c form) the mean z-angular momentum of the captured
