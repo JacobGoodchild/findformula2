@@ -1606,6 +1606,11 @@ How it was verified: polygon perimeter of the critical curve (2 million points p
      (0.5, 60 deg): 32.3470966623 vs 32.3470964474;  (0.9, 17 deg): 30.9419603395 vs 30.9419603395;
      (0.99, 45 deg): 30.7291466911 vs 30.7291463539.
 
+  Small-spin rule of thumb (C = cos^2 theta; fitted at 60 digits, rational identification error < 3e-19):
+     P / (6 sqrt3 pi M) = 1 - (1 + C) a^2/36 - ( 35/5184 + 35C/7776 - 23C^2/15552 ) a^4 - ...
+  Checks: the a^2 term is exactly half of the area's (1+C)/18 ([5]); on the axis (C = 1, a circle) the a^4
+  term -19/1944 equals what sqrt(A/A_0) gives from the exact polar area series (-2/243 - 1/648 = -19/1944).
+
 Novelty status: NOT FOUND (papers study the curvature radius and fitted shapes of the critical curve,
   e.g. arXiv:1904.07710, 2007.10336, but no exact perimeter was found).
 
