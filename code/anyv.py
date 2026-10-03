@@ -3,7 +3,7 @@ r,a,L,Q,E=sp.symbols('r a L Q E',positive=True)
 D=r**2-2*r+a**2
 R=sp.expand((E*(r**2+a**2)-a*L)**2-D*(r**2+(L-a*E)**2+Q))
 sol=sp.solve([R,sp.diff(R,r)],[L,Q],dict=True)
-for s_ in sol: print(sp.simplify(s_[L])); print(sp.simplify(s_[Q])); print('---')
+pass
 t,p=sp.symbols('t p',positive=True)
 s0=sol[1]
 rr=1/(t**2-p**2)
