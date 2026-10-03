@@ -31,3 +31,15 @@ ok('[12] KN master vs polygon (0.7,45deg,Q^2=0.2)', K.A_kn(0.7,mpf(np.radians(45
 import bv_equator, escape
 mp.dps=30
 ok('[13] equatorial solid angle z=0.3: 1D formula vs Phi-integral', bv_equator.Omega_eq(mpf('0.3'))[0], escape.Omega(mpf('0.3'),pi/2), 1e-20)
+# ---- session 2 entries ----
+from mpmath import ellipe, ellipk
+import mb_area, mb_knext, bv_kn, massive_escape, anyv_ext_area
+mp.dps=30
+a_=mpf('0.5')
+ok('[15] slow capture edge-on closed vs curve integral', 7*pi+pi*sqrt(1-a_**2)+16*sqrt(1+a_)*ellipe(2*a_/(1+a_)), mb_area.A_mb_edge('0.5'), 1e-20)
+ok('[15] a=1 value', 7*pi+16*sqrt(2), mb_knext.A_formula(1)[0], 1e-15)
+ok('[14] extremal KN solid angle far-field -> [7](1-2z)', bv_kn.Omega_kn('1e-4','0.8')/mpf('1e-8'), kn_ext_check.A_formula(0.8)*(1-2e-4), 1e-3)
+ok('[19] massive escape beta=0.8 is 1/8', massive_escape.P('0.8'), mpf(1)/8, 1e-20)
+ok('[19] massive escape beta=1 is 7/24', massive_escape.P('1').real, mpf(7)/24, 1e-20)
+ok('[21] extremal any-speed capture: slow limit', anyv_ext_area.area('0.0001')[0]*mpf('0.0001')**2, 7*pi+16*sqrt(2), 1e-3)
+ok('[22] extremal KN slow capture a->0 -> pi phi^5', mb_knext.A_formula('0.001')[0], pi*((1+sqrt(5))/2)**5, 1e-3)
