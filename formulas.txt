@@ -1602,6 +1602,9 @@ How it was verified: polygon perimeter of the critical curve (2 million points p
   underestimate): a = 0.001: 32.648387650 vs 32.648387649 (-> 2 pi sqrt27 = 32.648388556 as a -> 0);
   a = 0.3: 32.564906450 vs 32.564907405;  a = 0.7: 32.134978521 vs 32.134978521;  a = 0.9: 31.663421773 vs 31.663423045;
   a = 0.999: 31.189534447 vs 31.189535009 (-> 18 sqrt3 = 31.176914536 as a -> 1).
+  General-inclination integral vs polygon (code/perimeter_incl.py):
+     (0.5, 60 deg): 32.3470966623 vs 32.3470964474;  (0.9, 17 deg): 30.9419603395 vs 30.9419603395;
+     (0.99, 45 deg): 30.7291466911 vs 30.7291463539.
 
 Novelty status: NOT FOUND (papers study the curvature radius and fitted shapes of the critical curve,
   e.g. arXiv:1904.07710, 2007.10336, but no exact perimeter was found).
