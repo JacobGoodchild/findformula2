@@ -32,6 +32,9 @@ INDEX
 [10] Fraction of emitted ENERGY that escapes from the horizon of an extremal black hole:
     lamp at rest: 3/32 + sqrt(3)/16 (Kerr), (4a^2-1)/(32a) + sqrt(4a^2-1)/16 (Kerr-Newman);
     lamp on the ISCO: 2 sqrt3/9 + 1/(20 pi) + 13 arctan(sqrt(5/3))/(5 sqrt15 pi) = 59.56% (Kerr). — not found
+[11] Edge-on shadow area of a Kerr-Newman (spinning + charged) black hole, any spin and charge:
+    one compact integral whose coefficients depend only on the charge; K/E/Pi form when the
+    quartic has 4 real roots. Generalises [1] (Q = 0) and [7] (extremal).        — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -301,7 +304,11 @@ How it was verified (code/master.py):
   0.3, 89     84.38878643604521     84.38878643604519         84.38878643606
   0.998, 45   74.50487346629570     74.50487346629571         74.50487346528
   (agreement ~1e-14, limited by double-precision root finding; the polygon is an
-  independent method and agrees to ~1e-9.)  Also reduces to [1] at theta = 90 deg and
+  independent method and agrees to ~1e-9.)
+  Near the axis it converges to the exactly known polar circle pi(eta(r_0) + a^2):
+     a = 0.7:  theta = 0.5 deg: 79.80638834, 0.05 deg: 79.80622211, exact polar 79.80622043
+     a = 0.95: theta = 0.5 deg: 74.66494195, 0.05 deg: 74.66472738, exact polar 74.66472522
+     (differences shrink like theta^2).  Also reduces to [1] at theta = 90 deg and
   its small-spin series reproduces the exactly known polar (theta = 0) result (see [5]).
 
 Novelty status: NOT FOUND. Papers compute the area by numerically integrating the edge
@@ -626,6 +633,49 @@ How it was verified (code/energy_frac.py, energy_sim_zamo.py, energy_sim_isco.py
 Novelty status: NOT FOUND. Related papers (arXiv:2108.09051, 1910.12682) give photon escape
   probabilities and maximum blueshifts (e.g. sqrt3 for the ISCO, which is the maximum of
   a(t+k)/sqrt(1-k^2) at t = 1), but we did not find the energy-weighted escape fraction.
+
+==================================================================================
+[11] EDGE-ON SHADOW AREA OF A KERR-NEWMAN BLACK HOLE (ANY SPIN, ANY CHARGE)
+==================================================================================
+Question (plain English):
+  The Event Horizon Telescope has used shadow sizes to constrain how much electric (or other)
+  "charge" a black hole could carry. What is the exact shadow area of a black hole with spin a
+  and charge Q, seen edge-on?
+
+Formula (M = 1, q = Q^2, a^2 + q < 1, observer at infinity in the equatorial plane):
+   W(r) = 4a^2 (r - q) - (r^2 - 3r + 2q)^2          (quartic; eta = r^2 W/(a^2 (r-1)^2))
+   r_p < r_r: the two largest real roots of W (prograde/retrograde circular photon orbits).
+   A(a, q) = 1/(q - 1) * Integral_{r_p}^{r_r} [ 2(4q^2 - 2q - 3) - (8q^2 + 10q - 21) r
+                                             + (14q - 15) r^2 - 2(4q - 3)(a^2 + q - 1)/(r - 1) ] dr / sqrt(W(r))
+   * The polynomial coefficients depend on the charge only (not on the spin).
+   * q = 0 gives exactly entry [1]: (6 - 21 r + 15 r^2 + 6(1-a^2)/(r-1))/sqrt(W).
+   * When all four roots d < c < r_p < r_r of W are real (e.g. small charge), the K, E, Pi
+     formula of entry [1](b) applies verbatim with (r_0, r_p, r_r) -> (c, r_p, r_r) and lower
+     root d in place of 0 [m = (r_r-r_p)(c-d)/((r_r-c)(r_p-d)), n = (r_r-r_p)/(r_r-c),
+     g = 2/sqrt((r_r-c)(r_p-d))]; with a complex pair the standard two-real-root
+     reduction (Byrd & Friedman 259) applies instead (not written out here).
+
+Decimal values: (a, Q^2) = (0.5, 0.3): 74.36727894451...; (0.3, 0.6): 65.51400747063...;
+   (0.1, 0.9): 54.73464461329...; (0.8, 0.2): 74.27327870897...; (0.6, 0.6): 61.91314572514...
+
+How it was derived: sympy (code/kn_edge.py) solved R = R' = 0 for Kerr-Newman, giving
+   xi = -(r^3 - 3r^2 + a^2 r + a^2 + 2q r)/(a(r-1)), d xi/dr = -2[(r-1)^3 + 1 - a^2 - q]/(a(r-1)^2)
+   (same structure as Kerr), then the Hermite reduction with S = (r^2 - r + 2q - 3)/a^2
+   + t1/(r-1) + t2/(r-1)^2, t2 = 2(a^2+q-1)/a^2, t1 = (4q-5)(a^2+q-1)/(a^2(q-1)).
+
+How it was verified (code/kn_edge_closed.py):
+   reduced integral (30 digits) vs polygon area (1,000,000 points, general formulas):
+     (0.5, 0.3): 74.36727894451 vs 74.36727893958     (0.3, 0.6): 65.51400747063 vs 65.51400746917
+     (0.1, 0.9): 54.73464461329 vs 54.73464460974     (0.8, 0.2): 74.27327870897 vs 74.27327870089
+     (0.6, 0.6): 61.91314572514 vs 61.91314572911
+   K/E/Pi form (four real roots): (0.8, 0.2): 74.27327870897115 (= reduced integral);
+     (0.9, 0.15): 73.78914411826 vs polygon 73.78914411925.
+   q = 0: identical to [1] (83.5610541284615455783534950007 at a = 0.5).
+   a -> 0 (Richardson from a = 0.01, 0.005) vs the exact Reissner-Nordstrom area pi b_c^2,
+     b_c^2 = r_ph^4/(r_ph^2 - 2 r_ph + q), r_ph = (3 + sqrt(9 - 8q))/2:
+     q = 0.3: 76.01690876 vs 76.01690876;  q = 0.8: 59.00204769 vs 59.00204765.
+
+Novelty status: NOT FOUND (papers on Kerr-Newman shadows compute the area numerically).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
