@@ -35,6 +35,9 @@ INDEX
 [11] Edge-on shadow area of a Kerr-Newman (spinning + charged) black hole, any spin and charge:
     one compact integral whose coefficients depend only on the charge; K/E/Pi form when the
     quartic has 4 real roots. Generalises [1] (Q = 0) and [7] (extremal).        — not found
+[12] Kerr-Newman shadow area for ANY spin, charge and viewing angle (single integral), and the
+    rule of thumb A/(27 pi M^2) = 1 - Q^2/3 - (1+cos^2 th) a^2/18 - Q^4/27 - (3+cos^2 th) a^2 Q^2/81 - ...
+                                                                                — not found (Q-only terms known)
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -676,6 +679,54 @@ How it was verified (code/kn_edge_closed.py):
      q = 0.3: 76.01690876 vs 76.01690876;  q = 0.8: 59.00204769 vs 59.00204765.
 
 Novelty status: NOT FOUND (papers on Kerr-Newman shadows compute the area numerically).
+
+==================================================================================
+[12] KERR-NEWMAN SHADOW AREA: ANY SPIN, ANY CHARGE, ANY VIEWING ANGLE
+==================================================================================
+Question (plain English):
+  The most general version of the shadow-size question for the standard black holes of
+  Einstein-Maxwell theory: spin a, charge Q, viewed from any angle theta. Is there a compact
+  exact formula, and a simple rule of thumb for small spin and charge?
+
+Formula (M = 1, q = Q^2, u = a^2 cos^2 theta, D = u + q - 1, observer at infinity):
+  N(r) = -r^6 + 6r^5 - (2u + 4q + 9) r^4 + (4a^2 + 12q) r^3 + (-u^2 + 6u - 4a^2 q - 4q^2) r^2
+         + (2u^2 - 4a^2 u - 4uq) r - u^2
+  (N = beta^2 a^2 (r-1)^2 sin^2 theta). With r_1 < r_2 the outermost pair of roots of N above r = 1,
+  A = (1/D) Int_{r_1}^{r_2} [ -2(-u^2 + 5a^2 u + 5uq - 6u + 4a^2 q - 3a^2 + 4q^2 - 7q + 3)
+                             -2(2u^2 + a^2 u + uq - 3u + 2a^2 q - 3a^2 + 2q^2 - 7q + 3) r
+                             -2(-u^2 + 6u + 2q + 3) r^2  - 4(-u + q - 3) r^3  + 2(u + 2q - 3) r^4
+                             -2(a^2 + q - 1)(u^2 + 6u + 4q - 3)/(r - 1) ] dr / sqrt(N(r))
+  q = 0 gives entry [4]; theta = 90 deg gives entry [11].
+
+  Small spin and charge (C = cos^2 theta), coefficients identified as exact rationals:
+     A/(27 pi) = 1 - Q^2/3 - (1 + C) a^2/18
+                   - Q^4/27 - (3 + C) a^2 Q^2/81 - (1/72 + 5C/972 - 5C^2/1944) a^4 + (3rd order)
+  e.g. charge shrinks the shadow 6 times faster than spin at second order when seen edge-on
+  (Q^2/3 vs a^2/18).
+
+Decimal values (M = 1): (a, theta, Q^2) = (0.5, 17 deg, 0.3): 73.21806157272218;
+   (0.7, 45, 0.2): 74.51417044120029; (0.3, 70, 0.6): 65.45873623857935; (0.9, 30, 0.1): 73.12962306205849.
+
+How it was derived: as [4], with the Kerr-Newman critical curve (code/kn_master.py; sympy
+  Hermite reduction, S = (1 - r)/(a^2 (c^2 - 1)) + t1/(r-1) + t2/(r-1)^2,
+  t2 = -2(a^2+q-1)/(a^2(c^2-1)), t1 = -(a^2+q-1)(u+2q-3)/(a^2(c^2-1)(u+q-1))).
+  Series: fitted from the master formula at 60-digit precision on a grid of small a^2, Q^2
+  (step 1e-4, all monomials up to total degree 4) at cos^2 theta = 0.25, 0.5, 0.75.
+
+How it was verified (code/kn_master_check.py, code/kn_series.py):
+  master formula vs polygon area of the general Kerr-Newman critical curve (600,000 points):
+     (0.5,17,0.3): 73.21806157272 vs 73.21806157217;  (0.7,45,0.2): 74.51417044120 vs 74.51417044306
+     (0.3,70,0.6): 65.45873623858 vs 65.45873623784;  (0.9,30,0.1): 73.12962306206 vs 73.12962306035
+     (0.5,60,0):   83.26018631067749 (= entry [4]) vs 83.26018631109
+  series: rational identification errors 1e-17 (first order) and 1e-13 (second order);
+  the a^2 Q^2 coefficient -(3+C)/81 was PREDICTED from C = 0.25, 0.75 (-13/324, -5/108) and
+  then CONFIRMED at C = 0.5 (-7/162); the a^4 coefficient reproduces entry [5]
+  (-467/31104, -41/2592, -169/10368 at C = 0.25, 0.5, 0.75);
+  the pure-charge terms -q/3 - q^2/27 agree with the exact Reissner-Nordstrom series
+  b_c^2/27 = 1 - q/3 - q^2/27 - 11q^3/729 (sympy).
+
+Novelty status: NOT FOUND for the general formula and the spin-dependent series terms.
+  The pure-charge terms are KNOWN (they follow from the textbook Reissner-Nordstrom shadow).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
