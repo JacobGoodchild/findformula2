@@ -465,6 +465,10 @@ Results (M = 1, extremal Kerr-Newman, equatorial plane):
        * a = 0.8 (k = 0.625):     0.558898...
        * a = 1/sqrt2 (k = 1/sqrt2): 3/8 + sqrt(3)/9 = 3/8 + 1/(3 sqrt 3) = 0.567450089...  (new, neat)
        So adding charge (lowering spin) slightly INCREASES the ISCO escape probability.
+  (iv) Corollary: the maximum blueshift E_inf/E_emit of escaping photons from the ISCO lamp is
+       a sqrt((2a+1)/(2a-1))  (photon emitted straight along the motion, t = 1):
+       sqrt3 for Kerr (known), 1 + 1/sqrt2 = 1.7071... at a = 1/sqrt2, 1.66533 at a = 0.8.
+       Ray-simulation maxima (grid N=200, cannot hit t=1 exactly): 1.72628, 1.70211, 1.66021.
 
 How it was derived:
   Take the near-horizon escape cone of entry [6] (in the ZAMO frame), boost the lamp along the
