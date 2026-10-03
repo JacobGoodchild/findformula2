@@ -67,6 +67,9 @@ INDEX
     elliptic (sqrt of t^4 + 2E t^3 - t^2 - 2E p^2 t - p^4); joins 7pi+16sqrt2 (slow) to 16pi+15sqrt3 (light).  — not found
 [22] Slow-particle capture by an extremal Kerr-Newman hole (edge-on): (2/a^2) Int y(3y+1)(y-1)
     sqrt(a^2(2y+1) - (y^2-y-1)^2) dy, from pi phi^5 (golden ratio; extremal RN, probably known) to 7pi+16sqrt2.  — not found
+[23] Exact parametric critical angular momentum for capture of slow particles at any orbital tilt
+    (replaces Will 2012's fits): L_c^2 = (3y^4 - 4y^3 + a^2)/(y-1)^2, cos i = -(y^4 - 2y^3 + a^2)/(a sqrt(3y^4 - 4y^3 + a^2)).
+                                                                                — not found in this form (pieces probably known)
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1245,6 +1248,43 @@ How it was verified (code/mb_knext.py): independent brute force with the exact K
      a = 0.3: 35.64587 vs 35.64547.   a -> 0: A(0.001) = 34.84081 vs pi phi^5 = 34.84080.
 
 Novelty status: NOT FOUND for a > 0 (the a = 0 endpoint is probably known).
+
+==================================================================================
+[23] EXACT CAPTURE CRITERION FOR SLOW PARTICLES AT ANY ORBITAL INCLINATION (KERR)
+==================================================================================
+Question (plain English):
+  N-body simulations of stars and dark matter around massive black holes need a rule: a slow
+  particle (energy ~ rest mass) is swallowed if its angular momentum L is below L_c(i), where i is
+  its orbital inclination to the black hole's equator. Will (2012, arXiv:1208.3931) noted that for
+  general i the critical value must be found numerically from a degree-8 polynomial, and gave an
+  approximate fit (good to 0.5% for a <= 0.9, 5% for a <= 0.99, plus a separate numerical fit at a = 1).
+  Is there an exact, simple representation?
+
+Result (G = c = M = 1; L = sqrt(Carter C) = sqrt(Q + L_z^2), cos i = L_z/L; parameter y = sqrt(r) of
+  the marginally bound spherical orbit, 1 + sqrt(1-a) <= y <= 1 + sqrt(1+a)):
+     L_c^2 = (3y^4 - 4y^3 + a^2) / (y - 1)^2,
+     cos i = -(y^4 - 2y^3 + a^2) / ( a sqrt(3y^4 - 4y^3 + a^2) )
+  (cos i runs from +1 at the prograde to -1 at the retrograde marginally bound circular orbit,
+  reproducing Will's exact equatorial values L_c = 2 + 2 sqrt(1 -/+ a)).
+  Maximal spin a = 1 (fully elementary):
+     L_c^2 = 3y^2 + 2y + 1,  cos i = -(y^3 - y^2 - y - 1)/sqrt(3y^2 + 2y + 1),  1 <= y <= 1 + sqrt2,
+     covering cos i from -1 up to sqrt(2/3); for sqrt(2/3) <= cos i <= 1:  L_c = 2/cos i  (L_z = 2).
+  To use: given i, solve the monotone relation cos i(y) for y (one-dimensional), then evaluate L_c.
+
+How it was derived: from the E = 1 spherical-orbit formulas of entry [15] (L_z(y), Q(y)); in Q + L_z^2
+  the terms y^4 (y^2 - 2y)^2 cancel, leaving (3y^4 - 4y^3 + a^2)/(y-1)^2. At a = 1 the factor
+  3y^4 - 4y^3 + 1 = (y-1)^2 (3y^2 + 2y + 1) cancels the denominator.
+
+How it was verified (code/lc_param.py): against direct bisection for the largest L whose E = 1
+  radial potential (L_z = L cos i, Q = L^2 sin^2 i) reaches the horizon without a turning point:
+     a = 0.5,  cos i = -0.9: 4.4042444 (bisection) vs 4.4042421 (formula); cos i = 0.5: 3.6997225 vs 3.6997207
+     a = 0.9,  cos i = 0.95: 2.7012767 vs 2.7012763;   a = 0.99, cos i = 0.95: 2.2926397 vs 2.2926397
+     (12 test points, all agree to ~1e-6, limited by the bisection grid).
+  It also underlies the exact averages in [16] and [20] (brute-force verified).
+
+Novelty status: NOT FOUND in this form. Parametrisations of spherical orbits by their radius go back
+  to Wilkins (1972), so the ingredients are probably known; the simplified L_c(i) formula and its
+  use as an exact capture criterion replacing Will's fits were not found.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

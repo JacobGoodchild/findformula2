@@ -45,3 +45,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 20 | Dark-matter capture by a spinning black hole averaged over all directions | one integral; exact elementary value at max spin ≈ 45.28 (M/v)² | not found |
 | 21 | Max-spin black hole: capture target for particles of any speed (side-on) | one elliptic family joining 7π+16√2 (slow) to 16π+15√3 (light) | not found |
 | 22 | Slow-particle capture by max-spin *charged* black holes (side-on) | one elliptic integral; golden-ratio endpoint πφ⁵ | not found (endpoint probably known) |
+| 23 | Exact rule for when a slow star/particle gets swallowed, at any orbital tilt | simple parametric formula replacing published fits | not found in this form |
