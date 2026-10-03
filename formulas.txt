@@ -394,6 +394,8 @@ How it was verified:
     checked INDEPENDENTLY with sympy from the known exact polar formula
     A = pi(eta + a^2) at the root of r^3 - 3r^2 + a^2 r + a^2 = 0: identical rationals.
   * The edge-on a^2 term, -(3 pi/2) a^2, matches arXiv:2607.11979 eq. (115).
+  * The whole a^2 coefficient (1 + C)/18 is now DERIVED analytically: it is the r_c = 3 (light)
+    case of the perturbative capture formula of entry [17].
 
 Novelty status: NOT FOUND for general inclination (the inclination-dependent a^2 term
   (1 + cos^2 theta)/18 and all higher terms). The edge-on a^2 term is KNOWN
