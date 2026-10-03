@@ -73,6 +73,8 @@ INDEX
 [24] Massive particles launched (isotropically, speed beta) from the ISCO of an extremal Kerr hole:
     escape iff beta > (3 sqrt2 - 2)/7 c = 0.3204c; P = [2 beta + 1 - sqrt(3(1-beta^2))]/(4 beta) up to
     beta = sqrt(2/3) c (exactly 1/4 at beta = c/2, exactly 1/2 at sqrt(2/3) c).   — not found
+[25] Kerr-Sen (string-theory) black hole, edge-on shadow area: one compact integral for all (a, b);
+    extremal (a = M - b) closed form sqrt(a) sqrt(4-a)(a+14) + 8(2a+1) arcsin(sqrt(a)/2) + 4 pi (2a+1).  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1329,6 +1331,43 @@ How it was verified:
   * beta -> 1: 0.54645482 vs the known 0.54645490.
 
 Novelty status: NOT FOUND.
+
+==================================================================================
+[25] SHADOW AREA OF THE KERR-SEN BLACK HOLE (EDGE-ON), GENERAL AND EXTREMAL
+==================================================================================
+Question (plain English):
+  The Kerr-Sen black hole (heterotic string theory: spin a, dilaton/charge parameter b = Q^2/(2M))
+  is one of the standard "alternatives to Kerr" tested with Event Horizon Telescope images. What is
+  its exact shadow area seen edge-on?
+
+Formula (M = 1; Delta = r(r+2b) - 2r + a^2):
+  photon orbits: xi = -(r^3 + 3b r^2 - 3r^2 + 2b^2 r - 2b r + a^2 r + a^2 b + a^2)/(a (r+b-1)),
+                 eta = r^2 W(r)/(a^2 (r+b-1)^2), with the quartic
+  W(r) = -[ r^4 + (6b-6) r^3 + (13b^2-22b+9) r^2 + (12b^3-24b^2+12b-4a^2) r + 4b^4-8b^3+4b^2-4a^2 b ].
+  Edge-on area (r_p < r_r the two largest roots of W):
+     A(a, b) = Int_{r_p}^{r_r} [ -2(b-1)(b^2 - 8b + 3) + (32b - 3b^2 - 21) r + (15 - b) r^2
+                                  + 2(b+3)((1-b)^2 - a^2)/(r + b - 1) ] dr / sqrt(W(r))
+  (b = 0 gives entry [1] exactly: 6 - 21r + 15r^2 + 6(1-a^2)/(r-1)).
+  Extremal Kerr-Sen (a = 1 - b): W = (r+b-1)^2 [4(1-b) - (r+2b-2)^2], everything is elementary:
+     A_ext(a) = sqrt(a) sqrt(4 - a) (a + 14) + 8 (2a + 1) arcsin(sqrt(a)/2) + 4 pi (2a + 1)
+  a = 1 (b = 0): 15 sqrt3 + 16 pi (extremal Kerr, [2]); a -> 0 (b -> 1, extremal non-rotating
+  dilaton black hole): 4 pi (shadow radius 2M).
+  Values: general (a, b) = (0.5, 0.2): 71.59372086684692350;  (0.3, 0.4): 60.64342879172060423;
+          (0.8, 0.1): 74.44086645869790059.  Extremal a = 0.2: 32.49794200581742537;
+          a = 0.5: 50.09631221644395258;  a = 0.8: 65.99643386455061920.
+
+How it was derived: sympy (code/kerrsen.py, kerrsen_reduce.py): spherical photon orbits from
+  R = R' = 0, then the same Hermite reduction as [1]/[11]; the extremal factorisation of W turns the
+  area integral 2 Int sqrt(eta) |d xi| into (4/s^4) Int (x + 2s^2)(x + s^2) sqrt(4s^2 - x^2) dx, s^2 = a.
+
+How it was verified (code/kerrsen_check.py): polygon (shoelace) area of the shadow edge from the
+  UNSIMPLIFIED Kerr-Sen formulas, 1.5 million points:
+     (0.5, 0.2): 71.5937208696 vs 71.5937208668;  (0.3, 0.4): 60.6434287971 vs 60.6434287917;
+     (0.8, 0.1): 74.4408664627 vs 74.4408664587;
+     extremal a = 0.5: 50.0963122034 vs 50.0963122164;  0.8: 65.9964338576 vs 65.9964338646;
+     0.2: 32.4979420048 vs 32.4979420058.
+
+Novelty status: NOT FOUND (Kerr-Sen shadows are studied numerically, e.g. arXiv:2112.11066).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

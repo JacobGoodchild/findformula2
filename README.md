@@ -47,3 +47,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 22 | Slow-particle capture by max-spin *charged* black holes (side-on) | one elliptic integral; golden-ratio endpoint πφ⁵ | not found (endpoint probably known) |
 | 23 | Exact rule for when a slow star/particle gets swallowed, at any orbital tilt | simple parametric formula replacing published fits | not found in this form |
 | 24 | How fast must debris be thrown from the innermost orbit of a max-spin black hole to escape? | faster than (3√2−2)/7·c ≈ 0.32c; exactly 1/4 escape at c/2 | not found |
+| 25 | Shadow size of the string-theory (Kerr–Sen) black hole, side-on | compact integral; elementary closed form at extremality | not found |
