@@ -456,10 +456,16 @@ How it was derived:
   with n'_phi = t > 0 escapes, none with t < -k escape, and for -k < t < 0 the escaping
   fraction of the circle of directions is (1/pi) arcsin((t+k)/(k sqrt(1-t^2))), giving
      P = 1/2 + (1/2pi) Int_{-k}^{0} arcsin( (t+k)/(k sqrt(1-t^2)) ) dt,
-  and integration by parts + partial fractions gives the closed form above (the arctan piece
-  comes from Int ds/sqrt(s(2k-(1+k^2)s)); the remaining pieces sum to -arcsin k, which was
-  identified numerically to 30 digits at k = 1/2, 5/9, 2/3, 0.9 and is consistent with the
-  known k = 1/2 value).
+  and integration by parts + partial fractions gives the closed form above. Full proof:
+  with b = 1 + k^2, by parts J = Int_0^k s(1-ks)/((1-s^2) sqrt(s(2k-bs))) ds, and
+  s(1-ks)/(1-s^2) = k + (1-k)/(2(1-s)) - (1+k)/(2(1+s)). Substituting s = (2k/b) sin^2(phi)
+  (upper limit sin^2(phi_1) = b/2, so tan(phi_1)/sqrt(b) = 1/sqrt(1-k^2)):
+     k * Int ds/sqrt(..)            = (2k/sqrt b) arcsin(sqrt(b/2)),
+     (1-k)/2 * Int ds/((1-s)sqrt..) = arctan( sqrt((1-k)/(1+k)) ),
+     (1+k)/2 * Int ds/((1+s)sqrt..) = arctan( sqrt((1+k)/(1-k)) ),
+  and arctan(x) - arctan(1/x) = 2 arctan(x) - pi/2 = arccos(k) - pi/2 = -arcsin(k) for
+  x = sqrt((1-k)/(1+k)). Hence J = (2k/sqrt(1+k^2)) arcsin(sqrt((1+k^2)/2)) - arcsin(k).
+  (Also confirmed numerically to 30 digits at k = 1/2, 5/9, 2/3, 0.9.)
   The orbital speed v and the ISCO threshold came from direct numerics on the Kerr-Newman
   circular-orbit formulas (code/kn_isco.py): v(r -> 1) = 0.83333333 (a=0.6), 0.71428571 (a=0.7),
   0.55555556 (a=0.9), 0.5 (a=1); ISCO bisection gives a_c = 0.70710678 (= 1/sqrt2), and
