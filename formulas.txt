@@ -38,6 +38,10 @@ INDEX
 [12] Kerr-Newman shadow area for ANY spin, charge and viewing angle (single integral), and the
     rule of thumb A/(27 pi M^2) = 1 - Q^2/3 - (1+cos^2 th) a^2/18 - Q^4/27 - (3+cos^2 th) a^2 Q^2/81 - ...
                                                                                 — not found (Q-only terms known)
+[13] Exact silhouette (dark-sky) solid angle of an extremal Kerr black hole for an observer in the
+    equatorial plane at ANY distance (an open question raised by Baines & Visser 2024):
+    elementary part + one elliptic integral; series (M/r)^2 [(16pi+15sqrt3) - 2(16pi+15sqrt3)(M/r) + ...]
+                                                                                — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -739,6 +743,59 @@ How it was verified (code/kn_master_check.py, code/kn_series.py):
 
 Novelty status: NOT FOUND for the general formula and the spin-dependent series terms.
   The pure-charge terms are KNOWN (they follow from the textbook Reissner-Nordstrom shadow).
+
+==================================================================================
+[13] EXACT SILHOUETTE SOLID ANGLE OF EXTREMAL KERR FOR AN EQUATORIAL OBSERVER AT ANY DISTANCE
+==================================================================================
+Question (plain English):
+  How much of the sky does a maximally spinning black hole blot out for an observer at distance r
+  in its equatorial plane? Baines & Visser (arXiv:2405.08875, PRD 2025) found the exact SHAPE of the
+  dark region but wrote that the solid angles "proved to be intractable except in very special
+  cases". For a far observer the answer is A(theta)(M/r)^2 with A from [3]; here we give the exact
+  answer at any distance for the equatorial observer.
+
+Setup: observer at rest in the Carter frame (the frame of Baines-Visser / Perlick-Tsupko), r = M/z,
+  theta = 90 deg. On the equator their edge parameter is simply w = 1 + 2 sin(Phi) (no square root),
+  and two of the three quadratics in the problem become (w-3)(w+1) and (w+1)^2, so the integrand
+  lives on an ELLIPTIC curve (genus 1), not the genus-2 curve of the general case.
+  (Erratum to our own notes: the general case is genus 2 for every z; an earlier "special radius"
+  idea came from a sign lost in PDF text extraction and has been withdrawn.)
+
+Formula (M = 1, k = z/(1+z)):
+  Omega(z) = 2 pi - I_1(z) - I_2(z),
+  I_2 = 2 arcsin( sqrt3 / (2 sqrt(1-k^2)) ) - 2k arctan( sqrt3 k / sqrt(1 - 4k^2) )     (elementary;
+        from the straight "NHEK-line" part of the edge, sin Theta = k/|sin Phi|, sin Phi < -1/2)
+  I_1 = 2 Int_0^3 [ (1 - z - wz) sqrt((wz + 1 - z)^2 + 4z(1-z)) / (1 + (w^2-1) z^2) ] dw / sqrt((3-w)(1+w))
+        (an elliptic integral: square root of the quartic (3-w)(1+w)[(wz+1-z)^2 + 4z(1-z)]).
+  Far-observer series (all coefficients exact combinations of pi and sqrt3):
+     Omega = z^2 [ (16 pi + 15 sqrt3) - 2(16 pi + 15 sqrt3) z + (256 pi + 243 sqrt3)/6 z^2
+                   - (1280 pi + 1170 sqrt3)/3 z^3 + (14880 pi + 13521 sqrt3)/5 z^4
+                   - (46592 pi + 42282 sqrt3)/3 z^5 + ... ]
+  (leading term = area [2] of the edge-on shadow, as it must be).
+  Values: z = 0.1 (r = 10M): 0.619519517282147980771478546345 sr;  z = 0.3: 3.39146297944768557527669662910;
+          z = 0.5 (r = 2M): 5.71448719016311521152239799617;      z = 0.9: 8.33031146839084094240094460877
+
+How it was derived: Baines-Visser edge (their eqs. 1, 2, 4); Omega = Int (1 - cos Theta) dPhi with
+  cos Theta from the factorisation 1 + (w^2-1)z^2 - 2(1+w)z(1-z) = (wz - (1-z))^2 (so
+  cos Theta = (1-z-wz) sqrt((wz+1-z)^2 + 4z(1-z)) / (1 + (w^2-1)z^2) on the Case-I part);
+  change of variable Phi -> w on the equator. I_2: substitution t = cos(phi), elementary.
+  Series: Omega(z)/z^2 at 14 points z = 1e-5 ... 1.4e-4, 60-digit arithmetic, polynomial fit,
+  PSLQ on {c_j, pi, sqrt3} with tolerance 1e-22 (relations listed above, small integers).
+
+How it was verified:
+  * Fully independent brute-force photon test (code/bv_sim.py): 80,000 directions at the
+    observer in the Carter frame, each traced with the exact radial potential (including photons
+    sent inward that bounce); captured solid angle 4 pi (1 - P_escape):
+      z = 0.5: sim 5.7155 vs formula 5.7145;  z = 0.3: 3.3929 vs 3.3915;  z = 0.1: 0.6173 vs 0.6195
+    (grid error ~1e-3). The same simulation in the ZAMO frame gives clearly different numbers
+    (6.78, 4.06, 0.650), confirming that the Baines-Visser angles are Carter-frame angles.
+  * I_2 closed form vs quadrature at z = 0.3: 1.99952636973602376048923562619843318744582665542 (both, 60 digits).
+  * The 1D formula vs direct Phi-integration of the Baines-Visser edge (code/escape.py) at
+    z = 0.01, 0.1, 0.3, 0.5, 0.9: identical to 30 digits.
+  * Leading series coefficient = 16 pi + 15 sqrt3 (known edge-on area) and z -> 0 limit = [3] at 90 deg.
+
+Novelty status: NOT FOUND (explicitly described as open by Baines & Visser 2024). Only the
+  equatorial observer is solved here; general latitude remains a genus-2 problem.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M

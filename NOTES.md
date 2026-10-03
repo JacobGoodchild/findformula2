@@ -102,3 +102,10 @@
   5. Branch out of shadows: e.g. exact results for photon-ring Lyapunov exponents or
      quasinormal-mode (eikonal) quantities averaged over inclination, or exact lensing
      quantities for extremal Kerr-Newman.
+
+### Lead 7: Baines-Visser solid angle at finite distance -> RESULT [13]
+* CORRECTION: earlier note about a "special splitting radius r* = M sqrt(3 - sin^2)" was based on
+  a sign lost in the PDF text of their eq. (13). Correct form: sin Phi = (w^2 - 2 + s^2)/(2(1+w)s).
+  With it, the determinant is 4s(1 + z^2 cos^2) != 0: no splitting at any z for theta != 90.
+* At theta = 90 deg one quadratic becomes a perfect square -> elliptic. Solved; series in pi, sqrt3.
+* Simulation confirms BV angles are Carter-frame angles (ZAMO numbers differ at finite r).
