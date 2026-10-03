@@ -56,6 +56,9 @@ INDEX
 [18] Exact spin-down torque on a Kerr black hole from slow matter arriving side-on: the captured
     angular-momentum moment M_1 = -{32 sqrt(1+a)[(a^2+2)E - 2(1-a)K] + 35 pi a^2 + 10 pi (1 - sqrt(1-a^2))}/(5a);
     mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found
+[19] Escape of MASSIVE particles (local speed beta) from just outside an extremal Kerr horizon:
+    nothing slower than c/sqrt2 escapes; P = (1 - sqrt(1-beta^2)/beta)/2 for c/sqrt2 <= beta <= (sqrt3/2) c
+    (e.g. exactly 1/8 at beta = 0.8), one-integral formula above that, -> 7/24 as beta -> 1.   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1073,6 +1076,51 @@ How it was verified:
 
 Novelty status: NOT FOUND (leading O(a) term derivable from Will 2012; the exact closed form and
   higher terms not found).
+
+==================================================================================
+[19] ESCAPE OF MASSIVE PARTICLES FROM THE HORIZON OF AN EXTREMAL KERR BLACK HOLE
+==================================================================================
+Question (plain English):
+  A source at rest (ZAMO frame) just outside the horizon of a maximally spinning black hole
+  shoots out massive particles (e.g. neutrinos, or debris) in all directions with the same local
+  speed beta. What fraction escapes to infinity?  For light (beta = 1) the answer is 7/24.
+
+Result (extremal Kerr, equatorial plane, r -> M, isotropic in the ZAMO frame):
+  In the ZAMO frame (n_r, n_theta, n_phi = unit direction), a particle escapes iff
+     (i)   n_phi >= sqrt(1 - beta^2)/beta            (its conserved energy E >= 1, i.e. unbound),
+     (ii)  n_theta^2 < 3 n_phi^2 + 1 - 1/beta^2       (no turning point outside the near-horizon zone),
+     (iii) n_r > 0  or  n_phi > 1/(2 beta)           (inward-launched particles bounce back if n_phi > 1/(2beta)).
+  With t_0 = sqrt(1-beta^2)/beta and t_1 = 1/(2 beta):
+     beta < 1/sqrt2:                P = 0     (nothing slower than c/sqrt2 can escape)
+     1/sqrt2 <= beta <= sqrt3/2:     P = (1 - sqrt(1 - beta^2)/beta)/2              (elementary)
+     beta >= sqrt3/2:                P = (1 - t_1)/2 + (1/2pi) Int_{t_0}^{t_1} arcsin( sqrt( (3t^2 + 1 - 1/beta^2)/(1 - t^2) ) ) dt
+                                     (an incomplete elliptic integral after integration by parts)
+  Values: beta = 1: 7/24 = 0.291666... (known);  0.95: 0.264088165970314952052596590888;
+          0.9: 0.234944269212640420545045072773;  sqrt3/2: (1 - 1/sqrt3)/2 = 0.2113248654...;
+          0.8: exactly 1/8;  0.75: 0.0590414481559015682497307077268;  1/sqrt2: 0.
+
+How it was derived: near-horizon expansion r = 1 + eps x as in [6], now with massive geodesics.
+  For the ZAMO emitter E = gamma(alpha + omega sqrt(g_phiphi) beta n_phi), L = gamma beta n_phi sqrt(g_phiphi),
+  Q = gamma^2 beta^2 n_theta^2; keeping the O(eps) correction omega sqrt(g) = 1 - eps gives
+  2E - L = gamma eps (1 - 2 beta n_phi). The radial potential becomes, near the horizon,
+     R = eps^2 gamma^2 [ (2 b x + 1 - 2b)^2 - (1 - beta^2 n_r^2) x^2 ],  b = beta n_phi,
+  and far away R = (r-1)^2 [ (E^2 - 1) r^2 + 2E^2 r - Q ] with E = gamma b. Escape requires E >= 1 and
+  3E^2 - 1 - Q > 0, plus the near-zone root analysis (conditions above). Integrating the region:
+  for n_phi = t >= 1/(2beta) the whole circle of (n_r, n_theta) qualifies; below it only the
+  outward half within |sin psi| < sqrt(K)/sqrt(1-t^2), K = 3t^2 + 1 - 1/beta^2.
+  beta = 1 reproduces the photon wedge of [6] (n_theta^2 < 3 n_phi^2, n_phi > 1/2) and 7/24.
+
+How it was verified: independent brute-force simulation (code/massive_sim.py): 125,000 directions
+  isotropic in the ZAMO frame at r = 1 + 1e-7, exact Kerr geodesic constants with cancellation-free
+  algebra, escape decided by E >= 1 and the exact radial potential (inward bounces included):
+     beta = 0.95: sim 0.26424 vs formula 0.264088
+     beta = 0.80: sim 0.125024 vs 1/8
+     beta = 0.75: sim 0.05904 vs 0.059041
+
+Novelty status: NOT FOUND. Related: Zhang & Jiang (arXiv:2004.03367) treat massive particles moving
+  only within the equatorial plane with energy fixed at E = 1 (Kerr-Sen); Ogasawara et al.
+  (arXiv:1609.03022) the super-Penrose 5/12. The isotropic, fixed-speed problem and the c/sqrt2
+  threshold were not found.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
