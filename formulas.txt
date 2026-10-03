@@ -79,6 +79,8 @@ INDEX
     k = (1 + b)/2 (3D isotropic); in-plane version 1/2 - arcsin(k)/(2pi) reproduces Zhang & Jiang's numerics.  — not found
 [27] Spin-down of a black hole in a bath of slow isotropic dark matter: mean swallowed L_z per unit mass
     = -(2a/3 + a^3/15 + 41a^5/1680 + ...) M (derivable); exact at a = M: -0.81932684 M, da/dlnM = -2.81932684.  — not found (exact value)
+[28] Extremal Kerr-Sen shadow area for ANY viewing angle: edge polynomial factorises as
+    [(r - a(1+s))^2 - 2a(1+s)][(r - a(1-s))^2 - 2a(1-s)], s = sin theta; one-line elliptic formula.  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1446,6 +1448,42 @@ How it was verified (code/torque_iso_sim.py): independent bisection for L_c(mu) 
      a = 0.5: <l_z> = -0.342547 (sim) vs series -0.342430 (next term O(a^7))
 
 Novelty status: NOT FOUND for the exact extremal value; the small-spin series follows from Will (2012).
+
+==================================================================================
+[28] EXTREMAL KERR-SEN SHADOW AREA FOR ANY VIEWING ANGLE
+==================================================================================
+Question (plain English): entry [25] gave the edge-on shadow of the extremal Kerr-Sen black hole;
+  what about any viewing angle? (Analogue of [3] for Kerr and [9] for Kerr-Newman.)
+
+Result (M = 1, extremal Kerr-Sen a = 1 - b, s = sin theta, c = cos theta):
+  The shadow-edge polynomial factorises into two quadratics:
+     N_4(r) = a^2 s^2 beta^2 = -[ (r - a(1+s))^2 - 2a(1+s) ] [ (r - a(1-s))^2 - 2a(1-s) ]
+  (a = 1 gives Kerr's factorisation of [3]), with roots r_D = a(1+s) + sqrt(2a(1+s)),
+  r_C = a(1-s) + sqrt(2a(1-s)), r_B = a(1+s) - sqrt(2a(1+s)), r_A = a(1-s) - sqrt(2a(1-s)).
+  Area:
+     A(a, theta) = 4 Int_{r_lo}^{r_D} ( 3 r^2 + 2(1 - a) r - a^2 cos^2 theta ) / sqrt(N_4(r)) dr  +  B
+  where r_lo = max(r_C, a) (r = a is the extremal horizon r_H = 1 - b) and
+     B = (a s^2 + 2) sqrt(N_4(a)) / (a s^2)   if r_C < a  (straight NHEK edge visible, iff a s^2 + 2s > 2),
+     B = 0 otherwise.
+  Values: (a, theta) = (0.5, 60 deg): 50.0826566100583114509793632985;
+          (0.5, 85 deg): 50.0923217605178488439648700357;  (0.8, 30 deg): 64.7546111804329093801925880003;
+          (0.3, 70 deg): 38.8437413685310368030082887874;  (1, 60 deg): 75.0887577305781 (= [3]).
+
+How it was derived: extremal Kerr-Sen photon orbits from [25]: xi = -((r+b)^2 - 2r - 1)/(1-b),
+  eta = r^2 [4(1-b) - (r+2b-2)^2]/(1-b)^2; beta^2 = eta + a^2 c^2 - xi^2 c^2/s^2. The factorisation was
+  read off from exact factorisations at rational (b, theta) (sympy) and confirmed symbolically; then
+  Hermite reduction (code/kerrsen_incl.py):
+     (r - a) sqrt(N_4) = a^2 s^2 (3r^2 + 2(1-a) r - a^2 c^2)/sqrt(N_4) + d/dr[ S sqrt(N_4) ],
+     S = r^2/4 - a r/2 - a(a s^2 - a + 2)/4.
+
+How it was verified (code/kerrsen_incl_check.py): polygon area of the shadow edge built directly from
+  xi, eta (1.5 million points):
+     (0.5, 60): 50.08265661006 vs 50.08265661006;  (0.5, 85): 50.09232176468 vs 50.09232176052;
+     (0.8, 30): 64.75461117993 vs 64.75461118043;  (0.3, 70): 38.84374137130 vs 38.84374136853;
+     (1, 60): 75.08875773265 vs 75.08875773058.
+  (A first version had an overall factor a wrong -- the mismatch was exactly 1/a, which pinpointed it.)
+
+Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
