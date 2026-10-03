@@ -37,3 +37,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 12 | Shadow of a spinning charged black hole from any angle; rule of thumb | 1 − Q²/3 − (1+cos²θ)a²/18 − … | not found (charge-only terms known) |
 | 13 | How much sky a max-spin black hole blots out for a nearby observer on its equator (open question from 2024) | elementary + one elliptic integral; series in M/r with π, √3 | not found |
 | 14 | Same, for charged max-spin black holes | same structure; series with polynomial coefficients | not found |
+| 15 | How big a target a spinning black hole is for slow particles like dark matter (side-on) | 7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a)), times (M/v)² | not found |

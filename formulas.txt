@@ -44,6 +44,9 @@ INDEX
                                                                                 — not found
 [14] Same for extremal Kerr-Newman (charged) black holes; key identity: along the whole shadow edge
     Carter's constant K = eta + (lambda - a)^2 equals exactly 4r^2 (independent of spin/charge).   — not found
+[15] Capture cross-section of a spinning black hole for SLOW particles (e.g. dark matter) arriving
+    edge-on: sigma = [7 pi + pi sqrt(1-a^2) + 16 sqrt(1+a) E(2a/(1+a))] (M/v)^2;
+    = 16 pi (M/v)^2 at a = 0 (known), (7 pi + 16 sqrt2)(M/v)^2 at a = M.          — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -849,6 +852,58 @@ How it was verified:
   * a = 0 series = exact Reissner-Nordstrom series (16, -32, 80, -256, 896).
 
 Novelty status: NOT FOUND.
+
+==================================================================================
+[15] CAPTURE CROSS-SECTION OF A KERR BLACK HOLE FOR SLOW PARTICLES (EDGE-ON), EXACT
+==================================================================================
+Question (plain English):
+  A black hole moving through a cloud of slow particles (dark matter, stars, gas) swallows those
+  that come close enough. For a non-spinning hole the "target area" for particles arriving with
+  speed v << c is the textbook sigma = 16 pi (GM/v^2... i.e. 16 pi M^2/v^2 in G = c = 1 units).
+  How does spin change it?  A 2025 paper (arXiv:2510.13604, black holes moving through dark
+  matter) computed this numerically and used spin fits accurate to ~1.5%. Here is the exact
+  answer for particles arriving in the black hole's equatorial plane (perpendicular to the spin).
+
+Formula (G = c = 1, v -> 0, incoming direction perpendicular to the spin axis):
+     sigma(a) = (M/v)^2 * A(a),
+     A(a) = 7 pi + pi sqrt(1 - a^2) + 16 sqrt(1 + a) E( 2a/(1+a) )
+  (E = complete elliptic integral of the 2nd kind, parameter m = k^2 = 2a/(1+a); a = J/M^2).
+  Special values: A(0) = 16 pi = 50.2654824574... (known);
+                  A(1) = 7 pi + 16 sqrt(2) = 44.6185655730980734500655232703  (new, elementary).
+  Small spin:     A/(16 pi) = 1 - a^2/16 - 31 a^4/2048 - 233 a^6/32768 - ...
+  Values: a=0.3: 49.9763007800338611355772059272;  a=0.5: 49.4259440025740610119469215168;
+          a=0.7: 48.4827255642534127734527893836;  a=0.9: 46.8048353587896860460035899569;
+          a=0.99: 45.2057736582512883001624812403
+
+How it was derived:
+  Slow particles have E -> 1 (per unit mass). The boundary of the capture region in the plane of
+  (specific) angular momentum is traced by the marginally bound (E = 1) spherical orbits. With
+  r = y^2 (the square root of r makes them rational), sympy (code/mb_orbits.py) gives
+     L = -(y^4 - 2y^3 + a^2)/(a(y - 1)),   Q = y^4 (a^2 - (y^2 - 2y)^2)/(a^2 (y - 1)^2),
+  for y in [1 + sqrt(1-a), 1 + sqrt(1+a)] (the prograde/retrograde marginally bound circular
+  orbits r_mb = (1 + sqrt(1 -/+ a))^2, a check). Impact parameters are (L, sqrt Q)/v, so the
+  area is A = 2 Int sqrt(Q) |dL|. With u = y - 1 the square root is sqrt(a^2 - (u^2-1)^2), an
+  EVEN quartic; Hermite reduction (code/mb_reduce.py) gives exactly
+     A = Int_{sqrt(1-a)}^{sqrt(1+a)} ( 16 u^2 + 14 u + 2(1 - a^2)/u ) du / sqrt(a^2 - (u^2-1)^2).
+  The odd terms become elementary with t = u^2 (14u -> 7 pi; 2(1-a^2)/u -> pi sqrt(1-a^2)), and
+  Int u^2 du/sqrt((A^2-u^2)(u^2-B^2)) = A E(k), A^2 = 1+a, B^2 = 1-a, k^2 = 2a/(1+a).
+
+How it was verified:
+  * Closed form vs direct numerical integration of the boundary curve (30 digits):
+    identical at a = 0.001, 0.3, 0.5, 0.9, 0.999 (e.g. 49.4259440025740610119469215168 at a = 0.5).
+  * Polygon area of the boundary curve (400,000 points): a = 0.5: 49.42594378 vs 49.42594400;
+    a = 0.9: 46.80483508 vs 46.80483536; a = 0.999: 44.77989061 vs 44.77989099.
+  * Fully independent brute force (code/mb_sim2.py): for 4000 values of L, bisection in Q for
+    the largest Q whose E = 1 radial potential R(r) = (r^2+a^2-aL)^2 - Delta(r^2 + (L-a)^2 + Q)
+    stays positive all the way to the horizon (i.e. the particle is captured):
+      a = 0.5: 49.42577 vs 49.42594;  a = 0.9: 46.80486 vs 46.80484;  a = 0.999: 44.78042 vs 44.77989.
+  * Limits: a -> 0 gives 16 pi; a = 1 gives 7 pi + 16 sqrt2 both from the formula and from the
+    elementary integral 2 Int_0^sqrt2 (1+u)^2 u (3u+4) sqrt(2-u^2) du (sympy).
+  * Small-spin series coefficients: only even powers survive, check at a = 0.1 agrees to 4e-11.
+
+Novelty status: NOT FOUND. arXiv:2510.13604 (2025) computes the Kerr capture cross-section by
+  quasi-Monte Carlo and fits it; the 16 pi Schwarzschild value is textbook. Other directions of
+  incidence lead to genus-3 curves (genus 2 at a = 1), so no comparably simple formula there.
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
