@@ -1432,7 +1432,7 @@ Result (G = c = M = 1, slow particles E -> 1, isotropic velocities):
                       = 28.823369582005124491
      <l_z> = -0.81932684180255246848 M,     d a/d ln M = -2.8193268418025524685
   i.e. an extremal black hole loses spin about 2.82 times faster (in log M) than its spin value; the
-  small-spin law -8/3 a extrapolated to a = 1 would give -2.75.
+  small-spin law -8a/3 extrapolated to a = 1 would give -2.667 (-2.733 with the a^3 term).
 
 How it was derived: uniform directions + uniform impact parameters = uniform distribution of the
   asymptotic angular-momentum vector with measure d^3L/L (slow limit), so the L_z flux is
