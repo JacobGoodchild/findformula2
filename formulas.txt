@@ -197,6 +197,19 @@ Formula (M = 1, observer at infinity):
   Near the axis (series in s = sin theta, coefficients identified exactly by PSLQ):
      A = pi (12 + 8 sqrt 2) + sqrt(2) pi [ s^2/2 + s^4/128 - 7 s^6/2048 - 1735 s^8/524288 - ... ]
   (only even powers; all denominators are powers of 2).
+  Near-extremal behaviour (spin a slightly below M, epsilon = 1 - a):
+     A(a, theta) = A_ext(theta) + c(theta) sqrt(epsilon) + ...,
+     c(theta) = pi (3 - 6 cos^2 theta - cos^4 theta) / (sqrt(2) sin^3 theta)   for theta > theta_c,
+     c(theta) = 0 (correction only O(epsilon))                                   for theta < theta_c.
+  Since the straight NHEK-line edge has half-length beta_m with
+  beta_m^2 = (3 - 6c^2 - c^4)/s^2, this is c = pi beta_m^2/(sqrt2 sin theta): the square-root
+  growth comes entirely from the NHEK line opening up. Edge-on: c = 3 pi/sqrt2 (entry [1](d)).
+  Check (code/nearext_incl.py, nearext_incl2.py; master formula [4] at 50 digits, eps = 1e-10
+  and 1e-12, crude extrapolation):
+     50 deg: 1.7307038 vs predicted 1.7307190;  60 deg: 4.9164299 vs 4.9164410;
+     75 deg: ~6.39299 vs 6.3930;  85 deg: 6.6384383 vs 6.6384460;
+     30 deg (< theta_c): (A - A_ext)/sqrt(eps) = 3.9e-3, 3.9e-4, 3.9e-5 at eps = 1e-8, 1e-10, 1e-12
+     -> 0 as predicted. (Identified numerically, not proven.)
   At theta = 90 deg it reproduces (16 pi + 15 sqrt 3); at theta = 30 deg the elliptic
   modulus is k = sin 15 deg, a "singular value", so K and E there reduce to Gamma(1/3).
 

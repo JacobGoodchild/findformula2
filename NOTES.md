@@ -80,3 +80,9 @@
 ### Lead 5: energy-weighted escape -> RESULT [10]
 * ZAMO: 3/32 + sqrt3/16 (Kerr) found by PSLQ immediately; general a via PSLQ at 2 values.
 * ISCO: by-parts + same elementary integrals. Check: max of E_inf/E_emit = sqrt3 (known max blueshift).
+
+### Lead 6: near-extremal expansions
+* Edge-on: A = 16pi+15sqrt3 + (3pi/sqrt2) sqrt(eps) + eps[(8/sqrt3) ln(27/(2eps)) - 6 sqrt3] (numerical ID).
+* Any angle: sqrt(eps) coefficient = pi beta_m^2/(sqrt2 sin theta), beta_m = NHEK-line half-length.
+* Pitfall: tanh-sinh nodes landing exactly on a root of N -> ZeroDivision; fixed with
+  r = r1 + (r2-r1)(1-cos t)/2 substitution.
