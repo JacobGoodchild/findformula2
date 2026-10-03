@@ -706,6 +706,14 @@ How it was verified (code/energy_frac.py, energy_sim_zamo.py, energy_sim_isco.py
      0.05: 0.0136 vs 0.0134;  0.25: 0.0648 vs 0.0646;  0.45: 0.1249 vs 0.1242;  0.65 ... 1.65: 0.4333 vs 0.4330;
      edge bins (0.5-0.6 and 1.7-1.8) partially filled as expected; mean g 0.59563 vs 0.59564.
 
+  (d) Line profile for the lamp AT REST (ZAMO) near the extremal horizon, g = E_inf/E_emit = a n_phi:
+       Kerr (a = 1): dP/dg = 1/2 on 1/2 <= g <= 1;  dP/dg = (1/2pi) arcsin( sqrt3 g / sqrt(1 - g^2) ) for 0 < g < 1/2.
+       Extremal Kerr-Newman: flat part dP/dg = 1/(2a) on 1/2 <= g <= a (the step always sits at g = 1/2),
+       tail (1/(2 pi a)) arcsin( sqrt(1/k^2 - 1) (g/a) / sqrt(1 - g^2/a^2) ), k = 1/(2a).
+       No escaping photon is blueshifted (g <= a <= 1). Check (code/zamo_spectrum.py, ray simulation):
+       bins 0.05/0.15/0.25/0.35: 0.0140/0.0424/0.0740/0.1130 vs 0.0138/0.0423/0.0738/0.1120; flat part 0.5000 vs 0.5;
+       total 0.2917 vs 7/24; mean 0.202009 vs 0.202003.
+
 Novelty status: NOT FOUND. Related papers (arXiv:2108.09051, 1910.12682) give photon escape
   probabilities and maximum blueshifts (e.g. sqrt3 for the ISCO, which is the maximum of
   a(t+k)/sqrt(1-k^2) at t = 1), but we did not find the energy-weighted escape fraction.
