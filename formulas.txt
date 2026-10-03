@@ -1122,6 +1122,13 @@ How it was derived and verified:
      r_c = 10/3, C = 4/5: -0.030955078125         vs formula -0.030955078125         (diff 5e-23)
      r_c = 18/5, C = 1/4: -0.0805324978298611111  vs formula -0.0805324978298611111  (diff 2e-22)
   (6 checks in all, every difference below 3e-22.) Also vanishes on the spin axis (s = 0) as it must.
+  Corollary -- isotropic bath at any speed (weight each direction by its cross-section, which needs
+  the a^2 term of [17]; code/iso_spindown_a3.py):
+       <L_z>/E = -4a/(3(r_c - 2)) + 4 a^3 (3r_c^3 - 19r_c^2 + 48r_c - 144)/(15 r_c^2 (r_c - 2)(6 - r_c)^3) + O(a^5)
+       d a/d ln M = <L_z>/E - 2a.
+  Slow matter (r_c = 4): -(2a/3 + a^3/15) -- exactly the series of the independent exact result [27]
+  (found there from a closed-form area integral), a non-trivial cross-check of both the a^2 cross-section
+  term and the a^3 torque term.  Radiation (r_c = 3): <L_z>/E = -4a/3 - 8a^3/81.
 
 Novelty status: NOT FOUND. arXiv:2510.13604 (2025) expands the Kerr accretion cross-section in spin
   with numerically FITTED coefficient functions (~1.5% accuracy); this gives the exact a^2 coefficient.
