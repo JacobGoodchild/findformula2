@@ -1035,7 +1035,7 @@ Formula (G = c = 1, v -> 0, incoming direction perpendicular to the spin; m = 2a
   so the mean specific angular momentum swallowed is  dJ/dM = M * M_1/A
      = -a M [ 1 + 3a^2/32 + 37a^4/1024 + ... ],    and  d a / d ln M = M_1/A - 2a = -3a - 3a^3/32 - ...
   Series: M_1/(16 pi) = -a - a^3/32 - 31 a^5/2048 - ...
-  Extremal (a = 1): M_1 = -(96 sqrt2 + 45 pi)/5 = -55.43...  (the (1-a)K term vanishes),
+  Extremal (a = 1): M_1 = -(96 sqrt2 + 45 pi)/5 = -55.4272...  (the (1-a)K term vanishes),
      mean swallowed L_z = M_1/A = -(96 sqrt2 + 45 pi)/(5(7 pi + 16 sqrt2)) M = -1.2423... M.
   Values: M_1(0.1) = -5.02812669559229387769137645451; M_1(0.5) = -25.3570693339450610093659038737;
           M_1(0.9) = -47.3564848255197507269761211027.
@@ -1056,7 +1056,7 @@ How it was verified:
     a = 0.9: -47.35731 vs -47.35648.
   * Small-a: the leading term -16 pi a agrees with Will's (2012) L_c = 4 - a cos i + ...
     (moment = sin^2 theta Int cos(phi) L_c^3/3 dphi = -16 pi a sin^2 theta).
-  * a -> 1 numerically: M_1(0.999999) = -55.4182, approaching -(96 sqrt2 + 45 pi)/5 = -55.4302.
+  * a -> 1 numerically: M_1(0.999999) = -55.4182, approaching -(96 sqrt2 + 45 pi)/5 = -55.4272.
 
 Novelty status: NOT FOUND (leading O(a) term derivable from Will 2012; the exact closed form and
   higher terms not found).
