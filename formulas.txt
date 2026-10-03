@@ -1514,6 +1514,13 @@ How it was verified (code/ks_slow_sim.py): brute-force capture region from the e
   of L and bisection in Q:
      (0.5, 0.2): 43.93708 vs 43.93736;  (0.3, 0.5): 35.86651 vs 35.86662;  (0.6, 0.4): 35.74867 vs 35.74836.
 
+  Companion: spin-down torque (the Kerr-Sen version of [18]); with s_ = sqrt(B + a), K = K(m), E = E(m):
+     M_1(a, b) = Int Int L_z dL_z dy
+              = [ -32 B^2 s_ (E - K) - 160 B s_ (E - K) - 32 B a s_ K - 96 a^2 s_ E - 160 a s_ K
+                  - 30 pi B^2 + 30 pi B sqrt(B^2 - a^2) - 105 pi a^2 ] / (15 a)
+     (b = 0 reproduces [18]); spin-down rate as in [18]: dJ_z/dt = rho (M^3/v) M_1, dM/dt = rho (M^2/v) A.
+     Brute force (code/ks_torque_sim.py): (0.5, 0.2): -25.63574 vs -25.63479; (0.3, 0.5): -15.81743 vs -15.81903.
+
 Novelty status: NOT FOUND.
 
 ----------------------------------------------------------------------------------
