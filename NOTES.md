@@ -86,3 +86,19 @@
 * Any angle: sqrt(eps) coefficient = pi beta_m^2/(sqrt2 sin theta), beta_m = NHEK-line half-length.
 * Pitfall: tanh-sinh nodes landing exactly on a root of N -> ZeroDivision; fixed with
   r = r1 + (r2-r1)(1-cos t)/2 substitution.
+
+### Session 1 summary & plan for the overnight run
+* `code/verify_all.py` re-checks the headline numbers (all OK at end of session 1).
+* Strongest results: [1]/[4]/[11]/[12] (exact shadow areas -> directly usable by EHT-type
+  analyses), [6]/[8]/[10] (exact escape probabilities/energy fractions near extremal horizons,
+  turning numerical tables of a 2020 PRD into formulas).
+* Leads to pursue next:
+  1. Prove the near-extremal coefficients in [1](d)/[3] (3 pi/sqrt2; 8/sqrt3; ln(27/2)) analytically.
+  2. Escape probability for extremal Kerr at ANY distance (Baines-Visser open problem): genus 2
+     in general; check the special radius r* = M sqrt(3 - sin^2 theta) where the curve splits,
+     and/or a series in M/r*.
+  3. Third-order terms of the Kerr-Newman series [12]; spin from shadow area inversion formula.
+  4. Other emitters near extremal horizons (plunging / free-fall) using the exact escape wedge.
+  5. Branch out of shadows: e.g. exact results for photon-ring Lyapunov exponents or
+     quasinormal-mode (eikonal) quantities averaged over inclination, or exact lensing
+     quantities for extremal Kerr-Newman.
