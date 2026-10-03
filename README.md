@@ -32,5 +32,5 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 7 | Side-on shadow of a max-spin *charged* black hole | 16π + 8πa² (a ≤ 1/2), elementary arcsin formula above | not found |
 | 8 | Escape chance from the innermost stable orbit, charged case | closed form; 3/8 + √3/9 at the threshold a = 1/√2 | not found (uncharged value known) |
 | 9 | Max-spin charged shadow from any angle | one-line elliptic integral | not found |
-| 11 | Side-on shadow of a spinning *charged* black hole, any spin and charge | one compact integral (elliptic) | not found |
 | 10 | Fraction of *energy* that escapes from a max-spin horizon | 3/32 + √3/16 (lamp at rest); ≈59.56% closed form (orbiting lamp) | not found |
+| 11 | Side-on shadow of a spinning *charged* black hole, any spin and charge | one compact integral (elliptic) | not found |
