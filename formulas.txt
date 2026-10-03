@@ -582,6 +582,8 @@ How it was verified (code/energy_frac.py, energy_sim_zamo.py, energy_sim_isco.py
       ZAMO a=0.8: sim 0.13878   formula 0.13900
       ISCO a=1:   sim 0.59563   formula 0.59564
       ISCO a=0.8: sim 0.60205   formula 0.60204
+      ZAMO off-equator, a=1, 70 deg:   sim 0.16095   formula 0.16126
+      ZAMO off-equator, a=0.9, 60 deg: sim 0.09264   formula 0.09251
     (grid noise ~1e-3 relative).
 
 Novelty status: NOT FOUND. Related papers (arXiv:2108.09051, 1910.12682) give photon escape
