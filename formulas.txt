@@ -897,6 +897,8 @@ Formula: Omega(z, a) = 2 pi - I_1 - I_2 with
      K = eta + (lambda - a)^2 = 4 r^2 Delta(r)/(r - 1)^2     (sympy),
   so the extremal identity K = 4r^2 is a special case of a simple general relation that is
   PROBABLY KNOWN in the literature on spherical photon orbits; the solid-angle result is what is new.
+  The same structure holds for Kerr-Sen: K = 4 (r+b)^2 Delta/(r+b-1)^2 (sympy), i.e. in all three families
+  K = 4 Delta (rho'/Delta')^2 with rho the radial part of Sigma (r^2 for Kerr/KN, r(r+2b) for Kerr-Sen).
 
 How it was derived: Carter-frame celestial coordinates sin Theta = sqrt(K Delta_R)/(R^2 + a^2 - a lambda),
   sin Phi = (lambda - a)/sqrt(K) (equator), with the identity K = 4r^2 and Delta_R = (R-1)^2;
