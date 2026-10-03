@@ -794,6 +794,9 @@ How it was verified:
     z = 0.01, 0.1, 0.3, 0.5, 0.9: identical to 30 digits.
   * Leading series coefficient = 16 pi + 15 sqrt3 (known edge-on area) and z -> 0 limit = [3] at 90 deg.
 
+  Equivalent statement: a lamp at rest in the Carter frame at r = M/z on the equator, shining
+  isotropically, has exact escape probability P = 1 - Omega(z)/(4 pi).
+
 Novelty status: NOT FOUND (explicitly described as open by Baines & Visser 2024). Only the
   equatorial observer is solved here; general latitude remains a genus-2 problem.
 

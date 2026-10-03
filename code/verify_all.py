@@ -28,3 +28,6 @@ ok('[8] boosted cone reproduces known ISCO value', boosted.P(mpf(1)/2,mpf(1)/2),
 import kn_master_check as K
 mp.dps=30
 ok('[12] KN master vs polygon (0.7,45deg,Q^2=0.2)', K.A_kn(0.7,mpf(np.radians(45)),0.2)[0], K.shoelace(0.7,np.radians(45),0.2), 1e-6)
+import bv_equator, escape
+mp.dps=30
+ok('[13] equatorial solid angle z=0.3: 1D formula vs Phi-integral', bv_equator.Omega_eq(mpf('0.3'))[0], escape.Omega(mpf('0.3'),pi/2), 1e-20)
