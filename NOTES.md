@@ -141,3 +141,7 @@
   pi, sqrt2, sqrt3, sqrt6, ln(1+sqrt2), ln(2+sqrt3), ln((1+sqrt2+sqrt6)/(1+sqrt2)) finds nothing.
 * a^4 for general direction & speed: edge-on numerical coefficients (r_c = 15/4, 7/2, 10/3) did not give
   clean rationals at ~13-digit precision; not recorded. Polar a^4 = -4/(r_c^4 (6-r_c)) recorded in [17].
+* a^4 edge-on coefficient (any speed): with analytic dL/dr and 50 digits the rationals are exact:
+  alpha(r_c) = -(2 r^3 + 42 r^2 - 549 r + 1458)/(8 r^2 (6-r)^5)  [6-point interpolation predicts the 7th exactly].
+  Running cos^2 = 1/2 to get the full C-dependence (mid_a4b.py).
+* Dead end: inner shadow of polar-viewed extremal Kerr: b_in = 2.03468720358978884867..., no closed form found.
