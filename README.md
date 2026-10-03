@@ -40,6 +40,22 @@ nobody has written it down before. Please treat the results as candidates for ex
 * Also: charged (Kerr–Newman) and string-theory (Kerr–Sen) versions of several of these
   ([7], [9], [11], [12], [22], [25], [26], [28], [29]).
 
+## Practical formula box: capture of particles by a spinning black hole (G = c = 1)
+
+For particles arriving with speed v at angle θ to the spin axis (C = cos²θ), with
+r_c = (4v² − 1 + √(1+8v²))/(2v²) (r_c = 4 for slow particles, 3 for light) and the non-spinning value
+σ_S = π r_c² M² / ((r_c − 3)(E² − 1)), E = 1/√(1−v²):
+
+    σ/σ_S = 1 − a²·(r_c + 3C(4 − r_c)) / (2 r_c² (6 − r_c))
+              + a⁴·[α8 + β8·C + γ8·C²] / (8 r_c⁴ (6 − r_c)⁵) + O(a⁶)          ([17])
+    α8 = −r²(2r³ + 42r² − 549r + 1458),  β8 = 6r(2r⁴ + 2r³ − 239r² + 1302r − 2016),
+    γ8 = −10r⁵ − 2r⁴ + 1653r³ − 13266r² + 39744r − 41472      (r = r_c)
+
+Exact (all orders in spin) for slow particles side-on ([15]):
+σ = [7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a))]·(M/v)², and from any direction as one integral ([23]).
+Spin-down: mean swallowed L_z per unit energy = −2a·sin²θ·M/(r_c − 2) + O(a³) ([17]b); exact
+side-on slow case in closed form ([18]).
+
 ## Results so far (see `formulas.txt` for full details, numbers and checks)
 
 All in units G = c = M = 1. "Not found" = we searched and could not find it published.
