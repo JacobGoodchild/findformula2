@@ -59,6 +59,9 @@ INDEX
 [19] Escape of MASSIVE particles (local speed beta) from just outside an extremal Kerr horizon:
     nothing slower than c/sqrt2 escapes; P = (1 - sqrt(1-beta^2)/beta)/2 for c/sqrt2 <= beta <= (sqrt3/2) c
     (e.g. exactly 1/8 at beta = 0.8), one-integral formula above that, -> 7/24 as beta -> 1.   — not found
+[20] Direction-averaged (isotropic) slow-particle capture cross-section of a Kerr black hole: one-line
+    integral for any spin; at a = M exactly
+    pi (M/v)^2 [47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln((1+sqrt2+sqrt6)/(1+sqrt2))] = 45.2756 (M/v)^2.  — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1131,6 +1134,45 @@ Novelty status: NOT FOUND. Related: Zhang & Jiang (arXiv:2004.03367) treat massi
   only within the equatorial plane with energy fixed at E = 1 (Kerr-Sen); Ogasawara et al.
   (arXiv:1609.03022) the super-Penrose 5/12. The isotropic, fixed-speed problem and the c/sqrt2
   threshold were not found.
+
+==================================================================================
+[20] ISOTROPICALLY AVERAGED CAPTURE CROSS-SECTION FOR SLOW PARTICLES (DARK MATTER) BY A KERR HOLE
+==================================================================================
+Question (plain English):
+  Dark matter around a black hole moves in all directions. The quantity that sets how fast a
+  spinning black hole eats slow dark matter is the capture cross-section averaged over all
+  directions of approach. Exact value?
+
+Key identities (M = 1, E = 1 marginally bound spherical orbits, r = y^2):
+  Carter's C = Q + L_z^2 = (3y^4 - 4y^3 + a^2)/(y - 1)^2,
+  orbit tilt  mu = cos i = L_z/sqrt(C) = -(y^4 - 2y^3 + a^2) / (a sqrt(3y^4 - 4y^3 + a^2)).
+  Averaging over directions = averaging over orbit tilts uniformly, so with L_c(mu)^2 = C:
+     <sigma> = (pi/2) (M/v)^2 Int_{-1}^{1} L_c(mu)^2 dmu
+             = (pi/2) (M/v)^2 Int_{1+sqrt(1-a)}^{1+sqrt(1+a)} 2y^3 (3y^4 - 8y^3 + 6y^2 - a^2) dy
+                                                       / ( a (y-1)^2 sqrt(3y^4 - 4y^3 + a^2) )
+  (an incomplete elliptic integral for general a).
+  Extremal a = 1: 3y^4 - 4y^3 + 1 = (y-1)^2 (3y^2 + 2y + 1), so everything is elementary. The
+  curve covers mu in [-1, sqrt(2/3)]; for mu in [sqrt(2/3), 1] the boundary is the straight
+  "NHEK-type" piece L_z = 2, C = 4/mu^2. Result:
+     <sigma>(a = 1) = pi (M/v)^2 [ 47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln( (1 + sqrt2 + sqrt6)/(1 + sqrt2) ) ]
+                    = 45.27564306526540429854285 (M/v)^2    (vs 16 pi = 50.2655 for a = 0)
+  Small spin: <sigma> = 16 pi (M/v)^2 [1 - a^2/16 - 17a^4/1280 - 83a^6/14336 - ...] (from [16]).
+  Values: a = 0.5: 49.4330447022985735715671195891;  a = 0.9: 46.9615456127695955859973501506.
+
+How it was derived: the uniform measure over (incoming direction n, azimuth phi in the impact
+  plane) induces the uniform measure on the angular-momentum direction, so
+  <Int_0^{2pi} f(cos i) dphi>_n = pi Int_{-1}^{1} f(mu) dmu. The C and mu identities follow from the
+  formulas of [15] (the y^4 (y^2-2y)^2 terms cancel in Q + L^2). sympy evaluated the extremal case exactly
+  (simplifications: sqrt(2 sqrt2 + 3) = 1 + sqrt2, asinh(3 + 2 sqrt2) = ln((1+sqrt2)(1+sqrt2+sqrt6))).
+
+How it was verified (code/mb_avg.py, code/mb_avg_sim.py):
+  * Independent brute force: for 2000 tilts mu, bisection for the largest total angular momentum
+    L whose E = 1 radial potential (L_z = mu L, Q = (1-mu^2) L^2) has no turning point down to the horizon:
+       a = 1:   45.27567 (sim) vs 45.27564 (exact)
+       a = 0.5: 49.43307 (sim) vs 49.43304 (integral)
+  * a -> 0 gives 16 pi; a = 0.5 agrees with the series of [16] to the expected O(a^8).
+
+Novelty status: NOT FOUND (arXiv:2510.13604 computes such averages numerically).
 
 ----------------------------------------------------------------------------------
 ADDENDUM to [6], [7], [8]: braneworld ("tidal charge") black holes with a > M
