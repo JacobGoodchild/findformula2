@@ -64,3 +64,9 @@ def _K31(r,q,C): return (r**2*(r-q**2)-C*(3*r**3-12*r**2-q**2*r**2+18*q**2*r-8*q
 import math
 ok("[31] KN r=3.5 q=0.5 60deg", _K31(3.5,0.5,0.25), -0.0790432393693279, 1e-12)
 ok("[31] KN r=3.0 q=0.8 45deg", _K31(3.0,0.8,0.5), -0.136651895747247, 1e-12)
+
+# [32] universal shadow formula, Bardeen g=0.4 edge-on (code/univ_check_light.out)
+from mpmath import findroot as _fr, diff as _df, mpf as _mpf
+_fB=lambda x: 1-2*x**2/(x**2+_mpf('0.16'))**1.5
+_r=_fr(lambda x: 2*_fB(x)-x*_df(_fB,x),3); _f=_fB(_r); _k=2*_f-_r**2*_df(_fB,_r,2)
+ok("[32] Bardeen shadow a^2 coeff edge-on", 1/(2*_f*_r**2)-4/(_r**2*_k), -0.079747053068, 1e-11)

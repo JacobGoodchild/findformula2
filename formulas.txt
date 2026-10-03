@@ -89,6 +89,11 @@ INDEX
     direction and charge: sigma = sigma_RN [1 - a^2 (r^2(r - q^2) - C(3r^3 - 12r^2 - q^2 r^2 + 18q^2 r - 8q^4))
     / (2r(r - q^2)(6r^2 - r^3 - 9q^2 r + 4q^4)) + O(a^4)]; light limit gives the KN shadow area at any charge:
     A = pi r^4/(r^2 - 2r + q^2) [1 - a^2 (r + 3C(r-2))/(r^2 (r-1)(2r-3))], r = photon-ring radius.   — not found
+[32] UNIVERSAL small-spin shadow and capture formulas for ANY rotating black hole of Kerr-like (Newman-Janis /
+    Azreg-Ainou) form, Delta = r^2 f(r) + a^2, from the non-rotating profile f alone. Shadow:
+    A = (pi r^2/f)[1 + a^2{(1-C)[1/(2f r^2) - 4/(r^2 kappa)] + C(2f-1)/(f r^2)}], kappa = 2f - r^2 f'' at the photon
+    sphere; massive particles at any speed similarly (ISCO combination 3ff' + rff'' - 2rf'^2 in the denominator);
+    torque <L_z>/E = -a sin^2(theta)(1 - f)/f.   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1753,4 +1758,69 @@ Novelty status: NOT FOUND. The RN disc sigma_RN (non-spinning) follows from stan
   formulas and is probably known. The spin correction for charged holes at general speed and direction,
   and the compact KN shadow-area formula at any charge, were not found (searched: slow-rotation KN shadow
   expansions, KN capture cross-sections; papers found are numerical or treat other parameters).
+
+==================================================================================
+[32] UNIVERSAL SMALL-SPIN SHADOW AREA, CAPTURE CROSS-SECTION AND TORQUE FOR KERR-LIKE ROTATING BLACK HOLES
+==================================================================================
+Question (plain English):
+  Hundreds of papers take some non-spinning black hole of a modified theory (a "regular" black hole,
+  a black hole in a dark-matter halo, a quantum-corrected one, ...), described by one function f(r)
+  in ds^2 = -f dt^2 + dr^2/f + r^2 dOmega^2, make a spinning version with the Newman-Janis /
+  Azreg-Ainou recipe, and then compute its shadow numerically, case by case. Is there one formula
+  that gives the effect of a small spin directly from f, for every such black hole at once?
+  Yes -- for the shadow area at any viewing angle, for the capture cross-section of particles of
+  any speed, and for the angular momentum they carry in.
+
+Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r^2 + a^2 cos^2 theta
+  (this covers Kerr, Kerr-Newman, braneworld Kerr, rotating Bardeen / Hayward / and other regular black holes
+  built this way). Then geodesics separate and the radial potential is
+     R(r) = (E(r^2 + a^2) - a L_z)^2 - (r^2 f + a^2)(mu^2 r^2 + (L_z - aE)^2 + Q).
+  C = cos^2(theta) (angle between spin axis and line of sight / direction of travel); f, f', f'' are
+  evaluated at the relevant circular-orbit radius r of the NON-rotating hole.
+
+(a) SHADOW AREA (light; r = photon-sphere radius, r f'(r) = 2 f(r)):
+       A = (pi r^2/f) * [ 1 + a^2 { (1 - C) [ 1/(2 f r^2) - 4/(r^2 kappa) ] + C (2f - 1)/(f r^2) } + O(a^4) ],
+       kappa = 2f - r^2 f''      (equivalently kappa = 2 r^2 lambda^2/f, lambda = the photon-sphere Lyapunov
+                                  exponent of Cardoso et al. 2009).
+     Seen along the spin axis (C = 1) the shadow stays a disc: A_pole = pi [ r^2/f + a^2 (2f - 1)/f^2 ].
+     Kerr (r = 3, f = 1/3, kappa = 2): 1 - (1 + C) a^2/18, as in [5].
+
+(b) CAPTURE CROSS-SECTION for neutral particles of any speed (r = r_c, the unstable circular orbit on
+     the capture boundary: E^2 = 2f^2/(2f - r f'), L^2 = r^3 f'/(2f - r f'), sigma_0 = pi L^2/(E^2 - 1)):
+       sigma = sigma_0 [ 1 + a^2 { (1 - C) [ 1/(2 f r^2) + f'^2/(r f J) ] + C (2f + r f' - 2)/(r^3 f') } + O(a^4) ],
+       J = 3 f f' + r f f'' - 2 r f'^2      (J = 0 is the ISCO condition of the non-rotating hole).
+     At the photon sphere (r f' = 2f, J = -f kappa/r) this reduces to (a). Kerr: entry [17]; Kerr-Newman: entry [31].
+
+(c) TORQUE: mean z-angular momentum brought in per unit captured energy (any speed, incl. light),
+       <L_z>/E = -a sin^2(theta) (1 - f(r))/f(r) + O(a^3).
+
+How it was derived (code/univ_a2.py; argument 0 = light, 1 = massive): perturbation of the double-root
+  conditions R = R' = 0 to second order in a with f replaced by its Taylor series around r (f, f', f'', f'''
+  as free symbols; f''' drops out), E and L kept as algebraic symbols and reduced with E^2, L^2; average over
+  the impact-plane angle plus the a^2 cos^2 theta shift of the impact-plane radius (as in [17], [31]). The
+  compact forms come from eliminating f'' in favour of J (or kappa) with sympy.
+
+How it was verified (all independent of the perturbation method):
+  (1) Shadow, exact critical curve (Tsukamoto's general xi(r), eta(r) for Delta = r^2 f + a^2), area by
+      quadrature at a = 0.01, 0.02, 0.03 extrapolated in a^2 (code/univ_check_light.py):
+        Bardeen  f = 1 - 2r^2/(r^2+0.16)^(3/2), 90 deg: numeric -0.079747053068   formula -0.0797470530672
+                                                50 deg: numeric -0.103569637051   formula -0.10356963705
+        Hayward  f = 1 - 2r^2/(r^3+0.5),        90 deg: numeric -0.0863835116008  formula -0.0863835115987
+                                                50 deg: numeric -0.10712747758    formula -0.107127477578
+        Kerr                                    50 deg: numeric -0.0785097728427  formula -0.0785097728426
+      (the numbers are the a^2 coefficient of A/A_0).
+  (2) Massive particles, exact capture boundary from R = R' = 0 at 48 impact-plane angles, 40 digits,
+      a = 0.004, 0.008, 0.012 (code/univ_check_mass.py):
+        Bardeen r_c = 3.4, 60 deg: -0.08155531033444 vs formula -0.08155531033444
+        Bardeen r_c = 3.1, 90 deg: -0.07771672446027 vs -0.07771672446026
+        Hayward r_c = 3.4, 60 deg: -0.08231846186746 vs -0.08231846186746
+        Hayward r_c = 3.1, 90 deg: -0.08168373732763 vs -0.08168373732763
+      and sympy confirms the Kerr-Newman specialisation equals [31] identically.
+  (3) Torque, moment of the exact capture region at a = 1e-6 (code/univ_torque_check.py):
+        Bardeen r_c = 3.4, 60 deg: -1.01983100502 vs -1.01983100502;  r_c = 3.1, 35 deg: -0.558679725038 vs same.
+
+Novelty status: NOT FOUND. The exact shadow contour for this class is known (Tsukamoto 2018,
+  arXiv:1708.07427; Shaikh 2019, arXiv:1904.08322) and slow-rotation shadow papers work to FIRST order in
+  spin (a shift of the disc). We found no closed small-spin formula for the shadow AREA at second order
+  in terms of f, f'' at the photon sphere, nor the massive-particle / torque versions.
 

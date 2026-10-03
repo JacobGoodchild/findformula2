@@ -93,3 +93,4 @@ All in units G = c = M = 1. "Not found" = we searched and could not find it publ
 | 29 | Dark-matter capture by a string-theory (Kerr–Sen) black hole, side-on | 16√(B+a)·E(m) + π(3B + 4 + √(B²−a²)) | not found |
 | 30 | Circumference of a spinning black hole's shadow | exact; 18√3·M for maximal spin seen side-on | not found |
 | 31 | Capture by a charged, slowly spinning black hole at any speed, direction and charge (and its shadow size) | one-line spin correction; RN ISCO polynomial in the denominator | not found |
+| 32 | One formula for the small-spin shadow size, capture cross-section and spin-down of ANY Kerr-like rotating black hole (regular, quantum-corrected, …) from its non-rotating profile f(r) | shadow uses f and f″ at the photon sphere | not found |
