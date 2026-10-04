@@ -1837,6 +1837,13 @@ Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r
      The O(a) displacement of the shadow centre is a sin(theta) (1 - f)/f (Kerr: 2a sin theta, known);
      check (Bardeen g = 0.4, 60 deg, a = 1e-4, midpoint of the horizontal extremes): 1.837986122 vs 1.837986119.
 
+(b') ON THE SPIN AXIS to order a^4, any speed (code/univ_polar.py; exact disc sigma = pi(Q/p^2 + a^2), L_z = 0):
+       sigma_pole = sigma_0 [ 1 + a^2 (2f + r f' - 2)/(r^3 f') + a^4 * 2(1 - f)^2 (3f' + r f'')/(r^5 f' J) + O(a^6) ].
+     Kerr: 1 - a^2/r^2 - 4a^4/(r^4 (6 - r))  (= [17](a')).  Light limit agrees identically with (a') at C = 1.
+     Check, Bardeen g = 0.4 (exact capture disc, a = 0.01..0.05, 5-term fit):
+       r_c = 3.4: a^2 -0.0938935339679 vs -0.0938935339679;  a^4 -0.0161005095929 vs -0.0161005095929
+       r_c = 3.1: a^2 -0.114811334175  vs -0.114811334175;   a^4 -0.0214112232194 vs -0.0214112232194
+
 (c) TORQUE: mean z-angular momentum brought in per unit captured energy (any speed, incl. light),
        <L_z>/E = -a sin^2(theta) (1 - f(r))/f(r) + O(a^3).
 

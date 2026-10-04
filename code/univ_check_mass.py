@@ -22,7 +22,8 @@ def area(fun,r_c,a,th,n=48):
             return [R(rr),diff(R,rr)]
         rr,bb=findroot(eqs,(r_c,b0)); tot+=bb**2
     return pi*tot/n, pi*b0**2
-tests={'Bardeen g=0.4':lambda x: 1-2*x**2/(x**2+mpf('0.16'))**1.5,'Hayward l=0.5':lambda x: 1-2*x**2/(x**3+mpf('0.5'))}
+if __name__!="__main__": tests={}
+else: tests={'Bardeen g=0.4':lambda x: 1-2*x**2/(x**2+mpf('0.16'))**1.5,'Hayward l=0.5':lambda x: 1-2*x**2/(x**3+mpf('0.5'))}
 for name,fun in tests.items():
     for r_c,thdeg in [(mpf('3.4'),60),(mpf('3.1'),90)]:
         th=thdeg*pi/180; hs=[mpf('0.004'),mpf('0.008'),mpf('0.012')]; ys=[]
