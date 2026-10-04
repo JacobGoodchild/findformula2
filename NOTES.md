@@ -159,3 +159,12 @@
 * (Session restart lost ~8 h overnight: worker process restarted ~20:00, resumed 05:26 UTC.)
 * [32](a') universal a^4 shadow: residue/finite-part trick + sympy sparse fields -> runs in ~1 s
   (earlier generic sympy.series approach took >10 min even at a^2). Kerr and Bardeen checks pass.
+* [31] KN shadow a^4 at any charge from universal formula; numerically checked (q = 0.6, 0.8).
+* verify_all.py: 30 OK / 0 FAIL at 05:40 UTC Oct 4.
+### Leads for a future session
+* Universal a^4 for MASSIVE capture (no closed contour; needs order-4 perturbation of R = R' = 0 -- use the
+  sparse-field series code of univ_a4_fast.py instead of sympy.series, which was the bottleneck).
+* Universal perimeter beyond a^2 (same residue trick on sqrt(alpha'^2 + beta'^2)).
+* Kerr-Sen is NOT in the Delta = r^2 f + a^2 class (Sigma differs) -- would need its own version.
+* anyv_pert2_full.out has the analytic Kerr a^4 L_c(i) expansion; still needs the order-a^4 impact-plane
+  mapping before it can be compared with the numerical [17](a'') coefficients.

@@ -24,7 +24,10 @@ nobody has written it down before. Please treat the results as candidates for ex
   dark-matter-dressed, …), the small-spin shadow area is
   A = (πr²/f)[1 + a²{(1−cos²θ)[1/(2fr²) − 4/(r²κ)] + cos²θ(2f−1)/(fr²)}], κ = 2f − r²f″,
   evaluated at the photon sphere. Same for particle capture at any speed and the spin-down torque
-  −a·sin²θ(1−f)/f. Checked to 11–13 digits on Bardeen and Hayward black holes.
+  −a·sin²θ(1−f)/f. Checked to 11–13 digits on Bardeen and Hayward black holes. A new
+  term-by-term trick pushes the shadow formula to a⁴, a⁶ and a⁸ for all such black holes at once
+  (reproducing every known Kerr coefficient exactly), and gives the charged (Kerr–Newman) shadow at
+  any charge in closed form [31].
 
 * **Shadow size of a spinning black hole, exactly** (EHT-relevant). Edge-on, any spin: one formula
   with complete elliptic integrals [1]; any spin and viewing angle: a single short integral [4];

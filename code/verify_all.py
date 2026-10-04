@@ -70,3 +70,11 @@ from mpmath import findroot as _fr, diff as _df, mpf as _mpf
 _fB=lambda x: 1-2*x**2/(x**2+_mpf('0.16'))**1.5
 _r=_fr(lambda x: 2*_fB(x)-x*_df(_fB,x),3); _f=_fB(_r); _k=2*_f-_r**2*_df(_fB,_r,2)
 ok("[32] Bardeen shadow a^2 coeff edge-on", 1/(2*_f*_r**2)-4/(_r**2*_k), -0.079747053068, 1e-11)
+
+# [32](a') universal a^4 shadow coefficient: Kerr limit and Bardeen numeric (code/univ_a4_check.out)
+import sympy as _sp, os
+_C=_sp.Symbol('C'); _fs=_sp.symbols('f0:8'); _r=_sp.Symbol('r')
+_E4=_sp.sympify(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'univ_a4_fast.out')).read().split('a^4 relative (R=1):')[1].split('\n')[0],locals={'C':_C,**{'f%d'%i:_fs[i] for i in range(8)}})
+_fK=1-2/_r
+_k4=_E4.subs({_fs[k]:_sp.diff(_fK,_r,k).subs(_r,3)*3**k for k in range(6)}).subs(_C,_sp.Rational(1,4))/81
+ok("[32a'] Kerr a^4 at C=1/4", float(_k4), -(1/72+5*0.25/972-5*0.0625/1944), 1e-15)
