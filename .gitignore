@@ -1,2 +1,6 @@
 __pycache__/
 *.pyc
+papers/**/*.aux
+papers/**/*.log
+!papers/**/verify_*.log
+papers/**/*.out

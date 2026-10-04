@@ -1,0 +1,519 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+\newtheorem{result}{Result}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\numberwithin{equation}{section}
+
+\title{Universal small-spin formulas for the shadow area, the capture cross-section and the spin-down of Kerr-like rotating black holes}
+\author{Jacob Goodchild\thanks{Independent researcher. Contact: jacob.l.goodchild@gmail.com.
+This work was carried out with substantial assistance from an AI system; see the
+AI disclosure statement at the end of the paper.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Many rotating black-hole metrics studied in the literature are generated from a static,
+spherically symmetric seed $ds^2=-f\,dt^2+dr^2/f+r^2d\Omega^2$ by the Newman--Janis algorithm in the
+form of Azreg-A\"{\i}nou, which yields the Kerr metric with $2Mr$ replaced by $r^2(1-f(r))$. For this
+whole class we give closed formulas, in terms of $f$ and its derivatives at a single radius, for
+the leading effects of a small spin $a$ on three observables: (i) the area of the black-hole
+shadow seen by a distant observer at any inclination, to order $a^2$ and, with a term-by-term
+finite-part method, to orders $a^4$, $a^6$ and $a^8$; (ii) the capture cross-section for neutral
+massive particles of any speed arriving from any direction, to order $a^2$ (and to order $a^4$
+along the spin axis); and (iii) the mean angular momentum swallowed per unit captured energy, which
+controls the spin-down of a black hole accreting collisionless matter. The order-$a^2$ shadow formula
+depends on $f$ only through $f(R)$ and the curvature combination $\kappa=2f-R^2f''$ at the photon
+sphere $R$; the massive-particle formula contains the combination $3ff'+rff''-2rf'^2$ whose zero
+defines the innermost stable circular orbit. Specialising to Kerr--Newman gives explicit expressions valid at arbitrary charge, including the shadow area
+to order $a^4$; for Kerr the method reproduces the known low-order terms and yields the order-$a^6$ and $a^8$
+coefficients of the shadow area at any inclination. All results
+were checked against direct high-precision computations of the exact shadow contour or of the
+exact capture boundary for Kerr, Kerr--Newman, rotating Bardeen and rotating Hayward black holes,
+with agreement to 11--22 significant digits.
+\end{abstract}
+
+\section{Introduction}
+
+The shadow of a black hole---the dark region in the sky bounded by the image of the unstable
+photon orbits---is now an observable~\cite{EHT2019}. For the Kerr metric the boundary of the shadow
+is known in closed parametric form~\cite{Bardeen1973,Chandrasekhar1983}. A large body of work
+constructs rotating counterparts of non-Kerr static black holes (regular black holes, black holes
+surrounded by matter, quantum-corrected black holes, and so on) with the Newman--Janis
+algorithm~\cite{NewmanJanis1965}, most often in the non-complexified form of
+Azreg-A\"{\i}nou~\cite{AzregAinou2014}, and then computes their shadows. For this class the
+geodesic equations separate and general formulas for the shadow contour are
+available~\cite{Tsukamoto2018,Shaikh2019}; observables such as the area, the
+circumference or the displacement of the shadow are then usually computed numerically, model by
+model.
+
+The purpose of this paper is to give \emph{universal} closed formulas for the small-spin behaviour
+of such observables, valid for any seed function $f(r)$. The main results are:
+\begin{itemize}
+\item the order-$a^2$ correction to the shadow area at any inclination, eq.~\eqref{eq:A2};
+\item the order-$a^4$ correction, eqs.~\eqref{eq:A4}--\eqref{eq:N2}, obtained with a
+finite-part (residue at infinity) method that extends mechanically to $a^6$ and $a^8$;
+\item the order-$a^2$ correction to the capture cross-section of neutral massive particles of
+arbitrary speed and direction, eq.~\eqref{eq:sig2}, and its on-axis continuation to order $a^4$,
+eq.~\eqref{eq:sigpole};
+\item the mean angular momentum per unit energy carried into the hole by captured particles,
+eq.~\eqref{eq:torque}.
+\end{itemize}
+For Kerr and Kerr--Newman these specialise to explicit rational functions of the radius of the
+relevant circular orbit (Section~\ref{sec:special}). Several of these special cases were known before, in
+particular for Kerr~\cite{Bozza2006,GrallaLupsasca2020shape,KobialkoGaltsov2026,MachMomenniaSarbach2026}; Section~\ref{sec:prior}
+lists precisely which results are previously known and which, to the best of our knowledge, are new.
+
+Units are $G=c=1$. Lengths are measured in units of the mass parameter of the seed metric where
+relevant; all formulas below are invariant under the rescaling $r\to\lambda r$, $a\to\lambda a$,
+area $\to\lambda^2$ area, with $f(r)$ rescaled accordingly.
+
+\section{Setting}\label{sec:setting}
+
+\subsection{Metric and geodesics}
+Let $f(r)$ be a smooth function and put
+\begin{equation}
+\Sigma=r^2+a^2\cos^2\vartheta,\qquad \Delta=r^2f(r)+a^2 .
+\end{equation}
+The rotating metrics considered here are
+\begin{multline}
+ds^2=-\Big(1-\frac{r^2(1-f)}{\Sigma}\Big)dt^2-\frac{2a r^2(1-f)\sin^2\vartheta}{\Sigma}\,dt\,d\varphi
++\frac{\Sigma}{\Delta}dr^2+\Sigma\, d\vartheta^2\\
++\frac{\big[(r^2+a^2)^2-\Delta a^2\sin^2\vartheta\big]\sin^2\vartheta}{\Sigma}d\varphi^2 ,
+\label{eq:metric}
+\end{multline}
+which for $f=1-2M/r$ is the Kerr metric and for $f=1-2M/r+Q^2/r^2$ the Kerr--Newman metric. This is
+the form produced by the Newman--Janis algorithm without complexification~\cite{AzregAinou2014}
+when the seed is $ds^2=-f\,dt^2+dr^2/f+r^2d\Omega^2$. The Hamilton--Jacobi equation separates, and for
+a geodesic with energy $E$, axial angular momentum $L$, Carter constant $Q$ and mass $\mu$
+(all per unit mass for $\mu=1$; $\mu=0$ for light),
+\begin{align}
+\Sigma\,\frac{dr}{d\lambda}&=\pm\sqrt{\mathcal R(r)},&
+\mathcal R(r)&=\big[E(r^2+a^2)-aL\big]^2-\Delta\big[\mu^2r^2+(L-aE)^2+Q\big],\label{eq:R}\\
+\Sigma\,\frac{d\vartheta}{d\lambda}&=\pm\sqrt{\Theta(\vartheta)},&
+\Theta(\vartheta)&=Q-\cos^2\vartheta\Big[a^2(\mu^2-E^2)+\frac{L^2}{\sin^2\vartheta}\Big].
+\end{align}
+
+\subsection{The impact plane}
+Consider particles that arrive from infinity (or reach a distant observer) along the direction
+making angle $\vartheta_o$ with the spin axis, and write
+\begin{equation}
+C\equiv\cos^2\vartheta_o .
+\end{equation}
+With $p=\sqrt{E^2-\mu^2}$ the asymptotic momentum, the Cartesian impact parameters (celestial
+coordinates for light) are $\alpha=-L/(p\sin\vartheta_o)$, $\beta=\pm\sqrt{\Theta(\vartheta_o)}/p$, so that
+\begin{equation}
+b^2\equiv\alpha^2+\beta^2=\frac{L^2+Q}{p^2}+a^2C .
+\label{eq:b2}
+\end{equation}
+The \emph{shadow} (for light) and the \emph{capture region} (for massive particles of given $E$)
+are the regions of the $(\alpha,\beta)$ plane whose geodesics reach the horizon. Their boundaries
+are traced by orbits on which $\mathcal R$ has a double root, $\mathcal R=\mathcal R'=0$; we write
+$\mathcal A$ for the area of the shadow and $\sigma$ for the capture cross-section.
+
+\subsection{The non-rotating data}
+At $a=0$ the boundary is a circle. For light it is set by the photon sphere $r=R$,
+\begin{equation}
+Rf'(R)=2f(R),\qquad \mathcal A_0=\frac{\pi R^2}{f(R)} .
+\label{eq:photon}
+\end{equation}
+For massive particles with specific energy $E>1$ (speed $v$ at infinity, $E^2=1/(1-v^2)$) it is
+set by the unstable circular orbit of that energy, of radius $r$, with
+\begin{equation}
+E^2=\frac{2f^2}{2f-rf'},\qquad L^2=\frac{r^3f'}{2f-rf'},\qquad
+\sigma_0=\frac{\pi L^2}{E^2-1}=\frac{\pi r^3 f'}{2f^2-2f+rf'} ,
+\label{eq:circ}
+\end{equation}
+where $f$ and its derivatives are evaluated at $r$. These relations are standard; for the
+Schwarzschild metric they give the classical capture cross-section~\cite{Unruh1976} $\sigma_0=\pi r^3/(4-r)$ (with
+$M=1$), which tends to $16\pi/v^2$ for slow particles and to $27\pi$ for light. Throughout, $r$
+denotes this circular-orbit radius, which lies between the photon sphere (light) and the marginally
+bound orbit ($v\to0$).
+
+We use the abbreviations
+\begin{equation}
+\kappa\equiv2f-R^2f''(R)\quad\text{(at the photon sphere)},\qquad
+J\equiv3ff'+rff''-2rf'^2\quad\text{(at radius $r$)} .
+\label{eq:kappaJ}
+\end{equation}
+For static metrics, $\kappa$ is related to the Lyapunov exponent $\lambda$ of the photon sphere
+(in coordinate time) by $\lambda^2=f\kappa/(2R^2)$~\cite{Cardoso2009}, and $J=0$ is the condition for
+the innermost stable circular orbit. For Schwarzschild, $\kappa=2$ and $J=2(r-6)/r^3$.
+
+\section{Method}\label{sec:method}
+
+\subsection{Perturbation of the double-root conditions}
+For the order-$a^2$ results we parametrise the boundary orbits by their total angular momentum
+$\ell=\sqrt{L^2+Q}$ and the inclination $\cos i=L/\ell$, and expand the critical values
+\begin{equation}
+\ell_c=\ell_0+a\,\ell_1\cos i+a^2\ell_2(\cos^2 i)+O(a^3),\qquad r_c=r+O(a),
+\end{equation}
+by solving $\mathcal R=\mathcal R'=0$ order by order, with $f$ replaced by its Taylor series about the
+unperturbed radius. To leading order the inclination is related to the polar angle $\phi$ in the
+impact plane by $\cos i=-\sin\vartheta_o\cos\phi$, with $\phi$ measured from the $\alpha$ axis. The area of a star-shaped region is
+$\frac12\oint b^2\,d\phi$, and by \eqref{eq:b2}, $b^2=\ell_c^2/p^2+a^2C$. Averaging over $\phi$ gives
+the order-$a^2$ coefficient; the $O(a^2)$ reparametrisation between $\phi$ and $i$ does not contribute
+at this order because the $O(a)$ term is odd in $\cos\phi$. In particular one finds the universal
+first-order coefficient
+\begin{equation}
+\ell_1=-E\,\frac{1-f}{f}
+\label{eq:ell1}
+\end{equation}
+(sign chosen so that prograde orbits have $\cos i>0$). The derivative $f'''$ drops out of all
+order-$a^2$ results. The computations were done with \textsc{SymPy}.
+
+\subsection{Finite-part expansion of the shadow area}\label{sec:fp}
+For light the boundary of the shadow is known in closed parametric form for any
+$\Delta(r)$~\cite{Tsukamoto2018}:
+\begin{equation}
+\xi(r)=\frac{(r^2+a^2)\Delta'-4r\Delta}{a\Delta'},\qquad
+\eta(r)=\frac{r^2\big[16a^2\Delta-(4\Delta-r\Delta')^2\big]}{a^2\Delta'^2},
+\label{eq:xieta}
+\end{equation}
+with $\xi=L/E$, $\eta=Q/E^2$, $\alpha=-\xi/\sin\vartheta_o$ and
+$\beta^2=\eta+a^2C-\xi^2\cot^2\vartheta_o$. Set $r=R+a x$. Because $4\Delta-r\Delta'=r^2(2f-rf')+4a^2$
+vanishes at $a=0$, $r=R$, every coefficient of the expansion of $\xi$ and $\eta$ in powers of $a$ at
+fixed $x$ is a \emph{polynomial} in $x$. After the linear change of variable $u=\alpha_0(x)$
+(the zeroth-order abscissa), $\beta^2=b_0^2-u^2+\delta(u,a)$ with $b_0^2=R^2/f$ and $\delta$ a
+polynomial in $u$ at every order in $a$. The area
+$\mathcal A=2\int\beta\,d\alpha$ is an analytic function of $a$, and its expansion can be computed term by term
+with the finite-part (Hadamard) rule
+\begin{equation}
+\mathrm{FP}\!\int_{-b_0}^{b_0}u^m\,(b_0^2-u^2)^{\frac12-j}\,du
+=-\pi\,(-1)^j\binom{\frac12-j}{n}(-b_0^2)^n,\qquad n=\frac{m+2-2j}{2},
+\label{eq:FP}
+\end{equation}
+for even $m$ with $n\ge0$ (and zero otherwise), which follows from the residue of
+$u^{m}(b_0^2-u^2)^{1/2-j}$ at infinity. Expanding $\sqrt{b_0^2-u^2+\delta}\;d\alpha/du$ binomially in
+$\delta$ and applying \eqref{eq:FP} to each monomial gives the area to any order. With truncated power
+series over the rational function field in $f(R),R f'(R),\dots$ this takes about one second at
+order $a^4$, ten seconds at order $a^6$ and seven minutes at order $a^8$ on a laptop-class CPU.
+
+\section{Results}\label{sec:results}
+
+Throughout this section $f,f',f'',\dots$ denote values at the photon sphere $R$ (for the shadow) or at
+the circular-orbit radius $r$ (for massive particles), and $C=\cos^2\vartheta_o$.
+
+\subsection{Shadow area to order \texorpdfstring{$a^2$}{a2}}
+\begin{result}[Shadow area]\label{res:A2}
+\begin{equation}
+\mathcal A=\frac{\pi R^2}{f}\left[1+a^2\left\{(1-C)\left(\frac{1}{2fR^2}-\frac{4}{R^2\kappa}\right)
++C\,\frac{2f-1}{fR^2}\right\}+O(a^4)\right].
+\label{eq:A2}
+\end{equation}
+\end{result}
+\begin{corollary}[Polar observer]
+For $\vartheta_o=0$ the shadow is a disc, of area
+$\mathcal A=\pi\big[R^2/f+a^2(2f-1)/f^2\big]+O(a^4)$. (The exact polar radius of integrable
+spinning spacetimes is given in~\cite{Salehi2024}; this is its small-spin expansion.)
+\end{corollary}
+\begin{corollary}[Displacement and circumference]
+To first order in $a$ the shadow is displaced along the $\alpha$ axis by $a\sin\vartheta_o\,(1-f)/f$
+(for Kerr: $2a\sin\vartheta_o$, a known result~\cite{Bozza2006,GrallaLupsasca2020shape}). To order $a^2$ the boundary is a displaced circle plus a
+$\cos2\phi$ deformation, which changes neither area nor length at this order; hence the
+circumference is $P=2\pi R f^{-1/2}\big[1+\tfrac12 a^2\{\cdots\}+O(a^4)\big]$ with the same bracket
+$\{\cdots\}$ as in \eqref{eq:A2}.
+\end{corollary}
+
+\subsection{Shadow area to order \texorpdfstring{$a^4$}{a4}}
+Write $f_3=R^3f'''(R)$ and $f_4=R^4f''''(R)$.
+\begin{result}[Next order]\label{res:A4}
+\begin{equation}
+\mathcal A=\frac{\pi R^2}{f}\Big[1+a^2K_2+\frac{a^4}{R^4}\,\frac{N_0+N_1C+N_2C^2}{8f^2\kappa^5}+O(a^6)\Big],
+\label{eq:A4}
+\end{equation}
+where $K_2$ is the bracket of \eqref{eq:A2} and
+\begin{align}
+N_0&=-\kappa^5+16f\kappa^4-160f^2\kappa^3+32f^2f_3\kappa^2-384f^3\kappa^2+256f^3f_3\kappa-32f^3f_4\kappa-96f^3f_3^2,\label{eq:N0}\\
+N_1&=2\big[-3\kappa^5+4f\kappa^5+32f\kappa^4-32f^2\kappa^4-160f^2\kappa^3+32f^2f_3\kappa^2+192f^3\kappa^3\nonumber\\
+&\qquad+384f^3\kappa^2-64f^3f_3\kappa^2-256f^3f_3\kappa+32f^3f_4\kappa+96f^3f_3^2\big],\label{eq:N1}\\
+N_2&=15\kappa^5-24f\kappa^5-144f\kappa^4+8f^2\kappa^5+192f^2\kappa^4+480f^2\kappa^3-96f^2f_3\kappa^2\nonumber\\
+&\qquad-64f^3\kappa^4-384f^3\kappa^3-384f^3\kappa^2+128f^3f_3\kappa^2+256f^3f_3\kappa-32f^3f_4\kappa-96f^3f_3^2.\label{eq:N2}
+\end{align}
+\end{result}
+The coefficients of $a^6$ and $a^8$ are obtained by the same procedure; they are long rational
+expressions in $f$, $R^kf^{(k)}(R)$ ($k\le6$ and $k\le8$) and $C$, and are provided in machine-readable
+form with the accompanying code (see Code and data availability).
+
+\subsection{Capture cross-section to order \texorpdfstring{$a^2$}{a2}, any speed}
+\begin{result}[Capture]\label{res:sig2}
+For neutral particles with speed $v$ at infinity, arriving at angle $\vartheta_o$ to the spin axis,
+with $r$ the radius of the unstable circular orbit of energy $E=(1-v^2)^{-1/2}$ in the seed metric
+[eq.~\eqref{eq:circ}],
+\begin{equation}
+\sigma=\sigma_0\left[1+a^2\left\{(1-C)\left(\frac{1}{2fr^2}+\frac{f'^2}{rfJ}\right)
++C\,\frac{2f+rf'-2}{r^3f'}\right\}+O(a^4)\right].
+\label{eq:sig2}
+\end{equation}
+\end{result}
+At the photon sphere ($rf'=2f$, hence $J=-f\kappa/r$) the bracket reduces to that of
+\eqref{eq:A2}, as it must.
+
+\begin{result}[On the spin axis to order $a^4$]\label{res:pole}
+For $\vartheta_o=0$ the capture region is exactly a disc of radius$^2$ $Q/p^2+a^2$ (with $L=0$), and
+\begin{equation}
+\sigma=\sigma_0\left[1+a^2\,\frac{2f+rf'-2}{r^3f'}+a^4\,\frac{2(1-f)^2(3f'+rf'')}{r^5f'J}+O(a^6)\right].
+\label{eq:sigpole}
+\end{equation}
+\end{result}
+
+\subsection{Angular momentum swallowed}
+Let $\langle L\rangle$ be the mean axial angular momentum of the captured particles (averaged with
+uniform weight over the capture region of the impact plane) and $E$ their energy, both per unit
+rest mass. Then $\langle L\rangle/E=dJ_{\rm BH}/dM_{\rm BH}$ is the angular momentum gained per unit
+mass-energy gained.
+\begin{result}[Spin-down]\label{res:torque}
+\begin{equation}
+\frac{\langle L\rangle}{E}=-a\sin^2\vartheta_o\,\frac{1-f}{f}+O(a^3),
+\label{eq:torque}
+\end{equation}
+for massive particles of any speed ($f$ at $r$) and for light ($f$ at $R$).
+\end{result}
+For a black hole immersed in an isotropic flux of particles of a single speed, averaging over
+directions with the leading-order weight $\sigma_0$ gives $\langle L\rangle/E=-\tfrac23a(1-f)/f$ and,
+for the dimensionless spin $a_*=J_{\rm BH}/M_{\rm BH}^2$,
+\begin{equation}
+\frac{da_*}{d\ln M_{\rm BH}}=-2a_*-\frac{2a_*}{3}\,\frac{1-f}{f}+O(a_*^3).
+\end{equation}
+
+\section{Special cases}\label{sec:special}
+
+\subsection{Kerr}
+With $f=1-2/r$ ($M=1$): $R=3$, $f(R)=1/3$, $\kappa=2$, $f_3=4$, $f_4=-16$. The particle
+speed is encoded by the circular-orbit radius
+\begin{equation}
+r=\frac{4v^2-1+\sqrt{1+8v^2}}{2v^2}\in[3,4],\qquad \sigma_0=\frac{\pi r^3}{4-r}.
+\end{equation}
+Results~\ref{res:A2}--\ref{res:torque} give the following. The $a^2$ and $a^4$ terms of \eqref{eq:kerrA} are
+known~\cite{Bozza2006,GrallaLupsasca2020shape,KobialkoGaltsov2026}; the $a^6$ and $a^8$ terms do not appear in the literature we found. The
+capture formula \eqref{eq:kerrsig} at order $a^2$ and the order-$a$ term of $\langle L\rangle/E$ follow from the slow-rotation
+expansion of the critical Carter constant of Mach, Momennia and Sarbach~\cite{MachMomenniaSarbach2026} (who display
+the direction-averaged versions), and agree with the fitted coefficients of~\cite{Karydas2026}:
+\begin{align}
+\frac{\mathcal A}{27\pi}&=1-\frac{(1+C)a^2}{18}-\Big(\frac1{72}+\frac{5C}{972}-\frac{5C^2}{1944}\Big)a^4
+-\Big(\frac{2059}{314928}+\frac{167C}{104976}-\frac{185C^2}{104976}-\frac{5C^3}{3888}\Big)a^6\nonumber\\
+&\quad-\Big(\frac{88175}{22674816}+\frac{3869C}{5668704}-\frac{4865C^2}{3779136}-\frac{83C^3}{69984}-\frac{667C^4}{7558272}\Big)a^8+O(a^{10}),\label{eq:kerrA}\\
+\frac{\sigma}{\sigma_0}&=1-a^2\,\frac{r+3C(4-r)}{2r^2(6-r)}+O(a^4),\qquad
+\frac{\sigma(\vartheta_o=0)}{\sigma_0}=1-\frac{a^2}{r^2}-\frac{4a^4}{r^4(6-r)}+O(a^6),\label{eq:kerrsig}\\
+\frac{\langle L\rangle}{E}&=-\frac{2a\sin^2\vartheta_o}{r-2}+O(a^3).
+\end{align}
+For light ($r=3$) the capture result reproduces the $a^2$ term of \eqref{eq:kerrA}; for slow particles
+($r\to4$) the $a^2$ correction $-a^2/16$ is independent of direction.
+
+\paragraph{Higher orders for Kerr.} By fitting high-precision
+evaluations of the exact Kerr capture region at radii $r\in\{15/4,7/2,10/3,13/4,18/5,16/5\}$ we
+identified exact rational coefficients for the full order-$a^4$ term and for the order-$a^3$ term of
+the swallowed angular momentum:
+\begin{align}
+\frac{\sigma}{\sigma_0}&=1-a^2\frac{r+3C(4-r)}{2r^2(6-r)}
++a^4\,\frac{\alpha_8+\beta_8C+\gamma_8C^2}{8r^4(6-r)^5}+O(a^6),\label{eq:kerr4}\\
+\alpha_8&=-r^2(2r^3+42r^2-549r+1458),\quad
+\beta_8=6r(2r^4+2r^3-239r^2+1302r-2016),\nonumber\\
+\gamma_8&=-10r^5-2r^4+1653r^3-13266r^2+39744r-41472,\nonumber\\
+\frac{\langle L\rangle}{E}&=-\frac{2a(1-C)}{r-2}
++a^3(1-C)\,\frac{\tfrac32(r-5)-C\,\frac{7r^2-63r+144}{2r}}{(r-2)(6-r)^3}+O(a^5).\label{eq:kerrL3}
+\end{align}
+Eq.~\eqref{eq:kerr4} satisfies $\alpha_8+\beta_8+\gamma_8=-32(6-r)^4$, reproducing the on-axis
+result~\eqref{eq:kerrsig}, which was derived analytically; at $r=3$ it reproduces the $a^4$ term
+of \eqref{eq:kerrA}. Eq.~\eqref{eq:kerrL3} was found from data at $C=0$ and $C=1/2$ and then
+confirmed at $C=1/4$ and $C=4/5$; both formulas were further confirmed at radii and angles not used in
+their identification ($r=3.55$, $40^\circ$ and $r=3.15$, $70^\circ$; Table~\ref{tab:checks}). These two formulas are identifications
+supported by strong numerical evidence, not derivations. The order-$a^4$ capture term is beyond the
+expansion of~\cite{MachMomenniaSarbach2026}, which is given to third order in the spin, and has only been available as numerical fits~\cite{Karydas2026};
+the $a^3$ term of $\langle L\rangle/E$ can in principle be derived from the third-order terms of~\cite{MachMomenniaSarbach2026}, where it is not displayed. Averaging \eqref{eq:kerrL3} over an
+isotropic flux, with the order-$a^2$ weight \eqref{eq:kerrsig}, gives
+\begin{equation}
+\frac{\langle L\rangle}{E}\Big|_{\rm iso}=-\frac{4a}{3(r-2)}
++\frac{4a^3(3r^3-19r^2+48r-144)}{15r^2(r-2)(6-r)^3}+O(a^5),
+\end{equation}
+equal to $-(2a/3+a^3/15)$ for slow particles, as found in~\cite{MachMomenniaSarbach2026,MachMomenniaSarbach2026b},
+and $-(4a/3+8a^3/81)$ for light.
+
+\subsection{Kerr--Newman}
+With $f=1-2/r+q^2/r^2$ ($M=1$, charge $q$; neutral test particles):
+\begin{align}
+\frac{\sigma}{\sigma_0}&=1-a^2\,\frac{r^2(r-q^2)-C\,(3r^3-12r^2-q^2r^2+18q^2r-8q^4)}
+{2r(r-q^2)(6r^2-r^3-9q^2r+4q^4)}+O(a^4),\label{eq:KNsig}\\
+\sigma_0&=\frac{\pi r^4(r-q^2)}{4r^2-r^3-4q^2r+q^4},\nonumber\\
+\frac{\langle L\rangle}{E}&=-a\sin^2\vartheta_o\,\frac{2r-q^2}{r^2-2r+q^2}+O(a^3),
+\end{align}
+with $E^2=(r^2-2r+q^2)^2/[r^2(r^2-3r+2q^2)]$. The factor $r^3-6r^2+9q^2r-4q^4$ is the
+Reissner--Nordstr\"om ISCO polynomial. For the shadow, with $R=\tfrac12\big(3+\sqrt{9-8q^2}\big)$,
+\begin{equation}
+\mathcal A=\frac{\pi R^4}{R^2-2R+q^2}\Big[1-a^2\frac{R+3C(R-2)}{R^2(R-1)(2R-3)}+a^4K_4+O(a^6)\Big],
+\label{eq:KNA}
+\end{equation}
+where
+\begin{align*}
+K_4=\frac{1}{2R^4(R-1)^2(2R-3)^5}\Big[&C^2(R^6-38R^5+286R^4-768R^3+774R^2-108R-162)\\
+&-C(18R^6-108R^5+288R^4-492R^3+504R^2-216R)\\
+&-15R^6+58R^5-78R^4+36R^3\Big].
+\end{align*}
+Expanding in $q$ reproduces the double series
+$\mathcal A/(27\pi)=1-q^2/3-(1+C)a^2/18-q^4/27-(3+C)a^2q^2/81+\dots$, which is contained in the perturbative
+results of Kobialko and Gal'tsov~\cite{KobialkoGaltsov2026}; eqs.~\eqref{eq:KNsig}--\eqref{eq:KNA} are exact in $q$.
+
+\subsection{Regular black holes}
+For the rotating Bardeen ($f=1-2r^2/(r^2+g^2)^{3/2}$~\cite{AyonBeatoGarcia2000}) and Hayward ($f=1-2r^2/(r^3+2l^2)$~\cite{Hayward2006}) black holes,
+the order-$a^2$ coefficient of $\mathcal A/\mathcal A_0$ at $\vartheta_o=90^\circ$ is $-0.0797470530672$
+($g=0.4$) and $-0.0863835115987$ ($l=0.5$) respectively; further values are listed in
+Table~\ref{tab:checks}.
+
+\section{Verification}\label{sec:checks}
+
+Every result was checked against an independent computation that does not use the perturbative
+expansions.
+\begin{itemize}
+\item \emph{Shadow:} the exact contour \eqref{eq:xieta} was integrated by tanh--sinh quadrature at 40
+digits for $a=0.01,\dots,0.05$, and the coefficients of $a^2$ and $a^4$ were extracted by polynomial
+fitting in $a^2$.
+\item \emph{Capture:} the exact boundary $b(\phi)$ was computed at 48 impact-plane angles by solving
+$\mathcal R=\mathcal R'=0$ with Newton's method at 40 digits, the area evaluated as
+$\frac12\oint b^2d\phi$ (trapezoidal rule, spectrally accurate for periodic integrands), and the
+coefficients extracted as above. The swallowed angular momentum was computed as the first moment
+of the same region.
+\item \emph{Symbolic:} the Kerr--Newman specialisation of \eqref{eq:sig2} was checked to agree identically
+with an independent Kerr--Newman calculation; the light limit of \eqref{eq:sigpole} agrees
+with \eqref{eq:A4} at $C=1$ (exactly for Kerr, where both give $-4a^4/243$, and to $10^{-25}$ for Bardeen); the Kerr limits of the $a^6$ and $a^8$ shadow coefficients agree exactly with
+rational coefficients identified independently from 250-digit evaluations of an exact
+elliptic-integral formula for the edge-on Kerr shadow area and from a single-integral representation
+at general inclination.
+\end{itemize}
+
+\begin{table}[ht]
+\centering\footnotesize
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llll}
+\toprule
+Quantity & Case & Direct computation & Formula\\
+\midrule
+$a^2$ coeff.\ of $\mathcal A/\mathcal A_0$ & Bardeen $g=0.4$, $90^\circ$ & $-0.07974705306715083$ & $-0.07974705306715083$\\
+ & Bardeen $g=0.4$, $50^\circ$ & $-0.1035696370499696$ & $-0.1035696370499696$\\
+ & Hayward $l=0.5$, $90^\circ$ & $-0.08638351159869441$ & $-0.08638351159869439$\\
+ & Hayward $l=0.5$, $50^\circ$ & $-0.10712747758$ & $-0.107127477578$\\
+ & Kerr, $50^\circ$ & $-0.07850977284258527$ & $-0.07850977284258527$\\
+$a^4$ coeff.\ of $\mathcal A/\mathcal A_0$ & Bardeen $g=0.4$, $90^\circ$ & $-0.0317475715025$ & $-0.0317475715025$\\
+ & Bardeen $g=0.4$, $50^\circ$ & $-0.0319437641728$ & $-0.0319437641729$\\
+ & Kerr--Newman $q=0.6$, $60^\circ$ & $-0.0344681711527$ & $-0.0344681711528$\\
+ & Kerr--Newman $q=0.8$, $90^\circ$ & $-0.0918348939951$ & $-0.0918348939966$\\
+$a^2$ coeff.\ of $\sigma/\sigma_0$ & Bardeen, $r=3.4$, $60^\circ$ & $-0.08155531033444$ & $-0.08155531033444$\\
+ & Bardeen, $r=3.1$, $90^\circ$ & $-0.07771672446027$ & $-0.07771672446026$\\
+ & Hayward, $r=3.4$, $60^\circ$ & $-0.08231846186746$ & $-0.08231846186746$\\
+ & Hayward, $r=3.1$, $90^\circ$ & $-0.08168373732763$ & $-0.08168373732763$\\
+ & KN $q=0.5$, $r=3.5$, $60^\circ$ & $-0.0790432393693279$ & $-0.0790432393693263$\\
+ & KN $q=0.8$, $r=3.0$, $45^\circ$ & $-0.136651895747247$ & $-0.136651895747233$\\
+on-axis $a^2$, $a^4$ coeff. & Bardeen, $r=3.4$ & $-0.0938935339679$, $-0.0161005095929$ & same to all digits\\
+ & Bardeen, $r=3.1$ & $-0.114811334175$, $-0.0214112232194$ & same to all digits\\
+$\langle L\rangle/(aE)$ & Bardeen, $r=3.4$, $60^\circ$ & $-1.01983100502$ & $-1.01983100502$\\
+ & KN $q=0.5$, $r=3.5$, $60^\circ$ & $-0.920454545455$ & $-0.920454545455$\\
+$a^3$ coeff.\ of $\langle L\rangle/E$, Kerr & $r=7/2$, $C=1/4$ & $-0.0825714285714285714$ & $-0.0825714285714285714$\\
+ & $r=10/3$, $C=4/5$ & $-0.030955078125$ & $-0.030955078125$\\
+ & $r=3.55$, $40^\circ$ & $-0.05225970864164288$ & $-0.05225970864164288$\\
+$a^4$ coeff.\ of $\sigma/\sigma_0$, Kerr, eq.~\eqref{eq:kerr4} & $r=3.55$, $40^\circ$ & $-0.01290083149371615$ & $-0.01290083149371615$\\
+ & $r=3.15$, $70^\circ$ & $-0.01428654979243309$ & $-0.01428654979243309$\\
+\bottomrule
+\end{tabular}}
+\caption{Selected comparisons between the formulas and direct high-precision computations (values from
+\texttt{verify\_paperA.log}, except the Hayward $50^\circ$ shadow row and the Bardeen $r=3.1$ and Hayward $r=3.4$ capture rows,
+which come from the earlier scripts \texttt{univ\_check\_light.py} and \texttt{univ\_check\_mass.py}).
+Bardeen: $g=0.4$; Hayward: $l=0.5$ ($M=1$). The direct computations use the exact contour or
+the exact capture boundary, not the expansions.}
+\label{tab:checks}
+\end{table}
+
+\section{Relation to previous work}\label{sec:prior}
+To the best of our knowledge, based on searches of arXiv, INSPIRE and the wider web (October 2026), the
+status of the results is as follows.
+
+\emph{Previously known.}
+(i) The exact shadow contour for metrics of the form \eqref{eq:metric}~\cite{Tsukamoto2018,Shaikh2019},
+and the exact polar shadow radius for general integrable spinning spacetimes~\cite{Salehi2024}.
+(ii) For Kerr, the order-$a^2$ shape of the shadow (an ellipse displaced by $2a\sin\vartheta_o$)~\cite{Bozza2006,GrallaLupsasca2020shape,PerlickTsupko2022},
+hence the $a^2$ term of \eqref{eq:kerrA}; the edge-on area to order $a^2$ is stated explicitly in~\cite{Hassanabadi2026}.
+(iii) Kobialko and Gal'tsov~\cite{KobialkoGaltsov2026} developed a perturbation theory for shadows of Kerr-like spacetimes,
+expanding around Schwarzschild to fifth order in the spin and to second order in a small parameter measuring the deviation from Kerr.
+Their results, through their areal definition of the mean radius, yield the order-$a^4$ Kerr area of \eqref{eq:kerrA} and the
+Kerr--Newman double series to combined fourth order.
+(iv) For Kerr, the order-$a^2$ capture cross-section at any speed and direction, and the swallowed angular momentum, follow
+from the slow-rotation expansion of the critical Carter constant to $O(a^3)$ by Mach, Momennia and Sarbach~\cite{MachMomenniaSarbach2026},
+who give the direction-averaged accretion rates explicitly (see also~\cite{MachMomenniaSarbach2026b}); Karydas, Vicente and Bertone
+computed the direction- and speed-dependent coefficients through order $a^4$ as numerical fits~\cite{Karydas2026}. The
+Schwarzschild cross-section $\sigma_0(v)$ is classical~\cite{Unruh1976}, and the Reissner--Nordstr\"om one at arbitrary speed was
+studied in~\cite{Benone2014}.
+
+\emph{New in this paper, as far as we could determine.}
+(a) The formulas exact in $f$: Results~\ref{res:A2}--\ref{res:torque}, including the order-$a^4$ shadow formula, the
+$a^6$ and $a^8$ coefficients, the capture cross-section of massive particles for general $f$, its on-axis continuation to
+$a^4$ and the angular-momentum law $-a\sin^2\vartheta_o(1-f)/f$.
+(b) For Kerr: the $a^6$ and $a^8$ shadow-area coefficients at general inclination, the full order-$a^4$ capture term
+\eqref{eq:kerr4} (numerically identified), and the explicit direction-dependent order-$a^3$ swallowed angular momentum
+\eqref{eq:kerrL3} (numerically identified, and derivable in principle from~\cite{MachMomenniaSarbach2026}).
+(c) For Kerr--Newman: the closed forms exact in the charge, eqs.~\eqref{eq:KNsig}--\eqref{eq:KNA}.
+
+
+\section{Discussion}
+The formulas above reduce the small-spin behaviour of the shadow area, the capture cross-section
+and the accreted angular momentum of any Kerr-like black hole of the form \eqref{eq:metric} to the
+evaluation of $f$ and a few derivatives at one radius. Two limitations should be kept in mind.
+First, the metrics \eqref{eq:metric} are generated by an algorithm and are in general not solutions of
+any particular set of field equations; the results apply to them as geometries. Rotating metrics
+of other forms (for example the Kerr--Sen metric, whose $\Sigma$ differs) are not covered. Second,
+the results are expansions in $a$; their accuracy for rapidly rotating holes should be judged from
+the size of the successive terms, which we provide up to $a^8$ for the shadow.
+
+\section*{AI disclosure statement}
+This work was carried out by the author with substantial assistance from an AI system, Claude
+(Anthropic), used through the Claude Code software. Under the author's direction, the AI system
+proposed the research directions, wrote and ran the computer-algebra and numerical code (Python
+with SymPy and mpmath), performed the derivations and checks reported here, searched the
+literature, and drafted the text of this paper. The author directed the work, set the requirements
+(verification of every result, honest novelty assessment, no fabricated citations) and is
+responsible for its publication. All results were checked numerically as described in
+Section~\ref{sec:checks}; nevertheless, readers should treat the novelty assessment, which is based on
+literature searches, with appropriate caution.
+
+\begin{sloppypar}
+\section*{Code and data availability}\label{sec:code}
+All code used to derive and check the results, including the machine-readable $a^6$ and $a^8$
+coefficients, is available at \url{https://github.com/JacobGoodchild/findformula2}
+(directory \texttt{code/}; scripts \texttt{univ\_a2.py}, \texttt{univ\_a4\_fast.py},
+\texttt{univ\_polar.py}, \texttt{univ\_check\_light.py}, \texttt{univ\_check\_mass.py},
+\texttt{univ\_torque\_check.py}, \texttt{kn\_anyv\_a2.py}, \texttt{kn\_a4\_check.py}, and the
+verification script \texttt{papers/paperA/verify\_paperA.py}).
+\end{sloppypar}
+
+\begin{thebibliography}{99}
+\bibitem{EHT2019} Event Horizon Telescope Collaboration (K.~Akiyama et al.), ``First M87 Event Horizon Telescope Results. I. The Shadow of the Supermassive Black Hole'', Astrophys.\ J.\ Lett.\ \textbf{875}, L1 (2019), arXiv:1906.11238.
+\bibitem{Bardeen1973} J.~M.~Bardeen, ``Timelike and null geodesics in the Kerr metric'', in \emph{Black Holes (Les Astres Occlus)}, Les Houches 1972, eds.\ C.~DeWitt and B.~S.~DeWitt (Gordon and Breach, New York, 1973), pp.\ 215--240.
+\bibitem{Chandrasekhar1983} S.~Chandrasekhar, \emph{The Mathematical Theory of Black Holes} (Clarendon Press, Oxford, 1983).
+\bibitem{NewmanJanis1965} E.~T.~Newman and A.~I.~Janis, ``Note on the Kerr spinning-particle metric'', J.\ Math.\ Phys.\ \textbf{6}, 915--917 (1965).
+\bibitem{AzregAinou2014} M.~Azreg-A\"{\i}nou, ``Generating rotating regular black hole solutions without complexification'', Phys.\ Rev.\ D \textbf{90}, 064041 (2014), arXiv:1405.2569.
+\bibitem{Tsukamoto2018} N.~Tsukamoto, ``Black hole shadow in an asymptotically-flat, stationary, and axisymmetric spacetime: The Kerr-Newman and rotating regular black holes'', Phys.\ Rev.\ D \textbf{97}, 064021 (2018), arXiv:1708.07427.
+\bibitem{Shaikh2019} R.~Shaikh, ``Black hole shadow in a general rotating spacetime obtained through Newman-Janis algorithm'', Phys.\ Rev.\ D \textbf{100}, 024028 (2019), arXiv:1904.08322.
+\bibitem{Cardoso2009} V.~Cardoso, A.~S.~Miranda, E.~Berti, H.~Witek and V.~T.~Zanchin, ``Geodesic stability, Lyapunov exponents and quasinormal modes'', Phys.\ Rev.\ D \textbf{79}, 064016 (2009), arXiv:0812.1806.
+\bibitem{Bozza2006} V.~Bozza, F.~De~Luca and G.~Scarpetta, ``Kerr black hole lensing for generic observers in the strong deflection limit'', Phys.\ Rev.\ D \textbf{74}, 063001 (2006), arXiv:gr-qc/0604093.
+\bibitem{GrallaLupsasca2020shape} S.~E.~Gralla and A.~Lupsasca, ``Observable shape of black hole photon rings'', Phys.\ Rev.\ D \textbf{102}, 124003 (2020), arXiv:2007.10336.
+\bibitem{PerlickTsupko2022} V.~Perlick and O.~Yu.~Tsupko, ``Calculating black hole shadows: Review of analytical studies'', Phys.\ Rept.\ \textbf{947}, 1--39 (2022), arXiv:2105.07101.
+\bibitem{KobialkoGaltsov2026} K.~Kobialko and D.~Gal'tsov, ``Perturbation theory for gravitational shadows in Kerr-like spacetimes'', Phys.\ Rev.\ D \textbf{113}, 104007 (2026), arXiv:2512.24126.
+\bibitem{Hassanabadi2026} H.~Hassanabadi, M.~R.~R.~Good, S.~Zare, O.~Luongo and F.~Kafikang, ``Optical and thermodynamic properties of Kerr-Bertotti-Robinson black holes'', arXiv:2607.11979 (2026).
+\bibitem{Salehi2024} K.~Salehi, A.~E.~Broderick and B.~Georgiev, ``Photon rings and shadow size for general axisymmetric and stationary integrable spacetimes'', Astrophys.\ J.\ \textbf{966}, 143 (2024), arXiv:2311.01495.
+\bibitem{MachMomenniaSarbach2026} P.~Mach, M.~Momennia and O.~Sarbach, ``Accretion of a Vlasov gas by a Kerr black hole'', Phys.\ Rev.\ D \textbf{113}, 044068 (2026), arXiv:2508.04783.
+\bibitem{MachMomenniaSarbach2026b} P.~Mach, M.~Momennia and O.~Sarbach, ``Bondi-type accretion onto a Kerr black hole in the kinetic regime'', Phys.\ Rev.\ D \textbf{113}, L041505 (2026), arXiv:2508.20189.
+\bibitem{Karydas2026} T.~K.~Karydas, R.~Vicente and G.~Bertone, ``Mass and spin coevolution of black holes inspiralling through dark matter'', Phys.\ Rev.\ D \textbf{113}, 043057 (2026), arXiv:2510.13604.
+\bibitem{Unruh1976} W.~G.~Unruh, ``Absorption cross-section of small black holes'', Phys.\ Rev.\ D \textbf{14}, 3251 (1976).
+\bibitem{Benone2014} C.~L.~Benone, E.~S.~de~Oliveira, S.~R.~Dolan and L.~C.~B.~Crispino, ``Absorption of a massive scalar field by a charged black hole'', Phys.\ Rev.\ D \textbf{89}, 104053 (2014), arXiv:1404.0687.
+\bibitem{AyonBeatoGarcia2000} E.~Ay\'on-Beato and A.~Garc\'{\i}a, ``The Bardeen model as a nonlinear magnetic monopole'', Phys.\ Lett.\ B \textbf{493}, 149 (2000), arXiv:gr-qc/0009077.
+\bibitem{Hayward2006} S.~A.~Hayward, ``Formation and evaporation of regular black holes'', Phys.\ Rev.\ Lett.\ \textbf{96}, 031103 (2006), arXiv:gr-qc/0506126.
+
+\end{thebibliography}
+\end{document}

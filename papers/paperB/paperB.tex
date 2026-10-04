@@ -1,0 +1,447 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{result}{Result}
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\numberwithin{equation}{section}
+
+\title{Exact results for Kerr black holes: shadow areas and perimeters, capture of slow particles, and escape from near extremal horizons}
+\author{Jacob Goodchild\thanks{Independent researcher. Contact: jacob.l.goodchild@gmail.com.
+This work was carried out with substantial assistance from an AI system; see the
+AI disclosure statement at the end of the paper.}}
+\date{October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We give exact results for several observables of Kerr black holes that have so far been computed
+numerically, by fits, or only at isolated parameter values. (i) The area of the shadow seen by an equatorial
+observer, for every spin, in complete elliptic integrals, together with its small-spin series and its
+near-extremal expansion $\mathcal A=16\pi+15\sqrt3+(3\pi/\sqrt2)\sqrt{1-a}+\dots$; the shadow area of an
+extremal black hole at every inclination; and a single short integral for arbitrary spin and inclination.
+(ii) The perimeter of the shadow, equal to $18\sqrt3\,M$ for a maximally spinning hole seen edge-on.
+(iii) The capture cross-section of a Kerr black hole for slow particles arriving perpendicular to the spin,
+$\sigma=[7\pi+\pi\sqrt{1-a^2}+16\sqrt{1+a}\,E(2a/(1+a))]M^2/v^2$, the corresponding angular-momentum accretion in closed form,
+and the isotropically averaged cross-section and spin-down at maximal spin in elementary closed form.
+(iv) Escape probabilities for photons emitted isotropically just outside the horizon of an extremal
+Kerr--Newman black hole at any latitude, $P=\tfrac12-\arcsin(k)/(2\pi)-k/4$, and from the innermost stable circular
+orbit at any charge, together with escaping energy fractions and escape probabilities for massive particles.
+Known special cases are recovered and credited. All results were checked against independent high-precision
+numerical computations.
+\end{abstract}
+
+
+\section{Introduction}
+
+The Kerr metric is the unique stationary, asymptotically flat vacuum black hole of general relativity,
+and many of its observable properties reduce to integrals over the critical (marginally trapped)
+geodesics. For the shadow---the region of the observer's sky bounded by the image of the unstable
+spherical photon orbits~\cite{Bardeen1973,Chandrasekhar1983}---the boundary curve is known in closed
+parametric form, but derived quantities such as its \emph{area} and \emph{perimeter} have been computed
+numerically or by interpolation; for instance, Cunha, Herdeiro and Radu remark that they ``were not able to
+find an exact expression for the Kerr shadow areal radius in the generic case''~\cite{CunhaHerdeiroRadu2019}.
+Likewise the capture cross-section of a Kerr black hole for slow (marginally bound) particles, relevant for
+black holes moving through dark matter, has been obtained numerically or by fits~\cite{Young1976,Will2012,Karydas2026,MachMomenniaSarbach2026}, and the
+probability that light or matter escapes from just outside the horizon of an extremal black hole has been
+computed in closed form only at isolated points~\cite{YanGuoChen2021,GatesHadarLupsasca2021}.
+
+In this paper we give exact formulas for these quantities:
+\begin{itemize}
+\item the area of the Kerr shadow seen edge-on, for every spin, in complete elliptic integrals,
+with its small-spin and near-extremal expansions (Section~\ref{sec:edge});
+\item the shadow area of an extremal Kerr black hole at every inclination, and a single-integral
+representation for arbitrary spin and inclination (Sections~\ref{sec:ext}--\ref{sec:master});
+\item the perimeter of the shadow (Section~\ref{sec:perim});
+\item the edge-on capture cross-section for slow particles, the associated angular-momentum accretion,
+and the isotropically averaged cross-section and spin-down at maximal spin (Section~\ref{sec:capture});
+\item escape probabilities and escaping energy fractions for photons and massive particles emitted
+isotropically near the horizon of an extremal Kerr(--Newman) black hole, at any latitude and for emitters
+at rest or on the innermost stable circular orbit (Section~\ref{sec:escape}).
+\end{itemize}
+Results that were known before are identified as such in the text, with references. Units are
+$G=c=M=1$ throughout; $a=J/M^2\in[0,1]$.
+
+\section{Shadow boundary}\label{sec:setup}
+For a distant observer at inclination $\vartheta$ to the spin axis ($s=\sin\vartheta$, $c=\cos\vartheta$),
+the shadow boundary consists of the images of the spherical photon orbits of radius $r$, with
+impact parameters~\cite{Bardeen1973,Chandrasekhar1983}
+\begin{equation}
+\xi(r)=\frac{r^2(3-r)-a^2(r+1)}{a(r-1)},\qquad
+\eta(r)=\frac{r^3\big(4a^2-r(r-3)^2\big)}{a^2(r-1)^2},
+\end{equation}
+and celestial coordinates $\alpha=-\xi/s$, $\beta=\pm\sqrt{\eta+a^2c^2-\xi^2c^2/s^2}$. The area is
+$\mathcal A=2\int\beta\,|d\alpha|$ over the range of $r$ where $\beta^2\ge0$. A key simplification is
+\begin{equation}
+\frac{d\xi}{dr}=-\frac{2\big[(r-1)^3+1-a^2\big]}{a(r-1)^2}.
+\label{eq:dxi}
+\end{equation}
+The prograde and retrograde circular photon orbits are
+$r_{p}=2\big[1+\cos\big(\tfrac23\arccos(-a)\big)\big]$, $r_{r}=2\big[1+\cos\big(\tfrac23\arccos a\big)\big]$; the third root of
+$r^3-6r^2+9r-4a^2$ is $r_0=6-r_p-r_r\in(0,1)$.
+
+\section{Edge-on shadow area for every spin}\label{sec:edge}
+\begin{result}\label{res:edge}
+For $\vartheta=\pi/2$ and $0<a<1$,
+\begin{equation}
+\mathcal A(a)=3\int_{r_p}^{r_r}\frac{(r-1)(5r-2)+2(1-a^2)/(r-1)}{\sqrt{r\,(4a^2-r(r-3)^2)}}\,dr .
+\label{eq:edgeint}
+\end{equation}
+In terms of complete elliptic integrals $K=K(m)$, $E=E(m)$, $\Pi(n)=\Pi(n|m)$ (parameter convention),
+with
+\[
+m=\frac{(r_r-r_p)r_0}{(r_r-r_0)r_p},\quad n=\frac{r_r-r_p}{r_r-r_0},\quad n'=n\frac{r_0-1}{r_p-1},\quad
+g=\frac{2}{\sqrt{(r_r-r_0)r_p}},
+\]
+\[
+V=\frac{nE+(m-n)K+(2nm+2n-n^2-3m)\Pi(n)}{2(n-1)(m-n)},
+\]
+\[
+I_0=gK,\quad I_1=g\big[r_0K+(r_p-r_0)\Pi(n)\big],\quad
+I_2=g\big[r_0^2K+2r_0(r_p-r_0)\Pi(n)+(r_p-r_0)^2V\big],
+\]
+\[
+J=g\Big[\frac{K}{r_0-1}+\frac{r_0-r_p}{(r_p-1)(r_0-1)}\Pi(n')\Big],
+\]
+\begin{equation}
+\mathcal A(a)=6I_0-21I_1+15I_2+6(1-a^2)J .
+\label{eq:edgeclosed}
+\end{equation}
+\end{result}
+\emph{Derivation.} Using \eqref{eq:dxi}, the area integrand is
+$(4/a^2)\,r\sqrt{W}\,[1+(1-a^2)/(r-1)^3]$ with $W=r(4a^2-r(r-3)^2)$. Subtracting an exact derivative
+$\frac{d}{dr}[S(r)\sqrt W]$ that vanishes at both endpoints (found by Hermite reduction with \textsc{SymPy})
+leaves \eqref{eq:edgeint}; remarkably the polynomial part of the reduced integrand does not depend on $a$.
+The substitution $\mathrm{sn}^2u=(r_r-r_0)(r-r_p)/[(r_r-r_p)(r-r_0)]$ gives \eqref{eq:edgeclosed}.
+
+\paragraph{Expansions.} The small-spin expansion has rational coefficients (identified from 250-digit
+evaluations of \eqref{eq:edgeclosed}; all denominators are of the form $2^p3^q$):
+\begin{equation}
+\frac{\mathcal A}{27\pi}=1-\frac{a^2}{18}-\frac{a^4}{72}-\frac{2059\,a^6}{314928}-\frac{88175\,a^8}{22674816}
+-\frac{355999\,a^{10}}{136048896}-\dots
+\end{equation}
+The $a^2$ term follows from the known order-$a^2$ elliptical shape of the shadow~\cite{Bozza2006,GrallaLupsasca2020shape}
+and is stated explicitly for the area in~\cite{Hassanabadi2026}; the $a^4$ term is contained in the perturbative results of
+Kobialko and Gal'tsov~\cite{KobialkoGaltsov2026}. The higher coefficients appear to be new. At maximal spin $\mathcal A(1)=16\pi+15\sqrt3$, a value
+obtained previously in~\cite{CunhaHerdeiroRadu2019,FengLu2020}. Near extremality, with $\epsilon=1-a$,
+\begin{equation}
+\mathcal A=16\pi+15\sqrt3+\frac{3\pi}{\sqrt2}\,\epsilon^{1/2}
++\epsilon\Big[\frac{8}{\sqrt3}\ln\frac{27}{2\epsilon}-6\sqrt3\Big]+o(\epsilon).
+\label{eq:nearext}
+\end{equation}
+The $\epsilon^{1/2}$ term follows from matched asymptotics: as $a\to1$ the roots $r_0,r_p$ merge at $r=1$,
+$r_{p,0}\simeq1\pm\delta$ with $\delta=\sqrt{8\epsilon/3}$; in the inner region the pole term
+$6(1-a^2)/(r-1)\simeq12\epsilon/(r-1)$ dominates, and
+$\int_1^\infty dx/(x\sqrt{x^2-1})=\pi/2$ gives $(12\epsilon/\sqrt3\delta)(\pi/2)=3\pi\epsilon^{1/2}/\sqrt2$.
+The $\epsilon$ and $\epsilon\ln\epsilon$ coefficients were identified numerically (evaluating \eqref{eq:edgeclosed} with 60--150 digits
+for $\epsilon$ between $10^{-12}$ and $10^{-80}$, followed by an integer-relation search). The square-root onset means that the edge-on shadow area
+changes rapidly as the spin drops below its maximum.
+
+\section{Extremal Kerr at every inclination}\label{sec:ext}
+For $a=1$, $\xi=1+2r-r^2$ and $\eta=r^3(4-r)$. The quartic that defines $\beta^2$ factorises:
+\begin{equation}
+s^2\Big[r^3(4-r)+c^2-\frac{c^2}{s^2}(r^2-2r-1)^2\Big]=-\big(r^2-2(1+s)r-c^2\big)\big(r^2-2(1-s)r-c^2\big),
+\end{equation}
+with the elementary roots
+$r_A=1-s-\sqrt{2-2s}<r_B=1+s-\sqrt{2+2s}<r_C=1-s+\sqrt{2-2s}<r_D=1+s+\sqrt{2+2s}$.
+(Geometrically, Gralla and Lupsasca showed that the extremal critical curve is the convex hull of a
+Cartesian oval, completed by the straight ``NHEK line'' when $\sin\vartheta>\sqrt3-1$~\cite{GrallaLupsasca2020shape};
+the factorisation above is the corresponding statement in terms of the orbit radius.)
+\begin{result}\label{res:ext}
+With $\mathcal R(r)=(r-r_A)(r-r_B)(r-r_C)(r_D-r)$ and $\vartheta_c=\arcsin(\sqrt3-1)\approx47.0586^\circ$,
+\begin{equation}
+\mathcal A_{\rm ext}(\vartheta)=4\int_{r_{\rm lo}}^{r_D}\frac{3r^2-\cos^2\vartheta}{\sqrt{\mathcal R(r)}}\,dr+B(\vartheta),
+\label{eq:extint}
+\end{equation}
+where $r_{\rm lo}=r_C$, $B=0$ for $\vartheta\le\vartheta_c$, and $r_{\rm lo}=1$,
+$B=(2+s^2)\sqrt{3s^2+s^2c^2-4c^2}/s^2$ for $\vartheta>\vartheta_c$ (the NHEK-line contribution). For
+$\vartheta\le\vartheta_c$, with $(e_1,e_2,e_3,e_4)=(r_D,r_C,r_B,r_A)$,
+$m=\frac{(e_1-e_2)(e_3-e_4)}{(e_1-e_3)(e_2-e_4)}$,
+$n=\frac{e_1-e_2}{e_1-e_3}$, $g=2/\sqrt{(e_1-e_3)(e_2-e_4)}$, $V$ as in
+Result~\ref{res:edge},
+\begin{equation}
+\mathcal A_{\rm ext}=4\big(3I_2-c^2I_0\big),\quad I_0=gK,\quad
+I_2=g\big[e_3^2K+2e_3(e_2-e_3)\Pi(n)+(e_2-e_3)^2V\big].
+\end{equation}
+\end{result}
+The reduction uses, with $x=r-1$ and $P(x)\equiv\mathcal R(1+x)$, the identity $x\sqrt P=s^2(3x^2+6x+s^2+2)/\sqrt P+\frac{d}{dx}\big[(x^2-s^2-2)\sqrt P/4\big]$.
+The limits are the known values $\pi(12+8\sqrt2)$ at $\vartheta=0$~\cite{FengLu2020} and $16\pi+15\sqrt3$ at
+$\vartheta=\pi/2$. Near the axis,
+\begin{equation}
+\mathcal A_{\rm ext}=\pi(12+8\sqrt2)+\sqrt2\,\pi\Big[\frac{s^2}{2}+\frac{s^4}{128}-\frac{7s^6}{2048}-\frac{1735s^8}{524288}-\dots\Big]
+\end{equation}
+(coefficients identified by integer-relation search). For $a=1-\epsilon$ the area grows as
+$\mathcal A_{\rm ext}(\vartheta)+c(\vartheta)\sqrt\epsilon$ with
+\begin{equation}
+c(\vartheta)=\frac{\pi\,(3-6\cos^2\vartheta-\cos^4\vartheta)}{\sqrt2\,\sin^3\vartheta}\quad(\vartheta>\vartheta_c),\qquad c(\vartheta)=0\quad(\vartheta<\vartheta_c),
+\end{equation}
+derived as in Section~\ref{sec:edge} from the master formula below; equivalently $c=\pi\beta_m^2/(\sqrt2\sin\vartheta)$
+with $\beta_m$ the half-length of the NHEK line.
+Sample values: $\mathcal A_{\rm ext}(17^\circ)=73.43231016343180$, $\mathcal A_{\rm ext}(45^\circ)=74.35818308197668$,
+$\mathcal A_{\rm ext}(60^\circ)=75.08875773057813$.
+
+\section{Single-integral formula for any spin and inclination}\label{sec:master}
+For general $(a,\vartheta)$ the boundary involves a sextic, and no reduction to complete elliptic integrals is
+expected (the corresponding curve has genus two). Nevertheless the area reduces to one short integral.
+\begin{result}\label{res:master}
+With $u=a^2\cos^2\vartheta$,
+\[
+N(r)=-r^6+6r^5-(9+2u)r^4+4a^2r^3+6ur^2-4a^2ur-u^2(r-1)^2
+\]
+(so that $N=\beta^2a^2(r-1)^2\sin^2\vartheta$) and $r_1<r_2$ the roots of $N$ with $r>1$ that bound the shadow,
+\begin{multline}
+\mathcal A(a,\vartheta)=\frac{1}{u-1}\int_{r_1}^{r_2}\Big[2(u^2-5a^2u+6u+3a^2-3)-2(2u^2+a^2u-3u-3a^2+3)r
++2(u^2-6u-3)r^2\\+4(u+3)r^3+2(u-3)r^4-\frac{2(a^2-1)(u^2+6u-3)}{r-1}\Big]\frac{dr}{\sqrt{N(r)}} .
+\label{eq:master}
+\end{multline}
+\end{result}
+At $\vartheta=\pi/2$ this reduces to \eqref{eq:edgeint}. The integrand has only inverse-square-root endpoint
+singularities, so tanh--sinh quadrature converges to 15--30 digits at negligible cost.
+
+\section{Perimeter of the shadow}\label{sec:perim}
+\begin{result}\label{res:perim}
+Along the critical curve the arc-length element simplifies to
+$(d\ell/dr)^2=16r(r^2-a^2c^2)[(r-1)^3+1-a^2]^2/((r-1)^4N(r))$, so for any $(a,\vartheta)$
+\begin{equation}
+P(a,\vartheta)=8\int_{r_1}^{r_2}\frac{\big[(r-1)^3+1-a^2\big]\sqrt{r(r^2-a^2\cos^2\vartheta)}}{(r-1)^2\sqrt{N(r)}}\,dr .
+\end{equation}
+Edge-on only a cubic remains,
+$P(a)=8\int_{r_p}^{r_r}\big[(r-1)+(1-a^2)/(r-1)^2\big]\,dr/\sqrt{4a^2-r(r-3)^2}$, and in closed form, with
+$m=(r_r-r_p)/(r_r-r_0)$, $n=(r_r-r_p)/(r_r-1)$ and $V$ as above,
+\begin{equation}
+P(a)=\frac{16}{\sqrt{r_r-r_0}}\Big[r_0K+(r_r-r_0)E-K+\frac{(1-a^2)V}{(r_r-1)^2}\Big].
+\end{equation}
+At maximal spin edge-on, $d\ell=4\,dr/\sqrt{4-r}$ on $1\le r\le4$, so the curved part (both halves) has length $16\sqrt3$ and the
+NHEK line $2\sqrt3$:
+\begin{equation}
+P(1,\pi/2)=18\sqrt3\approx31.17691 .
+\end{equation}
+\end{result}
+Wei, Liu and Mann~\cite{WeiLiuMann2019} reported the length $16\sqrt3$ at $a=1$; this is the length of the curved
+part only. Including the straight NHEK segment, which is part of the critical curve, gives $18\sqrt3$, continuous
+with their value $31.2636$ at $a=0.99$. For small spin (coefficients identified at 60 digits),
+\begin{equation}
+\frac{P}{6\sqrt3\pi}=1-\frac{(1+C)a^2}{36}-\Big(\frac{35}{5184}+\frac{35C}{7776}-\frac{23C^2}{15552}\Big)a^4-\dots,\qquad C=\cos^2\vartheta .
+\end{equation}
+
+\section{Capture of slow particles}\label{sec:capture}
+For particles arriving from infinity with speed $v\ll1$ the capture boundary in the plane of specific
+angular momenta is traced by the marginally bound ($E=1$) spherical orbits. Writing $r=y^2$,
+\begin{equation}
+L_z=-\frac{y^4-2y^3+a^2}{a(y-1)},\qquad Q=\frac{y^4\big(a^2-(y^2-2y)^2\big)}{a^2(y-1)^2},\qquad 1+\sqrt{1-a}\le y\le1+\sqrt{1+a},
+\label{eq:mb}
+\end{equation}
+which is equivalent to the marginally bound Carter constant given by Teo~\cite{Teo2021}. In particular
+$L_z^2+Q=(3y^4-4y^3+a^2)/(y-1)^2$. The impact parameters are $(L_z,\sqrt Q)/v$ and the cross-section is
+$\sigma=(M/v)^2\mathcal S$ with $\mathcal S=2\int\sqrt Q\,|dL_z|$.
+
+\begin{result}[Edge-on cross-section]\label{res:slow}
+For particles arriving perpendicular to the spin axis,
+\begin{equation}
+\sigma=\frac{M^2}{v^2}\Big[7\pi+\pi\sqrt{1-a^2}+16\sqrt{1+a}\;E\Big(\frac{2a}{1+a}\Big)\Big],
+\label{eq:slow}
+\end{equation}
+which gives $16\pi M^2/v^2$ at $a=0$ and $(7\pi+16\sqrt2)M^2/v^2$ at $a=1$.
+\end{result}
+With $u=y-1$ the square root becomes $\sqrt{a^2-(u^2-1)^2}$, an even quartic; Hermite reduction gives
+$\mathcal S=\int_{\sqrt{1-a}}^{\sqrt{1+a}}\big(16u^2+14u+2(1-a^2)/u\big)du/\sqrt{a^2-(u^2-1)^2}$, whose odd terms are
+elementary. The expansion $\mathcal S/(16\pi)=1-a^2/16-31a^4/2048-233a^6/32768-\dots$ agrees through $a^4$ with
+the slow limits of the fitted coefficients of Karydas, Vicente and Bertone~\cite{Karydas2026}, and the $a^2$ term with
+Mach, Momennia and Sarbach~\cite{MachMomenniaSarbach2026}.
+
+\begin{result}[Angular momentum accreted, edge-on]\label{res:M1}
+The first moment of the capture region, $M_1=\iint L_z\,dL_z\,d\sqrt Q$, is
+\begin{equation}
+M_1=-\frac{32\sqrt{1+a}\,\big[(a^2+2)E-2(1-a)K\big]+35\pi a^2+10\pi\big(1-\sqrt{1-a^2}\big)}{5a},
+\end{equation}
+with $K=K(2a/(1+a))$, $E=E(2a/(1+a))$, so a black hole moving through slow matter in its equatorial plane gains angular momentum per unit mass
+$dJ/dM=M\,M_1/\mathcal S=-aM\big(1+\tfrac{3}{32}a^2+\tfrac{37}{1024}a^4+\dots\big)$, and
+$M_1\to-(96\sqrt2+45\pi)/5$ as $a\to1$.
+\end{result}
+The $a$ and $a^3$ terms are consistent with the slow limits of the fits of~\cite{Karydas2026}.
+
+\begin{result}[Isotropic flux]\label{res:iso}
+For an isotropic flux of slow particles, the direction-averaged cross-section is
+$\langle\sigma\rangle=(\pi/2)(M/v)^2\int_{-1}^{1}L_c(\mu)^2d\mu$, where $\mu=\cos i=L_z/L_c$ is the inclination of
+the orbital angular momentum, giving
+\begin{equation}
+\langle\sigma\rangle=\frac{\pi}{2}\frac{M^2}{v^2}\left|\int_{1+\sqrt{1-a}}^{1+\sqrt{1+a}}
+\frac{2y^3(3y^4-8y^3+6y^2-a^2)}{a(y-1)^2\sqrt{3y^4-4y^3+a^2}}\,dy\right| .
+\end{equation}
+At $a=1$ (where $3y^4-4y^3+1=(y-1)^2(3y^2+2y+1)$ and the boundary includes the straight piece $L_z=2$ for
+$\mu\ge\sqrt{2/3}$~\cite{Will2012}) everything is elementary:
+\begin{equation}
+\langle\sigma\rangle_{a=1}=\pi\frac{M^2}{v^2}\Big[\frac{47}{9}+\frac{31\sqrt2}{6}+\frac{7\sqrt6}{9}
+-\frac{\sqrt3}{54}\ln\frac{1+\sqrt2+\sqrt6}{1+\sqrt2}\Big]=45.27564306526540\,\frac{M^2}{v^2},
+\end{equation}
+i.e.\ $0.90073$ of the Schwarzschild value $16\pi M^2/v^2$ (Young reported the ratio $0.90$~\cite{Young1976}). The
+mean axial angular momentum per unit captured mass is $\langle l_z\rangle=\frac23\int\mu L_c^3d\mu/\int L_c^2d\mu$, and at
+$a=1$
+\begin{equation}
+\int_{-1}^{1}\mu L_c^3\,d\mu=-\frac{4876}{189}-\frac{790\sqrt2}{63}+\frac{628\sqrt6}{189}-\frac{2\sqrt3}{81}\ln\frac{1+\sqrt2+\sqrt6}{1+\sqrt2},
+\end{equation}
+\begin{equation}
+\langle l_z\rangle=-0.8193268418025525\,M .
+\end{equation}
+\end{result}
+The uniform measure over incoming directions and impact-plane azimuths induces the uniform measure on the
+direction of the orbital angular momentum, which justifies the averages. The small-spin series
+$\langle l_z\rangle=-(2a/3+a^3/15+\dots)M$ is contained in~\cite{MachMomenniaSarbach2026,MachMomenniaSarbach2026b}.
+Young~\cite{Young1976} reported $-0.828$ for this quantity at $a=1$; our exact value differs by about 1\%. It was confirmed
+by an independent brute-force computation ($-0.819328$, Section~\ref{sec:verify}); we have not been able to consult the full text
+of~\cite{Young1976} to identify the origin of the difference (numerical accuracy or a different averaging convention).
+
+\begin{remark}[Any speed, maximal spin]
+For $a=1$ and particles of any energy $\mathcal E=(1-v^2)^{-1/2}$, $p^2=\mathcal E^2-1$, arriving edge-on, the critical orbits are
+$L=\mathcal E(r+1)-(r-1)\sqrt{r(p^2r+1)}$, $Q=r^2\big[-p^2r^2+(2p^2-1)r+1+2\mathcal E\sqrt{r(p^2r+1)}\big]$ for $1\le r\le r_{\max}$, and the
+substitution $r=1/(t^2-p^2)$ reduces the cross-section to an incomplete elliptic integral with the quartic
+$t^4+2\mathcal Et^3-t^2-2\mathcal Ep^2t-p^4$. As $v$ increases, $\sigma v^2$ starts from $7\pi+16\sqrt2$ ($v\to0$), and $\sigma\to16\pi+15\sqrt3$ as $v\to1$.
+\end{remark}
+
+\section{Escape from near the horizon of an extremal black hole}\label{sec:escape}
+Consider the extremal Kerr--Newman family $a^2+q^2=1$, with $q$ the charge (Kerr: $a=1$) and an emitter at $r\to1^+$ at polar angle
+$\vartheta$, emitting isotropically in its rest frame. For extremal black holes a finite fraction of the
+emission escapes to infinity even in this limit~\cite{Ogasawara2020,YanGuoChen2021,GatesHadarLupsasca2021}.
+
+\begin{result}[Emitter at rest]\label{res:zamo}
+For an emitter at rest in the zero-angular-momentum frame, let
+$k=(1+a^2\cos^2\vartheta)/(2a\sin\vartheta)$. The escape probability of photons is
+\begin{equation}
+P=\frac12-\frac{\arcsin k}{2\pi}-\frac k4\quad(k<1),\qquad P=0\quad(k\ge1).
+\label{eq:Pzamo}
+\end{equation}
+The escape cone is $\{n_\varphi>0,\ n_\vartheta^2<(k^{-2}-1)n_\varphi^2,\ (n_\varphi>k\ \text{or}\ n_r>0)\}$ in terms of the
+emitter-frame unit direction $(n_r,n_\vartheta,n_\varphi)$.
+\end{result}
+On the equator of extremal Kerr ($k=1/2$) this gives $7/24$, the value of Yan, Guo and Chen~\cite{YanGuoChen2021}
+(numerically $0.2916$ in~\cite{Ogasawara2020}). On the equator of extremal Kerr--Newman ($k=1/(2a)$) it reproduces the
+numerical values of Ogasawara et al.~\cite{Ogasawara2020} (Table II there: $0.267$, $0.194$, $0.0911$ for
+$a=0.9,0.7,0.55$; formula: $0.26736$, $0.19480$, $0.09112$) and their threshold $a>1/2$. For Kerr, $P>0$ iff
+$\sin\vartheta>\sqrt3-1$, the latitude range singled out by Ogasawara and Igata~\cite{OgasawaraIgata2021}; the edge
+$n_\vartheta^2=(k^{-2}-1)n_\varphi^2$ corresponds to the near-horizon limit of the exact escape-cone boundary of Baines and
+Visser~\cite{BainesVisser2025}. (The 7/24 value refers to the zero-angular-momentum frame; cone boundaries
+expressed in other tetrads give different solid angles.)
+
+\emph{Derivation.} Put $r=1+\varepsilon x$ and $\lambda=\lambda_H-\varepsilon u/a$, $\lambda_H=(1+a^2)/a$. In the
+zero-angular-momentum frame $n_\varphi=\Sigma_H/(a\sin\vartheta\,(u+2))$, $\Sigma_H=1+a^2\cos^2\vartheta$. The radial
+potential is $(r-1)^2[(r+1)^2-\mathcal C]$ far from the horizon and $\varepsilon^2[(2x+u)^2-\mathcal Cx^2]$ near it,
+with $\mathcal C=\eta+1/a^2=(u+2)^2(n_\vartheta^2+n_\varphi^2)$; escape requires $\mathcal C<4$, and either outward
+emission or $u<0$ (inward photons then bounce at $x=|u|/(2-\sqrt{\mathcal C})$). The solid angle of the resulting cone
+is $\pi-2\arcsin k+\pi(1-k)$.
+
+\begin{result}[Emitter on the ISCO]\label{res:isco}
+For extremal Kerr--Newman with $a\ge1/\sqrt2$ the innermost stable circular orbit lies on the horizon and moves
+with speed $v=k=1/(2a)$ relative to the zero-angular-momentum frame. A photon emitter on it escapes with
+probability
+\begin{equation}
+P_{\rm ISCO}=\frac12-\frac{\arcsin k}{2\pi}+\frac{k}{\pi\sqrt{1+k^2}}\arctan\sqrt{\frac{1+k^2}{1-k^2}},\qquad k=\frac1{2a}.
+\label{eq:Pisco}
+\end{equation}
+\end{result}
+At $a=1$ this is $5/12+\arctan\sqrt{5/3}/(\sqrt5\pi)=0.546455$, the value found by Gates, Hadar and
+Lupsasca~\cite{GatesHadarLupsasca2021} (numerically $54.6\%$ in~\cite{Igata2020}). At $a=1/\sqrt2$ it equals
+$3/8+\sqrt3/9=0.567450$. It follows from boosting the cone of Result~\ref{res:zamo}: in the emitter frame,
+with $t$ the cosine of the angle to the orbital motion, all directions with $t>0$ escape, none with $t<-k$, and
+for $-k<t<0$ a fraction $\frac1\pi\arcsin\frac{t+k}{k\sqrt{1-t^2}}$, so
+$P=\frac12+\frac1{2\pi}\int_{-k}^0\arcsin\frac{t+k}{k\sqrt{1-t^2}}\,dt$, which integrates to \eqref{eq:Pisco}.
+
+\begin{result}[Escaping energy fractions]\label{res:energy}
+The fraction of the emitted energy (in the emitter frame) that reaches infinity is, for the emitter at rest on
+the equator ($a\ge1/2$),
+\begin{equation}
+\mathcal F_{\rm rest}=\frac{4a^2-1}{32a}+\frac{\sqrt{4a^2-1}}{16}\qquad(\text{Kerr: }\tfrac3{32}+\tfrac{\sqrt3}{16}=0.202003),
+\end{equation}
+and for the ISCO emitter of extremal Kerr
+\begin{equation}
+\mathcal F_{\rm ISCO}=\frac{2\sqrt3}{9}+\frac{1}{20\pi}+\frac{13\arctan\sqrt{5/3}}{5\sqrt{15}\,\pi}=0.595642 .
+\end{equation}
+\end{result}
+These follow by weighting the escape regions with the energy ratio $g=E_\infty/E_{\rm emit}$, which equals
+$a\,n_\varphi$ for the emitter at rest and $a(t+k)/\sqrt{1-k^2}$ for the ISCO emitter. The ISCO value can also be
+obtained by integrating the redshift-resolved flux of Gates, Hadar and Lupsasca~\cite{GatesHadarLupsasca2021}
+(their Eq.~(102)); we did not find the integrated fraction stated there.
+
+\begin{result}[Massive particles]\label{res:massive}
+(i) For particles emitted isotropically with local speed $\beta$ by an emitter at rest on the equator of an extremal
+Kerr--Newman black hole, escape is impossible for $\beta<1/\sqrt{1+a^2}$ (Kerr: $1/\sqrt2$), and
+\begin{equation}
+P=\frac12\Big(1-\frac{\sqrt{1-\beta^2}}{a\beta}\Big)\qquad\Big(\frac{1}{\sqrt{1+a^2}}\le\beta\le\frac{\sqrt3}{2}\Big);
+\end{equation}
+for Kerr, $P=1/8$ exactly at $\beta=0.8$. (ii) For particles launched isotropically with speed $\beta$ from the ISCO of
+extremal Kerr, escape requires $\beta>(3\sqrt2-2)/7=0.320377$, and
+\begin{equation}
+P=\frac{2\beta+1-\sqrt{3(1-\beta^2)}}{4\beta}\qquad\Big(\frac{3\sqrt2-2}{7}\le\beta\le\sqrt{\tfrac23}\Big),
+\end{equation}
+with $P=1/4$ at $\beta=1/2$ and $P=1/2$ at $\beta=\sqrt{2/3}$.
+\end{result}
+These follow from the same near-horizon analysis with massive geodesics: escape requires the conserved energy per unit mass to satisfy $\mathcal E\ge1$, the absence of a
+turning point in the far zone ($3\mathcal E^2-1>Q$ for Kerr, with $Q$ the Carter constant) and the near-zone bounce condition. Above the stated ranges the
+probabilities are given by one-dimensional integrals.
+
+\section{Verification}\label{sec:verify}
+All results were checked against independent computations (scripts in the code repository):
+\begin{itemize}
+\item closed forms against direct quadrature of the original parametric boundary curves at 30--40 digits
+(e.g.\ edge-on area at $a=0.5$: $83.5610541284615455783534950$ from both);
+\item areas against polygon (shoelace) areas of the boundary curves (agreement $\sim10^{-7}$--$10^{-9}$, limited by
+the number of vertices);
+\item the extremal formula at $60^\circ$ and $80^\circ$ against the master formula at $a=1-10^{-12}$ including the
+$c(\vartheta)\sqrt\epsilon$ correction;
+\item slow-capture cross-sections against brute-force bisection with the exact $E=1$ radial potential
+($a=0.5$: $49.4258$ vs $49.4259$; $a=0.9$: $46.8049$ vs $46.8048$), and the isotropic $a=1$ values against direct bisection
+for $L_c(\mu)$ at 2000 inclinations ($\langle l_z\rangle=-0.819328$ vs $-0.819327$);
+\item escape probabilities against ray-by-ray simulations: grids of up to $1.8\times10^5$ emission directions at
+$r=1+10^{-7}$, exact constants of motion computed without cancellation, escape decided from the exact radial potential
+including inward-launched rays (agreement within the grid resolution, $\sim10^{-3}$; e.g.\ Kerr equator $0.29172$
+vs $7/24$, ISCO $a=0.8$: $0.55890$ vs $0.55890$, massive $\beta=0.8$: $0.12502$ vs $1/8$).
+\end{itemize}
+
+
+\section*{AI disclosure statement}
+This work was carried out by the author with substantial assistance from an AI system, Claude
+(Anthropic), used through the Claude Code software. Under the author's direction, the AI system
+proposed the research directions, wrote and ran the computer-algebra and numerical code (Python
+with SymPy and mpmath), performed the derivations and checks reported here, searched the
+literature, and drafted the text of this paper. The author directed the work, set the requirements
+(verification of every result, honest novelty assessment, no fabricated citations) and is
+responsible for its publication. All results were checked numerically as described in the text;
+nevertheless, readers should treat the novelty assessment, which is based on literature searches,
+with appropriate caution.
+
+\begin{sloppypar}
+\section*{Code availability}
+All code used to derive and check the results is available at
+\url{https://github.com/JacobGoodchild/findformula2} (directory \texttt{code/}, and the
+verification scripts \texttt{papers/paperB/verify\_paperB.py} and \texttt{papers/paperB/verify\_paperB\_escape.py}).
+\end{sloppypar}
+
+\begin{thebibliography}{99}
+\bibitem{Bardeen1973} J.~M.~Bardeen, ``Timelike and null geodesics in the Kerr metric'', in \emph{Black Holes (Les Astres Occlus)}, Les Houches 1972, eds.\ C.~DeWitt and B.~S.~DeWitt (Gordon and Breach, New York, 1973), pp.\ 215--240.
+\bibitem{Chandrasekhar1983} S.~Chandrasekhar, \emph{The Mathematical Theory of Black Holes} (Clarendon Press, Oxford, 1983).
+\bibitem{CunhaHerdeiroRadu2019} P.~V.~P.~Cunha, C.~A.~R.~Herdeiro and E.~Radu, ``EHT constraint on the ultralight scalar hair of the M87 supermassive black hole'', Universe \textbf{5}, 220 (2019), arXiv:1909.08039.
+\bibitem{FengLu2020} X.-H.~Feng and H.~L\"u, ``On the size of rotating black holes'', Eur.\ Phys.\ J.\ C \textbf{80}, 551 (2020), arXiv:1911.12368.
+\bibitem{Bozza2006} V.~Bozza, F.~De~Luca and G.~Scarpetta, ``Kerr black hole lensing for generic observers in the strong deflection limit'', Phys.\ Rev.\ D \textbf{74}, 063001 (2006), arXiv:gr-qc/0604093.
+\bibitem{GrallaLupsasca2020shape} S.~E.~Gralla and A.~Lupsasca, ``Observable shape of black hole photon rings'', Phys.\ Rev.\ D \textbf{102}, 124003 (2020), arXiv:2007.10336.
+\bibitem{KobialkoGaltsov2026} K.~Kobialko and D.~Gal'tsov, ``Perturbation theory for gravitational shadows in Kerr-like spacetimes'', Phys.\ Rev.\ D \textbf{113}, 104007 (2026), arXiv:2512.24126.
+\bibitem{Hassanabadi2026} H.~Hassanabadi, M.~R.~R.~Good, S.~Zare, O.~Luongo and F.~Kafikang, ``Optical and thermodynamic properties of Kerr-Bertotti-Robinson black holes'', arXiv:2607.11979 (2026).
+\bibitem{WeiLiuMann2019} S.-W.~Wei, Y.-X.~Liu and R.~B.~Mann, ``Intrinsic curvature and topology of shadows in Kerr spacetime'', Phys.\ Rev.\ D \textbf{99}, 041303 (2019), arXiv:1811.00047.
+\bibitem{Young1976} P.~J.~Young, ``Capture of particles from plunge orbits by a black hole'', Phys.\ Rev.\ D \textbf{14}, 3281 (1976).
+\bibitem{Will2012} C.~M.~Will, ``Capture of non-relativistic particles in eccentric orbits by a Kerr black hole'', Class.\ Quantum Grav.\ \textbf{29}, 217001 (2012), arXiv:1208.3931.
+\bibitem{Teo2021} E.~Teo, ``Spherical orbits around a Kerr black hole'', Gen.\ Rel.\ Grav.\ \textbf{53}, 10 (2021), arXiv:2007.04022.
+\bibitem{Karydas2026} T.~K.~Karydas, R.~Vicente and G.~Bertone, ``Mass and spin coevolution of black holes inspiralling through dark matter'', Phys.\ Rev.\ D \textbf{113}, 043057 (2026), arXiv:2510.13604.
+\bibitem{MachMomenniaSarbach2026} P.~Mach, M.~Momennia and O.~Sarbach, ``Accretion of a Vlasov gas by a Kerr black hole'', Phys.\ Rev.\ D \textbf{113}, 044068 (2026), arXiv:2508.04783.
+\bibitem{MachMomenniaSarbach2026b} P.~Mach, M.~Momennia and O.~Sarbach, ``Bondi-type accretion onto a Kerr black hole in the kinetic regime'', Phys.\ Rev.\ D \textbf{113}, L041505 (2026), arXiv:2508.20189.
+\bibitem{Ogasawara2020} K.~Ogasawara, T.~Igata, T.~Harada and U.~Miyamoto, ``Escape probability of a photon emitted near the black hole horizon'', Phys.\ Rev.\ D \textbf{101}, 044023 (2020), arXiv:1910.01528.
+\bibitem{Igata2020} T.~Igata, K.~Nakashi and K.~Ogasawara, ``Observability of the innermost stable circular orbit in a near-extremal Kerr black hole'', Phys.\ Rev.\ D \textbf{101}, 044044 (2020), arXiv:1910.12682.
+\bibitem{YanGuoChen2021} H.~Yan, M.~Guo and B.~Chen, ``Observability of zero-angular-momentum sources near Kerr black holes'', Eur.\ Phys.\ J.\ C \textbf{81}, 847 (2021), arXiv:2104.07889.
+\bibitem{GatesHadarLupsasca2021} D.~E.~A.~Gates, S.~Hadar and A.~Lupsasca, ``Photon emission from circular equatorial Kerr orbiters'', Phys.\ Rev.\ D \textbf{103}, 044050 (2021), arXiv:2010.07330.
+\bibitem{OgasawaraIgata2021} K.~Ogasawara and T.~Igata, ``Complete classification of photon escape in the Kerr black hole spacetime'', Phys.\ Rev.\ D \textbf{103}, 044029 (2021), arXiv:2011.04380.
+\bibitem{BainesVisser2025} J.~Baines and M.~Visser, ``Exact analytic photon escape cones and silhouettes for extremal Kerr black holes'', Phys.\ Rev.\ D \textbf{111}, L021501 (2025), arXiv:2405.08875.
+
+\end{thebibliography}
+\end{document}

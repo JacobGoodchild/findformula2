@@ -1,43 +1,44 @@
 FORMULAS — verified results (general relativity)
 ==================================================
 AI-assisted (Claude Code), directed by Jacob Goodchild. Units G = c = M = 1 unless stated.
-Novelty labels: "not found" = not found in web searches (could still exist somewhere);
+Novelty labels: "not found" = not found in web/arXiv/INSPIRE searches (could still exist somewhere);
 "probably known" / "known" = found or very likely in the literature.
+Labels updated 4 Oct 2026 after a systematic literature check (see papers/LITERATURE_CHECK.md).
 
 INDEX
 -----
 [1] Exact area of the Kerr black-hole shadow seen edge-on, for every spin (elliptic integrals)
     + its small-spin series with rational coefficients + near-extremal expansion
-    A = 16pi + 15sqrt3 + (3pi/sqrt2) sqrt(1-a) + ... .                         — not found (only the a^2 term is known)
+    A = 16pi + 15sqrt3 + (3pi/sqrt2) sqrt(1-a) + ... .                         — not found (a^2 term known: Bozza+ 2006, Hassanabadi+ 2026; a^4 term in Kobialko & Gal'tsov 2026; a=1 value known)
 [2] Edge-on shadow of a maximally spinning (extremal) Kerr black hole:
-    area = (16*pi + 15*sqrt(3)) M^2 exactly.                                    — KNOWN (Cunha, Herdeiro & Radu 2019)
+    area = (16*pi + 15*sqrt(3)) M^2 exactly.                                    — KNOWN (Cunha, Herdeiro & Radu 2019; Feng & Lu 2020)
 [3] Extremal Kerr shadow area for EVERY viewing angle: the edge polynomial factorises,
-    giving a one-line integral / elliptic closed form + a series in sin(theta).  — not found
+    giving a one-line integral / elliptic closed form + a series in sin(theta).  — not found (area); oval geometry known (Gralla & Lupsasca 2020); polar & edge-on values known
 [4] "Master formula": Kerr shadow area for ANY spin and ANY viewing angle as a single
     integral of (polynomial + simple pole)/sqrt(sextic), coefficients depend only on
     u = a^2 cos^2(theta).                                                        — not found
 [5] Small-spin expansion of the Kerr shadow area at any viewing angle, exact rational
-    coefficients:  A = 27 pi M^2 [1 - (1+cos^2 th) a^2/18 - ...]               — not found (edge-on a^2 term known)
+    coefficients:  A = 27 pi M^2 [1 - (1+cos^2 th) a^2/18 - ...]               — PARTLY KNOWN: a^2 (Bozza+ 2006) and a^4 (Kobialko & Gal'tsov 2026) terms known; a^6, a^8 not found
 [6] Chance that light escapes from just outside the horizon of a maximally spinning (charged)
     black hole, for any spin and latitude:  P = 1/2 - arcsin(k)/(2 pi) - k/4,
-    k = (M^2 + a^2 cos^2 th)/(2 a M sin th).                                    — not found (equatorial uncharged value 7/24 known)
+    k = (M^2 + a^2 cos^2 th)/(2 a M sin th).                                    — not found (general formula); equatorial 7/24 known (Yan, Guo & Chen 2021); KN equator numerics known (Ogasawara+ 2020)
 [7] Edge-on shadow area of an extremal Kerr-Newman (charged, max-spin) black hole:
     16 pi + 8 pi a^2 for a <= M/2;  elementary arcsin formula for a > M/2.     — not found
 [8] Chance that light escapes from a lamp ORBITING at the innermost stable orbit of an extremal
     Kerr-Newman black hole (for a >= M/sqrt2, where that orbit sits on the horizon):
     P = 1/2 - arcsin(k)/(2pi) + k arctan(sqrt((1+k^2)/(1-k^2)))/(pi sqrt(1+k^2)), k = M/(2a);
-    equals 3/8 + sqrt(3)/9 at a = M/sqrt2.                                     — not found (a = M value 54.65% known)
+    equals 3/8 + sqrt(3)/9 at a = M/sqrt2.                                     — not found (KN formula); a = M value known in closed form (Gates, Hadar & Lupsasca 2021)
 [9] Extremal Kerr-Newman shadow area for ANY viewing angle: edge polynomial factorises,
     A = 4 Int (3r^2 + 2(a^2-1) r - a^2 cos^2 th)/sqrt(N) dr (+ edge term). Unifies [3] and [7]. — not found
 [10] Fraction of emitted ENERGY that escapes from the horizon of an extremal black hole:
     lamp at rest: 3/32 + sqrt(3)/16 (Kerr), (4a^2-1)/(32a) + sqrt(4a^2-1)/16 (Kerr-Newman);
-    lamp on the ISCO: 2 sqrt3/9 + 1/(20 pi) + 13 arctan(sqrt(5/3))/(5 sqrt15 pi) = 59.56% (Kerr). — not found
+    lamp on the ISCO: 2 sqrt3/9 + 1/(20 pi) + 13 arctan(sqrt(5/3))/(5 sqrt15 pi) = 59.56% (Kerr). — not found as stated (ISCO value derivable from Gates, Hadar & Lupsasca 2021 Eq. 102; line profile (c) KNOWN there)
 [11] Edge-on shadow area of a Kerr-Newman (spinning + charged) black hole, any spin and charge:
     one compact integral whose coefficients depend only on the charge; K/E/Pi form when the
     quartic has 4 real roots. Generalises [1] (Q = 0) and [7] (extremal).        — not found
 [12] Kerr-Newman shadow area for ANY spin, charge and viewing angle (single integral), and the
     rule of thumb A/(27 pi M^2) = 1 - Q^2/3 - (1+cos^2 th) a^2/18 - Q^4/27 - (3+cos^2 th) a^2 Q^2/81 - ...
-                                                                                — not found (Q-only terms known)
+                                                                                — PARTLY KNOWN: double series through 4th order in Kobialko & Gal'tsov 2026; exact-in-charge forms not found
 [13] Exact silhouette (dark-sky) solid angle of an extremal Kerr black hole for an observer in the
     equatorial plane at ANY distance (an open question raised by Baines & Visser 2024):
     elementary part + one elliptic integral; series (M/r)^2 [(16pi+15sqrt3) - 2(16pi+15sqrt3)(M/r) + ...]
@@ -49,19 +50,19 @@ INDEX
     = 16 pi (M/v)^2 at a = 0 (known), (7 pi + 16 sqrt2)(M/v)^2 at a = M.          — not found
 [16] Slow-particle capture cross-section for ANY direction: the a^2 correction is direction-independent,
     sigma = 16 pi (M/v)^2 [1 - a^2/16 - (31/2048 - 3C/1024 - 9C^2/2048) a^4 - ...];
-    direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — PROBABLY KNOWN (follows from Will 2012)
+    direction-averaged: 16 pi (M/v)^2 [1 - a^2/16 - 17 a^4/1280 - 83 a^6/14336 - ...]   — PROBABLY KNOWN (Will 2012; Karydas+ 2026 fits; Mach+ 2026)
 [17] Leading spin correction to the capture cross-section for ANY particle speed and ANY direction:
     sigma = sigma_Schw(v) [1 - a^2 (r_c + 3 cos^2(th) (4 - r_c)) / (2 r_c^2 (6 - r_c)) + O(a^4)],
-    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)); full a^4 term and spin-down torque to a^3 too.  — not found
+    r_c = (4v^2 - 1 + sqrt(1 + 8v^2))/(2v^2); direction average: 1 - 2a^2/(r_c^2 (6 - r_c)); full a^4 term and spin-down torque to a^3 too.  — PARTLY KNOWN: a^2 term and O(a) torque follow from Mach, Momennia & Sarbach 2026 (PRD 113, 044068); a^4 term (numerically identified) not found
 [18] Exact spin-down torque on a Kerr black hole from slow matter arriving side-on: the captured
     angular-momentum moment M_1 = -{32 sqrt(1+a)[(a^2+2)E - 2(1-a)K] + 35 pi a^2 + 10 pi (1 - sqrt(1-a^2))}/(5a);
-    mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found
+    mean captured L_z per unit mass = -a M (1 + 3a^2/32 + 37a^4/1024 + ...).          — not found (closed form); a and a^3 terms consistent with Karydas+ 2026 fits
 [19] Escape of MASSIVE particles (local speed beta) from just outside an extremal Kerr horizon:
     nothing slower than c/sqrt2 escapes; P = (1 - sqrt(1-beta^2)/beta)/2 for c/sqrt2 <= beta <= (sqrt3/2) c
     (e.g. exactly 1/8 at beta = 0.8), one-integral formula above that, -> 7/24 as beta -> 1.   — not found
 [20] Direction-averaged (isotropic) slow-particle capture cross-section of a Kerr black hole: one-line
     integral for any spin; at a = M exactly
-    pi (M/v)^2 [47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln((1+sqrt2+sqrt6)/(1+sqrt2))] = 45.2756 (M/v)^2.  — not found
+    pi (M/v)^2 [47/9 + 31 sqrt2/6 + 7 sqrt6/9 - (sqrt3/54) ln((1+sqrt2+sqrt6)/(1+sqrt2))] = 45.2756 (M/v)^2.  — not found (closed form); ratio 0.90 published numerically by Young 1976
 [21] Extremal Kerr, edge-on capture cross-section at ANY particle speed: the boundary is
     L = E(r+1) - (r-1) sqrt(r(p^2 r+1)), Q = r^2[-p^2 r^2 + (2p^2-1) r + 1 + 2E sqrt(r(p^2 r+1))];
     elliptic (sqrt of t^4 + 2E t^3 - t^2 - 2E p^2 t - p^4); joins 7pi+16sqrt2 (slow) to 16pi+15sqrt3 (light).  — not found
@@ -69,7 +70,7 @@ INDEX
     sqrt(a^2(2y+1) - (y^2-y-1)^2) dy, from pi phi^5 (golden ratio; extremal RN, probably known) to 7pi+16sqrt2.  — not found
 [23] Exact parametric critical angular momentum for capture of slow particles at any orbital tilt
     (replaces Will 2012's fits): L_c^2 = (3y^4 - 4y^3 + a^2)/(y-1)^2, cos i = -(y^4 - 2y^3 + a^2)/(a sqrt(3y^4 - 4y^3 + a^2)).
-                                                                                — not found in this form (pieces probably known)
+                                                                                — KNOWN in substance (Teo 2021, Eq. 4.5); simplified form ours
 [24] Massive particles launched (isotropically, speed beta) from the ISCO of an extremal Kerr hole:
     escape iff beta > (3 sqrt2 - 2)/7 c = 0.3204c; P = [2 beta + 1 - sqrt(3(1-beta^2))]/(4 beta) up to
     beta = sqrt(2/3) c (exactly 1/4 at beta = c/2, exactly 1/2 at sqrt(2/3) c).   — not found
@@ -78,22 +79,22 @@ INDEX
 [26] Escape of light from the horizon of an extremal Kerr-Sen black hole: P = 1/2 - arcsin(k)/(2pi) - k/4,
     k = (1 + b)/2 (3D isotropic); in-plane version 1/2 - arcsin(k)/(2pi) reproduces Zhang & Jiang's numerics.  — not found
 [27] Spin-down of a black hole in a bath of slow isotropic dark matter: mean swallowed L_z per unit mass
-    = -(2a/3 + a^3/15 + 41a^5/1680 + ...) M (derivable); exact at a = M: -0.81932684 M, da/dlnM = -2.81932684.  — not found (exact value)
+    = -(2a/3 + a^3/15 + 41a^5/1680 + ...) M (derivable); exact at a = M: -0.81932684 M, da/dlnM = -2.81932684.  — series KNOWN (Mach+ 2026); exact a = M value not found (Young 1976 gave -0.828 numerically, ~1% different)
 [28] Extremal Kerr-Sen shadow area for ANY viewing angle: edge polynomial factorises as
     [(r - a(1+s))^2 - 2a(1+s)][(r - a(1-s))^2 - 2a(1-s)], s = sin theta; one-line elliptic formula.  — not found
 [29] Slow-particle (dark matter) capture by a Kerr-Sen black hole, edge-on: with B = M - b,
     sigma = [16 sqrt(B+a) E(2a/(B+a)) + pi (3B + 4 + sqrt(B^2 - a^2))] (M/v)^2 (M = 1, exact).  — not found
 [30] PERIMETER (circumference) of the Kerr shadow: arc length element collapses; edge-on any spin in
-    K, E, Pi; maximal spin edge-on exactly 18 sqrt3 M; any (a, theta) as one integral.   — not found
+    K, E, Pi; maximal spin edge-on exactly 18 sqrt3 M; any (a, theta) as one integral.   — not found (closed form); a = 1 curved-part length 16 sqrt3 in Wei, Liu & Mann 2019 (excludes the NHEK line)
 [31] Capture cross-section of a charged, slowly spinning (Kerr-Newman) black hole for ANY particle speed,
     direction and charge: sigma = sigma_RN [1 - a^2 (r^2(r - q^2) - C(3r^3 - 12r^2 - q^2 r^2 + 18q^2 r - 8q^4))
     / (2r(r - q^2)(6r^2 - r^3 - 9q^2 r + 4q^4)) + O(a^4)]; light limit gives the KN shadow area at any charge:
-    A = pi r^4/(r^2 - 2r + q^2) [1 - a^2 (r + 3C(r-2))/(r^2 (r-1)(2r-3))], r = photon-ring radius.   — not found
+    A = pi r^4/(r^2 - 2r + q^2) [1 - a^2 (r + 3C(r-2))/(r^2 (r-1)(2r-3))], r = photon-ring radius.   — not found (exact in charge); low-order double series in Kobialko & Gal'tsov 2026
 [32] UNIVERSAL small-spin shadow and capture formulas for ANY rotating black hole of Kerr-like (Newman-Janis /
     Azreg-Ainou) form, Delta = r^2 f(r) + a^2, from the non-rotating profile f alone. Shadow:
     A = (pi r^2/f)[1 + a^2{(1-C)[1/(2f r^2) - 4/(r^2 kappa)] + C(2f-1)/(f r^2)}], kappa = 2f - r^2 f'' at the photon
     sphere; massive particles at any speed similarly (ISCO combination 3ff' + rff'' - 2rf'^2 in the denominator);
-    torque <L_z>/E = -a sin^2(theta)(1 - f)/f; shadow area also to O(a^4) universally.   — not found
+    torque <L_z>/E = -a sin^2(theta)(1 - f)/f; shadow area also to O(a^4) universally.   — not found (exact in f); Kerr low-order terms known (see [5], [17])
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -456,7 +457,7 @@ Formula (extremal Kerr-Newman: a^2 + Q^2 = M^2, a > 0; lamp at polar angle theta
   with n_phi > k escape even if aimed inward (they bounce off the potential barrier).
 
 Decimal values:
-  a=M, equator: 0.29166666...   a=0.9M: 0.26736...   a=0.7M: 0.19480...   a=0.55M: 0.09110...
+  a=M, equator: 0.29166666...   a=0.9M: 0.26736...   a=0.7M: 0.19480...   a=0.55M: 0.09112...
   a=M, theta=70 deg: 0.25013...  a=0.8M, theta=60 deg: 0.13282...  a=0.9M, theta=50 deg: 0.04842...
 
 How it was derived:
@@ -486,7 +487,7 @@ How it was verified:
   * Literature numbers: Ogasawara, Igata, Harada & Miyamoto, PRD 101, 044023 (2020),
     arXiv:1910.01528, Table II (horizon limit, equator, extremal Kerr-Newman), numerically:
         a = 1: 0.291, 0.9: 0.267, 0.7: 0.194/0.195, 0.55: 0.0911, 0.5: 0
-    Formula: 0.29167, 0.26736, 0.19480, 0.09110, 0 -- all match.
+    Formula: 0.29167, 0.26736, 0.19480, 0.09112, 0 -- all match.
   * Threshold a > M/2 for nonzero escape matches that paper's main result.
 
 Novelty status: NOT FOUND (general formula). The equatorial uncharged value 7/24 is KNOWN

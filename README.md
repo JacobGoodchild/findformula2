@@ -17,6 +17,28 @@ Units: G = c = 1, and lengths are in units of the black hole mass M unless state
 Caveat: "not found" means we could not find it with web searches — not a guarantee that
 nobody has written it down before. Please treat the results as candidates for expert checking.
 
+## AI disclosure statement
+
+This project is **AI-assisted**. The research was carried out by Claude (an AI system made by
+Anthropic), using the Claude Code software, under the direction of Jacob Goodchild. The AI system:
+proposed research directions; wrote and ran all the computer-algebra and numerical code (Python with
+SymPy, mpmath, NumPy and SciPy); performed the derivations and verification checks; searched the
+literature; and drafted `formulas.txt`, `NOTES.md` and the two papers in `papers/`. Jacob Goodchild
+directed the work, set the requirements (verify every result, label novelty honestly, never invent
+citations) and is responsible for publishing it. All results were checked against independent
+high-precision numerical computations (see `code/verify_all.py` and the `papers/*/verify_*.py`
+scripts with their logs). Novelty assessments come from literature searches (see
+`papers/LITERATURE_CHECK.md`) and may be incomplete. Please treat the results as candidates for
+expert checking.
+
+## Papers
+
+* `papers/paperA/paperA.pdf` — *Universal small-spin formulas for the shadow area, the capture
+  cross-section and the spin-down of Kerr-like rotating black holes.*
+* `papers/paperB/paperB.pdf` — *Exact results for Kerr black holes: shadow areas and perimeters,
+  capture of slow particles, and escape from near extremal horizons.*
+* LaTeX sources, verification scripts and their output logs are next to each PDF.
+
 ## Highlights (crisp exact results; details and checks in `formulas.txt`)
 
 * **One formula for many black holes** [32]: for any spinning black hole built from a non-spinning
@@ -31,20 +53,22 @@ nobody has written it down before. Please treat the results as candidates for ex
 
 * **Shadow size of a spinning black hole, exactly** (EHT-relevant). Edge-on, any spin: one formula
   with complete elliptic integrals [1]; any spin and viewing angle: a single short integral [4];
-  rule of thumb: area = 27πM²[1 − (1+cos²θ)a²/18 − …] [5]. Previously only fits/numerics.
+  rule of thumb: area = 27πM²[1 − (1+cos²θ)a²/18 − …] [5] (the a² and a⁴ terms of this rule were
+  already known — Bozza et al. 2006; Kobialko & Gal'tsov 2026; the exact formulas and higher terms were not found).
 * **Dark matter (slow particle) capture by a spinning black hole, exactly** [15]:
   σ = [7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a))](M/v)²; at maximal spin (7π + 16√2)(M/v)².
   The matching spin-down torque in closed form [18]; how spin changes capture at any speed and
-  direction: factor 1 − a²(r_c + 3cos²θ(4−r_c))/(2r_c²(6−r_c)) [17] (analytically derived).
+  direction: factor 1 − a²(r_c + 3cos²θ(4−r_c))/(2r_c²(6−r_c)) [17] (analytically derived here, but it
+  turned out to follow from Mach, Momennia & Sarbach, PRD 113, 044068 (2026) — so NOT new).
 * **Light escaping from right next to a maximally spinning black hole** [6]:
-  P = 1/2 − arcsin(k)/(2π) − k/4 for every latitude and for charged holes (7/24 on the equator,
-  known); from the innermost orbit of a charged extremal hole 3/8 + √3/9 at the threshold [8];
+  P = 1/2 − arcsin(k)/(2π) − k/4 for every latitude and for charged holes (7/24 on the equator is
+  known; Yan, Guo & Chen 2021); from the innermost orbit of a charged extremal hole 3/8 + √3/9 at the threshold [8];
   fraction of emitted energy that escapes 3/32 + √3/16 [10].
 * **Massive particles** near a maximally spinning hole [19], [24]: nothing launched slower than
   c/√2 escapes from rest near the horizon (exactly 1/8 escape at 0.8c); from the innermost
   orbit the threshold is (3√2−2)/7·c ≈ 0.32c and exactly 1/4 escape at c/2.
 * **Shadow circumference** [30]: maximal spin seen side-on has perimeter exactly 18√3·M
-  (non-spinning: 6√3π·M).
+  (non-spinning: 6√3π·M); Wei, Liu & Mann (2019) gave 16√3·M, the length without the straight NHEK segment.
 * **Open question answered (partly)**: the dark-sky solid angle of a maximally spinning black hole
   for an equatorial observer at any distance [13], [14] (called "intractable" in a 2024 paper).
 * Also: charged (Kerr–Newman) and string-theory (Kerr–Sen) versions of several of these
@@ -60,6 +84,9 @@ r_c = (4v² − 1 + √(1+8v²))/(2v²) (r_c = 4 for slow particles, 3 for light
               + a⁴·[α8 + β8·C + γ8·C²] / (8 r_c⁴ (6 − r_c)⁵) + O(a⁶)          ([17])
     α8 = −r²(2r³ + 42r² − 549r + 1458),  β8 = 6r(2r⁴ + 2r³ − 239r² + 1302r − 2016),
     γ8 = −10r⁵ − 2r⁴ + 1653r³ − 13266r² + 39744r − 41472      (r = r_c)
+
+(Credit: the a² term and the O(a) spin-down below follow from Mach, Momennia & Sarbach, PRD 113, 044068 (2026);
+the a⁴ term was identified numerically here and was only available as fits before — Karydas et al. 2026.)
 
 Exact (all orders in spin) for slow particles side-on ([15]):
 σ = [7π + π√(1−a²) + 16√(1+a)·E(2a/(1+a))]·(M/v)², and from any direction as one integral ([23]).
