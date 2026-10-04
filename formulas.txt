@@ -1745,6 +1745,17 @@ How it was verified:
       ratio -(9 + 9C + 9q^2 + 5Cq^2)/162 to order q^2 (sympy).
   (3) q = 0 reduces exactly to [17].
 
+Next order for light (from the universal a^4 formula of [32](a'); code/kn_a4_check.py). With r the
+  photon-ring radius (r^2 - 3r + 2q^2 = 0) the KN shadow area is
+     A = pi r^4/(r^2 - 2r + q^2) [ 1 - a^2 (r + 3C(r-2))/(r^2 (r-1)(2r-3)) + a^4 K_4 + O(a^6) ],
+     K_4 = [ C^2 (r^6 - 38r^5 + 286r^4 - 768r^3 + 774r^2 - 108r - 162)
+             - C (18r^6 - 108r^5 + 288r^4 - 492r^3 + 504r^2 - 216r)
+             - 15r^6 + 58r^5 - 78r^4 + 36r^3 ] / ( 2 r^4 (r-1)^2 (2r-3)^5 ).
+  q = 0 (r = 3): -(1/72 + 5C/972 - 5C^2/1944), as in [5].
+  Check, exact KN contour with a = 0.01..0.05 and a 5-term fit:
+     q = 0.6, 60 deg: numeric -0.0344681711527  formula -0.0344681711528
+     q = 0.8, 90 deg: numeric -0.0918348939951  formula -0.0918348939966
+
 Companion -- spin-down torque (code/kn_torque_check.py). Mean z-angular momentum captured per unit
   captured energy, to first order in a:
        <L_z>/E = -a sin^2(theta) (2r - q^2)/(r^2 - 2r + q^2) + O(a^3)      (q = 0: -2a sin^2 theta/(r - 2), [17](b))
