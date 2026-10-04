@@ -1847,6 +1847,10 @@ Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r
 (c) TORQUE: mean z-angular momentum brought in per unit captured energy (any speed, incl. light),
        <L_z>/E = -a sin^2(theta) (1 - f(r))/f(r) + O(a^3).
 
+   Corollary (isotropic bath, any speed; average of (c) with the leading-order disc weight):
+       <L_z>/E = -(2a/3)(1 - f)/f,   d a*/d ln M = -2a* - (2a*/3)(1 - f)/f  (+ O(a^3));
+     Kerr slow matter (r = 4, f = 1/2): -2a/3, matching [27]; Kerr light (r = 3): -4a/3, matching [17](b').
+
 How it was derived (code/univ_a2.py; argument 0 = light, 1 = massive): perturbation of the double-root
   conditions R = R' = 0 to second order in a with f replaced by its Taylor series around r (f, f', f'', f'''
   as free symbols; f''' drops out), E and L kept as algebraic symbols and reduced with E^2, L^2; average over
