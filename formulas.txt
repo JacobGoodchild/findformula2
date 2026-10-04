@@ -1804,6 +1804,14 @@ Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r
          90 deg: numeric -0.0317475715025  formula -0.0317475715025
          50 deg: numeric -0.0319437641728  formula -0.0319437641729
 
+(a'') Orders a^6 and a^8, universally (same code: `python3 code/univ_a4_fast.py 6` runs in 11 s, `... 8` in
+     under 7 min). The rational expressions in f, R^k f^(k) (k <= 6 resp. 8) and C are long and are stored in
+     code/univ_a6_fast.out and code/univ_a8_fast.out rather than printed here. Check: for Kerr they give
+     EXACTLY the a^6 and a^8 coefficients of [5] (2059/314928, 167C/104976, -185C^2/104976, -5C^3/3888 and
+     88175/22674816, 3869C/5668704, -4865C^2/3779136, -83C^3/69984, -667C^4/7558272), which [5] had found
+     independently by high-precision numerics + rational recognition. Transcription of the N0, N1, N2 above
+     was machine-checked against the computed a^4 expression (difference 0).
+
 (b) CAPTURE CROSS-SECTION for neutral particles of any speed (r = r_c, the unstable circular orbit on
      the capture boundary: E^2 = 2f^2/(2f - r f'), L^2 = r^3 f'/(2f - r f'), sigma_0 = pi L^2/(E^2 - 1)):
        sigma = sigma_0 [ 1 + a^2 { (1 - C) [ 1/(2 f r^2) + f'^2/(r f J) ] + C (2f + r f' - 2)/(r^3 f') } + O(a^4) ],
