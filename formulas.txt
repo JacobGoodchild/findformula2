@@ -93,7 +93,7 @@ INDEX
     Azreg-Ainou) form, Delta = r^2 f(r) + a^2, from the non-rotating profile f alone. Shadow:
     A = (pi r^2/f)[1 + a^2{(1-C)[1/(2f r^2) - 4/(r^2 kappa)] + C(2f-1)/(f r^2)}], kappa = 2f - r^2 f'' at the photon
     sphere; massive particles at any speed similarly (ISCO combination 3ff' + rff'' - 2rf'^2 in the denominator);
-    torque <L_z>/E = -a sin^2(theta)(1 - f)/f.   — not found
+    torque <L_z>/E = -a sin^2(theta)(1 - f)/f; shadow area also to O(a^4) universally.   — not found
 
 ==================================================================================
 [1] EXACT AREA OF THE KERR SHADOW FOR AN EDGE-ON OBSERVER (ANY SPIN)
@@ -1784,6 +1784,25 @@ Setting: the rotating metric is Kerr's with Delta = r^2 f(r) + a^2 and Sigma = r
                                   exponent of Cardoso et al. 2009).
      Seen along the spin axis (C = 1) the shadow stays a disc: A_pole = pi [ r^2/f + a^2 (2f - 1)/f^2 ].
      Kerr (r = 3, f = 1/3, kappa = 2): 1 - (1 + C) a^2/18, as in [5].
+
+(a') NEXT ORDER, a^4 (new; code/univ_a4_fast.py, univ_a4_check.py). Write f = f(R), f3 = R^3 f'''(R),
+     f4 = R^4 f''''(R), kappa = 2f - R^2 f''(R) at the photon sphere R. Then
+       A = (pi R^2/f) [ 1 + a^2 K_2 + (a/R)^4 (N0 + N1 C + N2 C^2)/(8 f^2 kappa^5) + O(a^6) ],  K_2 as in (a), with
+       N0 = -kappa^5 + 16 f kappa^4 - 160 f^2 kappa^3 + 32 f^2 f3 kappa^2 - 384 f^3 kappa^2 + 256 f^3 f3 kappa
+            - 32 f^3 f4 kappa - 96 f^3 f3^2,
+       N1 = 2[ -3 kappa^5 + 4 f kappa^5 + 32 f kappa^4 - 32 f^2 kappa^4 - 160 f^2 kappa^3 + 32 f^2 f3 kappa^2
+            + 192 f^3 kappa^3 + 384 f^3 kappa^2 - 64 f^3 f3 kappa^2 - 256 f^3 f3 kappa + 32 f^3 f4 kappa + 96 f^3 f3^2 ],
+       N2 = 15 kappa^5 - 24 f kappa^5 - 144 f kappa^4 + 8 f^2 kappa^5 + 192 f^2 kappa^4 + 480 f^2 kappa^3
+            - 96 f^2 f3 kappa^2 - 64 f^3 kappa^4 - 384 f^3 kappa^3 - 384 f^3 kappa^2 + 128 f^3 f3 kappa^2
+            + 256 f^3 f3 kappa - 32 f^3 f4 kappa - 96 f^3 f3^2.
+     Method: put r = R + a x in the exact contour xi(r), eta(r); every coefficient of the a-expansion is a
+       polynomial in x, and the area integral is expanded term by term using the finite-part rule
+       FP Int_{-b}^{b} u^m (b^2 - u^2)^(1/2 - j) du = -pi (-1)^j binom(1/2 - j, n) (-b^2)^n, n = (m + 2 - 2j)/2
+       (residue at infinity), which is exact because the area is analytic in a. (Reproduces (a) at order a^2.)
+     Checks: Kerr gives exactly -(1/72 + 5C/972 - 5C^2/1944), the known series of [5].
+       Bardeen g = 0.4 (exact contour, a = 0.01..0.05, 5-term fit in a^2):
+         90 deg: numeric -0.0317475715025  formula -0.0317475715025
+         50 deg: numeric -0.0319437641728  formula -0.0319437641729
 
 (b) CAPTURE CROSS-SECTION for neutral particles of any speed (r = r_c, the unstable circular orbit on
      the capture boundary: E^2 = 2f^2/(2f - r f'), L^2 = r^3 f'/(2f - r f'), sigma_0 = pi L^2/(E^2 - 1)):

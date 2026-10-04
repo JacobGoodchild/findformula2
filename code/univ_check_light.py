@@ -23,12 +23,13 @@ def Kform(fun,r,C):
 tests={'Bardeen g=0.4':lambda r: 1-2*r**2/(r**2+mpf('0.16'))**1.5,
        'Hayward l=0.5':lambda r: 1-2*r**2/(r**3+2*mpf('0.25')),
        'Kerr':lambda r: 1-2/r}
-for name,fun in tests.items():
-    ar=make(fun)
-    for thdeg in [90,50]:
-        th=thdeg*pi/180; C=cos(th)**2
-        hs=[mpf('0.01'),mpf('0.02'),mpf('0.03')]; ys=[]
-        for h in hs:
-            A,rph=ar(h,th); A0=pi*rph**2/fun(rph); ys.append((A/A0-1)/h**2)
-        K=lu_solve(matrix([[1,h**2,h**4] for h in hs]),matrix(ys))[0]
-        print(name,thdeg,'r_ph=',nstr(rph,10),'numeric',nstr(K,12),'formula',nstr(Kform(fun,rph,C),12),flush=True)
+if __name__=="__main__":
+  for name,fun in tests.items():
+      ar=make(fun)
+      for thdeg in [90,50]:
+          th=thdeg*pi/180; C=cos(th)**2
+          hs=[mpf('0.01'),mpf('0.02'),mpf('0.03')]; ys=[]
+          for h in hs:
+              A,rph=ar(h,th); A0=pi*rph**2/fun(rph); ys.append((A/A0-1)/h**2)
+          K=lu_solve(matrix([[1,h**2,h**4] for h in hs]),matrix(ys))[0]
+          print(name,thdeg,'r_ph=',nstr(rph,10),'numeric',nstr(K,12),'formula',nstr(Kform(fun,rph,C),12),flush=True)

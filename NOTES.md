@@ -156,3 +156,6 @@
 * Shadow a^2 coefficient depends only on f and kappa = 2f - r^2 f'' (Lyapunov exponent); massive on J = ISCO combo.
 * Verified on Bardeen / Hayward via exact contour (Tsukamoto form) and exact capture boundary.
 * Idea for next: a^4 term universally? (needs order-4 perturbation; Kerr a^4 from [5]/[17] as check.)
+* (Session restart lost ~8 h overnight: worker process restarted ~20:00, resumed 05:26 UTC.)
+* [32](a') universal a^4 shadow: residue/finite-part trick + sympy sparse fields -> runs in ~1 s
+  (earlier generic sympy.series approach took >10 min even at a^2). Kerr and Bardeen checks pass.
