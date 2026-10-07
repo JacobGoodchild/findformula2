@@ -168,3 +168,8 @@
 * Kerr-Sen is NOT in the Delta = r^2 f + a^2 class (Sigma differs) -- would need its own version.
 * anyv_pert2_full.out has the analytic Kerr a^4 L_c(i) expansion; still needs the order-a^4 impact-plane
   mapping before it can be compared with the numerical [17](a'') coefficients.
+
+### Session 7 Oct 2026 (brief, stopped at user's request)
+* Explored HorizonMath closed-form constants and the cap set capacity lower bound (record 2.2203, X-evolve 2025).
+  `capset/bound.py` reproduces the published bounds exactly (Edel 2.217389, Tyrrell 2.217982, FunSearch 2.220234).
+  Abandoned in favour of a bigger target chosen by the user.
