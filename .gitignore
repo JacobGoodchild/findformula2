@@ -4,3 +4,4 @@ papers/**/*.aux
 papers/**/*.log
 !papers/**/verify_*.log
 papers/**/*.out
+hadwiger/*.pkl
